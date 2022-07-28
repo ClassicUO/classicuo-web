@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ title }}{% if url != '/' %} | {{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if url != '/' %}{{ description }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:image" content="{{ '/images/cover.png' | url }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="{{ '/images/favicon.png' | url }}">
+  <link rel="stylesheet" href="{{ '/css/styles.css' | url }}">
+  {% for style in styles %}
+    <link rel="stylesheet" href="{{ ('/css/' + style) | url }}"/>
+  {% endfor %}
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"/>
+  <script src="https://kit.fontawesome.com/3ccad12ff1.js" crossorigin="anonymous"></script>
+  <script>
+    function refreshDarkMode() {
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.dataset.theme = 'dark';
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.dataset.theme = 'light';
+        document.documentElement.classList.remove('dark');
+      }
+    }
+
+    refreshDarkMode();
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('#dark-mode-toggle').addEventListener('click', () => {
+        const darkModeActive = !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches || localStorage.theme === 'dark';
+        localStorage.theme = darkModeActive ? 'light' : 'dark';
+        refreshDarkMode();
+      });
+    });
+  </script>
+  {% for script in scripts %}
+    <script defer src="{{ ('/js/' + script) | url }}"></script>
+  {% endfor %}
+</head>
+<body class="dark:bg-blue-dark">
+<header
+  class="fixed top-0 z-20 w-full border-b border-gray-100 dark:border-blue-100/10 bg-blur dark:bg-blue-dark dark:bg-opacity-20 text-emphasis">
+  <div class="main flex items-center">
+    {% if hasMenu %}
+      <button id="menu-toggle"
+              class="block px-2 w-8 md:hidden mr-4 outline-none hover:text-blue-500 focus:text-blue-500"
+              aria-label="Menu toggle"
+              aria-expanded="false"
+              aria-controls="menu">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+    {% endif %}
+    <a href="/" class="mr-auto flex items-center flex-shrink-0">
+      <img src="{{ '/images/cuo-logo.png' | url }}" alt="ClassicUO Logo" class="h-8 mr-2">
+      <span class="md:block hidden text-secondary text-xl font-bold font-headings">ClassicUO</span>
+    </a>
+    {#      {% if url != '/' %} #}
+    {#        <div class="max-w-xxs mx-4"> #}
+    {#          <div id="docsearch"></div> #}
+    {#        </div> #}
+    {#      {% endif %} #}
+    <nav {% if url != '/' %}class="hidden md:block"{% endif %}>
+      <ul class="flex items-center">
+        <li class="mr-3 hover:text-primary transition-colors duration-300"><a href="/docs/intro">Docs</a></li>
+        <li class="text-lg hover:text-primary transition-colors duration-300 pr-1">
+          <button id="dark-mode-toggle" class="p-1 bg-none border-none" aria-label="Toggle dark mode"
+                  title="Toggle dark mode">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+          </button>
+        </li>
+        <li class="mr-3 text-lg hover:text-primary transition-colors duration-300">
+          <a href="https://github.com/ClassicUO/ClassicUO" target="_blank">
+            <span class="sr-only">ClassicUO on GitHub</span>
+            <i class="fab fa-github"></i>
+          </a>
+        </li>
+        <li class="text-lg hover:text-primary transition-colors duration-300">
+          <a href="https://discord.gg/M5K7TBd" target="_blank">
+            <span class="sr-only">ClassicUO on Discord</span>
+            <i class="fab fa-discord"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+{{ content | safe }}
+
+<footer class="bg-gray-100 dark:bg-opacity-5 py-12">
+  <div class="main flex items-center">
+    <img src="{{ '/images/cuo-logo.png' | url }}" alt="ClassicUO Logo" class="h-8 md:mr-2 mr-auto">
+    <span class="md:block hidden text-secondary text-xl font-bold mr-auto font-headings">ClassicUO Web</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+<script type="text/javascript">
+  docsearch({
+    apiKey: 'd18e7884c2a304ed35d61c440524eb22',
+    indexName: 'ClassicUO',
+    container: '#docsearch',
+    appId: 'AM3UJ98ONF',
+    debug: false,
+  });
+</script>
+</body>
+</html>

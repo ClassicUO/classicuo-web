@@ -1,0 +1,296 @@
+@tailwind base;
+@tailwind components;
+
+html {
+  scroll-padding-top: 70px;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  @apply text-primary leading-normal break-words;
+}
+
+h1, h2, h3, h4, h5, h6, .font-headings {
+  font-family: 'DM Sans', sans-serif;
+}
+
+.text-primary {
+  @apply text-gray-600 dark:text-gray-200;
+}
+
+.text-secondary {
+  @apply text-gray-500 dark:text-gray-400;
+}
+
+.text-tertiary {
+  @apply text-gray-400 dark:text-gray-600;
+}
+
+.text-emphasis {
+  @apply text-gray-800 dark:text-white;
+}
+
+.dark .fa-sun {
+  display: block;
+}
+
+.dark .fa-moon {
+  display: none;
+}
+
+.fa-sun {
+  display: none;
+}
+
+.highlight-icon {
+  @apply text-blue-600 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-6 shadow-lg rounded-full bg-white;
+}
+
+.highlight-description {
+  @apply mt-2 mb-4 text-secondary;
+}
+
+article {
+  @apply text-secondary leading-7;
+}
+
+
+article > * + * {
+  @apply mt-0 mb-6;
+}
+
+article li + li {
+  @apply mt-1;
+}
+
+article li > p + p {
+  @apply mt-6;
+}
+
+article strong {
+  @apply font-semibold;
+}
+
+article a {
+  @apply text-blue-600;
+}
+
+article strong a {
+  @apply font-bold;
+}
+
+article h1 {
+  @apply text-primary leading-tight border-b dark:border-gray-300/10 text-4xl font-medium mt-16 mb-6 pb-2;
+}
+
+article > h1:first-of-type {
+  @apply mt-0;
+}
+
+article h2 {
+  @apply text-primary leading-tight border-b dark:border-gray-300/10 text-2xl font-medium mt-16 mb-6 pb-2;
+}
+
+article h3 {
+  @apply text-primary leading-snug text-lg font-medium mb-4 mt-8;
+}
+
+article h4 {
+  @apply text-primary leading-none text-base font-medium mb-4 mt-6;
+}
+
+article h5 {
+  @apply text-primary leading-tight text-sm font-medium mb-4 mt-6;
+}
+
+article h6 {
+  @apply leading-tight text-sm font-medium text-primary mb-4 mt-6;
+}
+
+article blockquote {
+  @apply text-base rounded-md bg-gray-50 dark:bg-gray-800 dark:border dark:border-gray-700 pl-4 pr-4 py-4 text-secondary ;
+}
+
+article code {
+  padding: 2px 4px;
+  @apply font-mono text-sm inline bg-gray-200 dark:bg-gray-800 rounded;
+}
+
+article pre,
+article pre.hljs {
+  @apply rounded-lg p-4 bg-gray-800 border border-gray-700;
+}
+
+article pre code {
+  @apply block bg-transparent p-0 overflow-visible rounded-none;
+}
+
+article ul {
+  @apply text-base pl-8 list-disc;
+}
+
+article ol {
+  @apply text-base pl-8 list-decimal;
+}
+
+article kbd {
+  @apply text-xs inline-block rounded border p-1 align-middle font-normal font-mono shadow;
+}
+
+article table {
+  @apply text-base border-separate border-spacing-0;
+}
+
+article table tr th,
+article table tr td {
+  @apply dark:border-gray-800 border-r border-b py-1 px-3 align-top;
+}
+
+article table tr th:first-child,
+article table tr td:first-child {
+  @apply border-l;
+}
+
+article table tr th {
+  @apply border-t;
+}
+
+article table tr:first-child th:first-child {
+  border-top-left-radius: 0.5em;
+}
+
+article table tr:first-child th:last-child {
+  border-top-right-radius: 0.5em;
+}
+
+article table tr:last-child td:first-child {
+  border-bottom-left-radius: 0.5em;
+}
+
+article table tr:last-child td:last-child {
+  border-bottom-right-radius: 0.5em;
+}
+
+article .header-anchor {
+  position: absolute;
+  left: -1em;
+  opacity: 0;
+  font-weight: normal;
+  font-family: 'Open Sans', sans-serif;
+  @apply text-tertiary;
+}
+
+article h1,
+article h2,
+article h3 {
+  position: relative;
+}
+
+article h1:hover > .header-anchor,
+article h2:hover > .header-anchor,
+article h3:hover > .header-anchor,
+.header-anchor:focus
+{
+  opacity: 1;
+}
+
+#menu-toggle[aria-expanded=false] > .fa-bars {
+  display: inline;
+}
+
+#menu-toggle[aria-expanded=false] > .fa-times {
+  display: none;
+}
+
+#menu-toggle[aria-expanded=true] > .fa-times {
+  display: inline;
+}
+
+#menu-toggle[aria-expanded=true] > .fa-bars {
+  display: none;
+}
+
+.sidebar {
+  @apply font-headings
+         flex-shrink-0
+         md:mt-3;
+}
+
+#menu {
+  width: 60vw;
+  z-index: 1;
+  @apply fixed
+         bg-white
+         dark:bg-blue-dark
+         px-4
+         inset-y-0
+         left-0
+         transform-gpu
+         -translate-x-full
+         transition-all
+         duration-300
+         md:static
+         md:transform-none
+         md:w-1/5
+         md:pr-8
+         md:mr-8
+         md:pl-0
+         md:mt-0
+         md:shadow-none;
+}
+
+@media (max-width: 768px) {
+  #menu .md\:sticky {
+    height: calc(100% - 5rem);
+    @apply mt-20;
+  }
+
+  #menu .scroll-wrapper {
+    height: 100%;
+  }
+
+  #menu.open {
+    @apply translate-x-0 shadow-2xl;
+  }
+}
+
+.sidebar .sticky {
+  top: 100px;
+}
+
+@screen md {
+  .sidebar .md\:sticky {
+    top: 100px;
+  }
+}
+
+.sidebar .scroll-wrapper {
+  height: calc(100vh - 7.5rem);
+  @apply overflow-y-auto;
+}
+
+.bg-blur {
+  background: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.bg-blur.dark {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.main {
+
+  max-width: 90rem;
+  @apply md:mx-auto p-4;
+}
+
+.h-fill {
+  height: calc(100vh - 14em);
+}
+
+.max-w-xxs {
+  max-width: 14rem;
+}
+
+@tailwind utilities;

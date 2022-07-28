@@ -1,0 +1,7 @@
+type: docs
+layout: layouts/docs.njk
+groups:
+  - id: getting-started
+    title: Getting Started
+  - id: guides
+    title: Guides

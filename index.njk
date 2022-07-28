@@ -1,0 +1,125 @@
+---
+title: 'ClassicUO | The script runner for Deno'
+layout: layouts/main.njk
+scripts:
+  - asciinema-player.js
+styles:
+  - home.css
+---
+
+<div class="main hero mt-12 py-20 flex flex-col-reverse md:flex-row items-center relative">
+
+  <div class="flex flex-col space-y-4 items-center text-center mt-8 md:mt-0 md:mr-auto md:items-start md:text-left">
+    <h1 class="text-5xl font-bold mb-8">Ultima Online <br>for the web</h1>
+
+    <div class="flex flex-row space-x-4">
+      <a href="https://classicuo.org"
+         class="bg-red-600 hover:bg-red-700 transition-colors duration-300 rounded-lg shadow px-5 py-3 text-white text-lg">
+        Play now
+      </a>
+      <a href="/docs/intro"
+         class="bg-blue-600 hover:bg-blue-700 transition-colors duration-300 rounded-lg shadow px-5 py-3 text-white text-lg">
+        Docs
+      </a>
+    </div>
+
+  </div>
+
+  <div>
+    <svg class="chevron" width="800px" height="603.3px" viewBox="0 0 205.8 155.2">
+      <style type="text/css">
+        .st0 {
+          fill: url(#gradient);
+        }
+      </style>
+      <linearGradient id="gradient" gradientUnits="userSpaceOnUse" x1="0" y1="77.5983" x2="205.8001" y2="77.5983">
+        <stop offset="0" style="stop-color:#393ca0"/>
+        <stop offset="1" style="stop-color:#fcfbfe"/>
+      </linearGradient>
+      <path class="st0" d="M205.8,19.1v117.1c0,10.5-8.5,19.1-19.1,19.1H42.5c-7.8,0-14.8-4.7-17.7-12L1.4,84.7c-1.8-4.6-1.8-9.6,0-14.2
+    L24.8,12c2.9-7.2,9.9-12,17.7-12h144.2C197.3,0,205.8,8.5,205.8,19.1z"/>
+    </svg>
+
+    <div class="terminal bg-blur dark rounded-md border border-gray-600 p-4 text-white">
+      <div class="flex mb-2">
+        <div class="w-3 h-3 mr-2 rounded-md bg-red-500"></div>
+        <div class="w-3 h-3 mr-2 rounded-md bg-yellow-500"></div>
+        <div class="w-3 h-3 rounded-md bg-green-500"></div>
+      </div>
+      <img alt="ClassicUO web screenshot" src="{{ '/images/screenshot.png' | url }}" />
+{#      <asciinema-player src="vr.cast" autoplay></asciinema-player>#}
+    </div>
+  </div>
+
+</div>
+
+<div class="bg-gray-100 dark:bg-opacity-5 mt-10 py-28">
+  <div class="main">
+    <div class="text-xl text-center max-w-lg mx-auto pb-20">
+      ClassicUO Web brings the game you know and love to your browser.
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-y-12 text-center">
+      <div class="flex flex-col mx-auto items-center max-w-xs">
+        <div class="highlight-icon">
+          <i class="fa-solid fa-bolt-lightning"></i>
+        </div>
+        <h6 class="text-xl font-semibold">Play instantly</h6>
+        <p class="highlight-description">
+          Go from a new tab to in the game in seconds
+        </p>
+      </div>
+      <div class="flex flex-col mx-auto items-center max-w-xs">
+        <div class="highlight-icon">
+          <i class="fas fa-dragon"></i>
+        </div>
+        <h6 class="text-xl font-semibold">Near native speed</h6>
+        <p class="highlight-description">
+          Play as if you had the client locally installed
+        </p>
+      </div>
+      <div class="flex flex-col mx-auto items-center max-w-xs">
+        <div class="text-blue-600 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-6 shadow-lg rounded-full bg-white">
+          <i class="fa-brands fa-chrome"></i>
+        </div>
+        <h6 class="text-xl font-semibold">Chrome 99+</h6>
+        <p class="highlight-description">
+          A recent version of Chrome is all you need
+        </p>
+      </div>
+      <div class="flex flex-col mx-auto items-center max-w-xs">
+        <div class="highlight-icon">
+          <i class="fa-solid fa-list-ul"></i>
+        </div>
+        <h6 class="text-xl font-semibold">Server list</h6>
+        <p class="highlight-description">
+          Browse to find your favourite shard, or try out a new one easily
+        </p>
+      </div>
+      <div class="flex flex-col mx-auto items-center max-w-xs">
+        <div class="highlight-icon">
+          <i class="fa-solid fa-cloud-arrow-down"></i>
+        </div>
+        <h6 class="text-xl font-semibold">No updates needed</h6>
+        <p class="highlight-description">
+          Always up to date, new patches are automatically applied
+        </p>
+      </div>
+      <div class="flex flex-col mx-auto items-center max-w-xs">
+        <div class="highlight-icon">
+          <i class="fa-solid fa-dungeon"></i>
+        </div>
+        <h6 class="text-xl font-semibold">Customizations</h6>
+        <p class="highlight-description">
+          Shard-specific customizations <br/>(coming soon)
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main my-12 py-12 flex items-center justify-center">
+  <a href="https://classicuo.org"
+     class="bg-red-600 hover:bg-red-700 transition-colors duration-300 rounded-lg shadow px-5 py-3 text-white text-lg">
+    Play now
+  </a>
+</div>

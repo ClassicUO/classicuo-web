@@ -1,0 +1,10 @@
+{
+  "importMap": "import_map.json",
+  "tasks": {
+    "lume": "deno eval \"import 'lume/task.ts'\" --",
+    "build": "NODE_ENV=production deno task lume && deno task styles",
+    "serve": "npx concurrently \"deno task lume -s -p 8000\" \"sleep 1 && deno task styles --watch\"",
+    "styles": "npx tailwindcss@3.1.3 -i static/css/styles.css -o ./_site/css/styles.css",
+    "deploy": "deployctl "
+  }
+}
