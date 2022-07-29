@@ -6,9 +6,16 @@ const server = new Server({
 });
 
 const redirectMiddleware: Middleware = (req, next, _conn) => {
-  const { pathname, origin } = new URL(req.url);
-  if(/^\/docs\/?$/i.test(pathname)) {
-    return Promise.resolve(Response.redirect(`${origin}/docs/intro`));
+  const url = new URL(req.url);
+
+  if (url.hostname.startsWith('www.')) {
+    url.hostname = url.hostname.replace('www.', '');
+    return Promise.resolve(Response.redirect(url.toString(), 301)); 
+  }
+
+  if(/^\/docs\/?$/i.test(url.pathname)) {
+    url.pathname = '/docs/intro';
+    return Promise.resolve(Response.redirect(url.toString()));
   }
 
   return next(req);
