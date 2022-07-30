@@ -11,6 +11,7 @@ body:
     attributes:
       value: |
         Please enter your shard details below, we'll do our best to add it as soon as we can.
+        If you have issues/questions please contact us directly via the CUO discord.
   - type: input
     id: shard-name
     attributes:
@@ -121,3 +122,10 @@ body:
       description: If you have any extra comments/requests place them here
     validations:
       required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to be patient and acknowledge that the CUO devs are working on their own free time to help me.
+          required: true
