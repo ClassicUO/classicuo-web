@@ -10,7 +10,7 @@ const redirectMiddleware: Middleware = (req, next, _conn) => {
 
   if (url.hostname.startsWith('www.')) {
     url.hostname = url.hostname.replace('www.', '');
-    return Promise.resolve(Response.redirect(url.toString(), 301)); 
+    return Promise.resolve(Response.redirect(url.toString(), 301));
   }
 
   if(/^\/docs\/?$/i.test(url.pathname)) {

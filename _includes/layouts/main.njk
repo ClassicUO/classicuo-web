@@ -112,5 +112,40 @@
 {#    debug: false,#}
 {#  });#}
 {#</script>#}
+
+<script type="text/javascript">
+
+  // Clear legacy storage
+  const clearStorage = async () => {
+    if(!('getDirectory' in navigator.storage)) {
+      console.log('OPFS storage not available');
+      return;
+    }
+
+    const root = await navigator.storage.getDirectory();
+
+    const directoryNames = [];
+    const fileNames = [];
+    for await (const handle of root.values()) {
+      if (handle.kind === 'directory') {
+        directoryNames.push(handle.name);
+      } else {
+        fileNames.push(handle.name);
+      }
+    }
+
+    for (const dirName of directoryNames) {
+      await root.removeEntry(dirName, { recursive: true });
+    }
+
+    for (const fileName of fileNames) {
+      await root.removeEntry(fileName);
+    }
+
+    console.log('Cleared local OPFS storage');
+  };
+
+  clearStorage();
+</script>
 </body>
 </html>
