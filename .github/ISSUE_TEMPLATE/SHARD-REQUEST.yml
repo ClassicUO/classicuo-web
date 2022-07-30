@@ -101,7 +101,9 @@ body:
     id: shard-files-modded
     attributes:
       label: List of modified UO assets
-      description: Please provide a list of files you've edited, e.g. gumps.mul, gumpidx.mul, statics0.mul etc.
+      description: |
+        Please provide a list of files you've edited, e.g. gumps.mul, gumpidx.mul, statics0.mul etc.
+        It's important you provide every file you've modified as we will use this list to generate patches.
       render: shell
   - type: textarea
     id: shard-classicuo-customisations
