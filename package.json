@@ -1,0 +1,7 @@
+{
+  "name": "classicuo-web",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
