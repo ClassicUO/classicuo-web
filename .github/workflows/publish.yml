@@ -27,7 +27,6 @@ jobs:
       - name: Deploy to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          working-directory: ./packages/web
           project: classicuo-web
           import-map: "./import_map.json"
-          entrypoint: serve.ts
+          entrypoint: ./packages/web/serve.ts
