@@ -32,5 +32,5 @@ export const getWebDiffTool = (root: string): DiffTool => {
   chmodSync(path.join(root, 'bin/', name), 0o755);
 
   return (sourceDir: string, targetDir: string, patchDir: string, file: string) =>
-    execAsync(`${name} --source-dir ${sourceDir} --target-dir ${targetDir} --output-dir ${patchDir} ${file}`);
+    execAsync(`${name} --source-dir "${sourceDir}" --target-dir "${targetDir}" --output-dir "${patchDir}" ${file}`);
 };

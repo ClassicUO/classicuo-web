@@ -179,7 +179,7 @@ const createDictionaryFile = (source: string, dictFile: string) => {
   console.log("Creating dictionary file with zstd");
   return pipe(
     TE.tryCatch(
-      () => execAsync(`zstd${process.platform === 'win32' ? '.exe' : ''} --maxdict=1266011 --train ${path.join(source, '*')} -o ${dictFile}`),
+      () => execAsync(`zstd${process.platform === 'win32' ? '.exe' : ''} --maxdict=1266011 --train "${path.join(source, '*')}" -o ${dictFile}`),
       (reason) => new Error(`Failed to generate dictionary ${reason}`)
     ),
     TE.map(() => dictFile)
