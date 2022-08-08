@@ -176,7 +176,7 @@ const compareFiles = (filesMap: Map<string, [p1: string, p2: string]>):
   );
 
 const createDictionaryFile = (source: string, dictFile: string) => {
-  const cmd = `zstd${process.platform === 'win32' ? '.exe' : ''} --maxdict=1266011 --train ${path.join(source, '*')} -o ${dictFile}`;
+  const cmd = `zstd${process.platform === 'win32' ? '.exe' : ''} --maxdict=1266011 -r --train "${source}" -o ${dictFile}`;
   console.log(`Creating dictionary file with zstd: ${cmd}`);
   return pipe(
     TE.tryCatch(
