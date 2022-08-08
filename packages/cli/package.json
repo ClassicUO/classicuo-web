@@ -18,12 +18,10 @@
     "@oclif/core": "^1.13.1",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.0.1",
-    "@wasmer/wasi": "^1.0.2",
     "axios": "^0.27.2",
     "fp-ts": "^2.12.2",
     "fp-ts-contrib": "^0.1.29",
     "vcdiff-wasm": "^1.0.10",
-    "wasi": "^0.0.6",
     "zod": "^3.17.10"
   },
   "devDependencies": {

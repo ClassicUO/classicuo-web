@@ -11,7 +11,6 @@
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
     <PublishReadyToRun>true</PublishReadyToRun>
-    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
     <PublishTrimmed>true</PublishTrimmed>
     <AssemblyName>classicuo-web-diff-tool.$(RuntimeIdentifier)</AssemblyName>
   </PropertyGroup>
