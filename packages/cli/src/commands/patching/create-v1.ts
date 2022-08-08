@@ -257,19 +257,24 @@ const createPatches = (
         files: A.sort(Str.Ord)(config.patch.files)
       }
     })),
-    TE.chainFirstW(({ patch }) => pipe(
-      isDirectoryF(patch.outputDirectory),
-      TE.fold(
-        () => mkdirF(patch.outputDirectory),
-        (right) =>
-          preserve
-            ? TE.right(right)
-            : pipe(
-              rmDirF(patch.outputDirectory),
-              TE.chain(() => mkdirF(patch.outputDirectory))
-            ),
-      ),
-    )),
+    TE.chainFirstW(({ patch }) => {
+
+      console.log(`Found ${patch.files.length} files to patch`)
+
+      return pipe(
+        isDirectoryF(patch.outputDirectory),
+        TE.fold(
+          () => mkdirF(patch.outputDirectory),
+          (right) =>
+            preserve
+              ? TE.right(right)
+              : pipe(
+                rmDirF(patch.outputDirectory),
+                TE.chain(() => mkdirF(patch.outputDirectory))
+              ),
+        ),
+      );
+    }),
     TE.chainFirst(({ patch }) => isDirectoryF(patch.targetDirectory)),
     TE.bind('dictFile', ({ patch }) =>
       pipe(
@@ -328,7 +333,10 @@ const createPatches = (
           file,
           patchFile: path.join(patch.outputDirectory, `${file}.patch`)
         }),
-        ({ patchFile }) => createPatchFileCUOCli(diffTool)(sourceFile, targetFile, patchFile)
+        ({ patchFile }) => {
+          console.log(`Patching ${path.basename(targetFile)}`)
+          return createPatchFileCUOCli(diffTool)(sourceFile, targetFile, patchFile);
+        }
       )),
       TE.sequenceArray,
       TE.map(flow(
