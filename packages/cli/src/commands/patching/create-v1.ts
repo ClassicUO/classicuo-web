@@ -163,6 +163,7 @@ const compareFiles = (filesMap: Map<string, [p1: string, p2: string]>):
     [...filesMap.entries()],
     A.map(([key, [p1, p2]]) => TE.tryCatch(
       async () => {
+        console.log(`Comparing files via sha256: ${p1} => ${p2}`);
         return sha256sum(await readFileAsync(p1)) !== sha256sum(await readFileAsync(p2))
           ? O.some([key, [p1, p2]] as [string, [p1: string, p2: string]])
           : O.none;
@@ -174,13 +175,16 @@ const compareFiles = (filesMap: Map<string, [p1: string, p2: string]>):
     TE.map((entries) => new Map(entries))
   );
 
-const createDictionaryFile = (source: string, dictFile: string) => pipe(
+const createDictionaryFile = (source: string, dictFile: string) => {
+  console.log("Creating dictionary file with zstd");
+  return pipe(
     TE.tryCatch(
-      () => execAsync(`zstd${process.platform === 'win32' ? '.exe' : ''} --maxdict=1266011 --train ${source}/* -o ${dictFile}`),
+      () => execAsync(`zstd${process.platform === 'win32' ? '.exe' : ''} --maxdict=1266011 --train ${path.join(source, '*')} -o ${dictFile}`),
       (reason) => new Error(`Failed to generate dictionary ${reason}`)
     ),
     TE.map(() => dictFile)
   );
+};
 
 // const createPatchFileWasm = (sourceFile: string, targetFile: string, patchFile: string) =>
 //   pipe(
