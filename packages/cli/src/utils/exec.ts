@@ -1,6 +1,6 @@
-import { execAsync } from './fs';
 import path from 'path';
 import { chmodSync } from 'fs';
+import { execAsync } from './fs';
 
 export const ARCH_MAPPING: Record<string, string> = {
   'x64': 'x64',
@@ -29,9 +29,8 @@ export const getWebDiffTool = (root: string): DiffTool => {
     process.platform === 'win32' ? '.exe' : ''
   }`;
 
-  const executable = path.join(root, 'bin/', name);
-  chmodSync(executable, 0o755);
+  chmodSync(path.join(root, 'bin/', name), 0o755);
 
   return (sourceDir: string, targetDir: string, patchDir: string, file: string) =>
-    execAsync(`${executable} --source-dir ${sourceDir} --target-dir ${targetDir} --output-dir ${patchDir} ${file}`);
+    execAsync(`${name} --source-dir ${sourceDir} --target-dir ${targetDir} --output-dir ${patchDir} ${file}`);
 };

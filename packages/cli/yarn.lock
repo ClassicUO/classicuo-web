@@ -305,7 +305,6 @@ __metadata:
     "@types/chai": ^4
     "@types/mocha": ^9.0.0
     "@types/node": ^16.9.4
-    "@wasmer/wasi": ^1.0.2
     axios: ^0.27.2
     chai: ^4
     eslint: ^7.32.0
@@ -321,7 +320,6 @@ __metadata:
     tslib: ^2.3.1
     typescript: ^4.4.3
     vcdiff-wasm: ^1.0.10
-    wasi: ^0.0.6
     zod: ^3.17.10
   bin:
     cli: ./bin/run
@@ -1223,13 +1221,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wasmer/wasi@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@wasmer/wasi@npm:1.0.2"
-  checksum: ccfc0d1caa02faddfa3374038d79912299a4e51c85214b5c62937cea93840add59c267645b78ffe131a0302c9a4ca405f4d97fbc80dfeb1168607ffa9c9ad5ab
-  languageName: node
-  linkType: hard
-
 "abbrev@npm:1":
   version: 1.1.1
   resolution: "abbrev@npm:1.1.1"
@@ -1612,15 +1603,6 @@ __metadata:
   version: 4.18.0
   resolution: "binaryextensions@npm:4.18.0"
   checksum: 6fe92a9004c5a7c08a8d49ac4087581043a0d195e76c288619c13e9232d0b80543f01da0037bb0f1b02830c174721fcad92bdfe76c84295cc8f308ee3b74d184
-  languageName: node
-  linkType: hard
-
-"bindings@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "bindings@npm:1.5.0"
-  dependencies:
-    file-uri-to-path: 1.0.0
-  checksum: 65b6b48095717c2e6105a021a7da4ea435aa8d3d3cd085cb9e85bcb6e5773cf318c4745c3f7c504412855940b585bdf9b918236612a1c7a7942491de176f1ae7
   languageName: node
   linkType: hard
 
@@ -3130,13 +3112,6 @@ __metadata:
   dependencies:
     flat-cache: ^3.0.4
   checksum: f49701feaa6314c8127c3c2f6173cfefff17612f5ed2daaafc6da13b5c91fd43e3b2a58fd0d63f9f94478a501b167615931e7200e31485e320f74a33885a9c74
-  languageName: node
-  linkType: hard
-
-"file-uri-to-path@npm:1.0.0":
-  version: 1.0.0
-  resolution: "file-uri-to-path@npm:1.0.0"
-  checksum: b648580bdd893a008c92c7ecc96c3ee57a5e7b6c4c18a9a09b44fb5d36d79146f8e442578bc0e173dc027adf3987e254ba1dfd6e3ec998b7c282873010502144
   languageName: node
   linkType: hard
 
@@ -7139,18 +7114,6 @@ __metadata:
   version: 1.0.0
   resolution: "walk-up-path@npm:1.0.0"
   checksum: b8019ac4fb9ba1576839ec66d2217f62ab773c1cc4c704bfd1c79b1359fef5366f1382d3ab230a66a14c3adb1bf0fe102d1fdaa3437881e69154dfd1432abd32
-  languageName: node
-  linkType: hard
-
-"wasi@npm:^0.0.6":
-  version: 0.0.6
-  resolution: "wasi@npm:0.0.6"
-  dependencies:
-    bindings: ^1.5.0
-    node-gyp: latest
-  bin:
-    wasi: run.js
-  checksum: 2ff97aadb4c9f350a652a43ab6b5095b854b25492600c01165293e9b527f99f2c4041c76c42c7b5b63eea437ba06f124085f3e1074823592a38adb4f6bb10e60
   languageName: node
   linkType: hard
 

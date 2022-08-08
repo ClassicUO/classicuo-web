@@ -21,6 +21,8 @@ hello friend from oclif! (./src/commands/hello/index.ts)
 
     this.log(`hello ${args.person} from ${flags.from}! (./src/commands/hello/index.ts)`)
 
+    console.log(path.join(this.config.root, '*'))
+
     console.log({
       arch: process.arch,
       platform: process.platform,

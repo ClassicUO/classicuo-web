@@ -86,12 +86,14 @@ export default class CreateV1 extends Command {
     const { args, flags } = await this.parse(CreateV1);
 
     CliUx.ux.action.start('Synchronising source files')
-    await syncSourceFiles(flags.source, flags.sourcePath)();
-    CliUx.ux.action.stop()
+    await syncSourceFiles(flags.source as URL, flags.sourcePath as string)();
+    CliUx.ux.action.stop();
+
+    process.env.PATH = `${this.config.root}/bin` + (process.platform === 'win32' ? ';' : ':') + process.env.PATH;
 
     return pipe(
       createPatches({
-        source: flags.sourcePath,
+        source: flags.sourcePath as string,
         configPath: path.resolve(args.config),
         preserve: flags.preserve,
         diffTool: getWebDiffTool(this.config.root)
@@ -142,7 +144,7 @@ const syncSourceFiles = (source: URL, sourceDir: string) =>
 const mapFiles = (dir: string) => pipe(
   dir,
   getFilesRecursively,
-  A.filterMap((p) =>
+  A.filterMap((p: string) =>
     extensions.includes(path.extname(p))
       ? O.some([normalizeName(p), p] as [string, string])
       : O.none
@@ -168,12 +170,12 @@ const compareFiles = (filesMap: Map<string, [p1: string, p2: string]>):
   );
 
 const createDictionaryFile = (source: string, dictFile: string) => pipe(
-  TE.tryCatch(
-    () => execAsync(`zstd --maxdict=1266011 --train ${source}/* -o ${dictFile}`),
-    (reason) => new Error(`Failed to generate dictionary ${reason}`)
-  ),
-  TE.map(() => dictFile)
-);
+    TE.tryCatch(
+      () => execAsync(`zstd${process.platform === 'win32' ? '.exe' : ''} --maxdict=1266011 --train ${source}/* -o ${dictFile}`),
+      (reason) => new Error(`Failed to generate dictionary ${reason}`)
+    ),
+    TE.map(() => dictFile)
+  );
 
 // const createPatchFileWasm = (sourceFile: string, targetFile: string, patchFile: string) =>
 //   pipe(

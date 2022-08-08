@@ -21,7 +21,7 @@ import { either as E, taskEither as TE, array as A, option as O, map as M, set a
 import { configSchema } from '../schemas/config';
 import { z, ZodAny, ZodError, ZodType } from 'zod';
 
-export const execAsync = util.promisify(exec);
+export const execAsync = util.promisify(exec) as (arg1: string) => Promise<{ stdout: string, stderr: string }>;
 export const readFileAsync = util.promisify(readFile);
 export const writeFileAsync = util.promisify(writeFile);
 export const statAsync = util.promisify(stat);
