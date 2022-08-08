@@ -3,3 +3,5 @@ dist
 node_modules
 shard-configs
 bin/classicuo-web-diff-tool*
+bin/zstd*
+housing.bin

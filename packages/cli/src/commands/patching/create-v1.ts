@@ -91,19 +91,24 @@ export default class CreateV1 extends Command {
 
     process.env.PATH = `${this.config.root}/bin` + (process.platform === 'win32' ? ';' : ':') + process.env.PATH;
 
-    return pipe(
+    const patch = pipe(
       createPatches({
         source: flags.sourcePath as string,
         configPath: path.resolve(args.config),
         preserve: flags.preserve,
-        diffTool: getWebDiffTool(this.config.root)
+        diffTool: getWebDiffTool(this.config.root),
+        log: this.log
       }),
       TE.mapLeft(
         (error) => {
           throw error;
         }
       )
-    )();
+    );
+
+    CliUx.ux.action.start('Patching files');
+    await patch();
+    CliUx.ux.action.stop();
   }
 }
 
@@ -118,9 +123,9 @@ const syncSourceFiles = (source: URL, sourceDir: string) =>
     TE.chainFirst(() => mkdirF(sourceDir)),
     TE.chain((manifest) => pipe(
       manifest.files,
-      A.map((file) => {
+      A.map((file: string) => {
         const remoteFile = `${manifest.cdnBase}/${file}`;
-        const localFile = `${sourceDir}/${file}`;
+        const localFile = path.join(sourceDir, file);
 
         return pipe(
           isDirectoryF(path.dirname(localFile)),
@@ -241,7 +246,7 @@ const createPatchFileCUOCli = (diffTool: DiffTool) => (sourceFile: string, targe
 
 
 const createPatches = (
-  { source, configPath, preserve, diffTool }: { source: string, configPath: string, preserve: boolean, diffTool: DiffTool }
+  { source, configPath, preserve, diffTool }: { source: string, configPath: string, preserve: boolean, diffTool: DiffTool, log: Command['log'] }
 ) =>
   pipe(
     tryParseJson(configSchema, configPath),
