@@ -176,10 +176,11 @@ const compareFiles = (filesMap: Map<string, [p1: string, p2: string]>):
   );
 
 const createDictionaryFile = (source: string, dictFile: string) => {
-  console.log("Creating dictionary file with zstd");
+  const cmd = `zstd${process.platform === 'win32' ? '.exe' : ''} --maxdict=1266011 --train ${path.join(source, '*')} -o ${dictFile}`;
+  console.log(`Creating dictionary file with zstd: ${cmd}`);
   return pipe(
     TE.tryCatch(
-      () => execAsync(`zstd${process.platform === 'win32' ? '.exe' : ''} --maxdict=1266011 --train "${path.join(source, '*')}" -o "${dictFile}"`),
+      () => execAsync(cmd),
       (reason) => new Error(`Failed to generate dictionary ${reason}`)
     ),
     TE.map(() => dictFile)
