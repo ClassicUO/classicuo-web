@@ -7,7 +7,6 @@ export const shardSchema = z.object({
   logo: z.string().url(),
   name: z.string(),
   region: z.enum(["US", "EU", "OCE", "ASIA", "BR"]),
-  url: z.string().url(),
   focus: z.string(),
   website: z.string().url(),
   discord: z.string().url().optional(),

@@ -1,6 +1,6 @@
 ---
-title: FAQ (Players)
-group: getting-started
+title: FAQ
+group: players
 description: Frequently asked questions about the ClassicUO Client from players
 ---
 # Players FAQ

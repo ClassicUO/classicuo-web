@@ -3,7 +3,7 @@ module.exports = {
   content: [
     'index.njk',
     '404.html',
-    './_includes/**/*.{html,njk}',
+    './_site/**/*.{html,njk}',
   ],
   safelist: ['ml-2', 'ml-4', 'ml-6'],
   theme: {

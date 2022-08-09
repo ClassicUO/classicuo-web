@@ -1,3 +1,2 @@
-_site/
-.idea
+.yarn
 node_modules

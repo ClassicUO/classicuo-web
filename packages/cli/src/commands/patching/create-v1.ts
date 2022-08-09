@@ -12,6 +12,7 @@ import {
 } from 'fp-ts';
 import { configSchema } from '../../schemas/config';
 import {
+  copyAsync, copyFileF,
   execAsync,
   getFilesRecursively,
   isDirectoryF,
@@ -75,6 +76,16 @@ export default class CreateV1 extends Command {
       required: true,
       description: 'Directory to store a local copy of the source files to patch against',
     }),
+    targetPath: Flags.string({
+      char: 'i',
+      required: true,
+      description: 'Your shard files to create patches for',
+    }),
+    outputPath: Flags.string({
+      char: 'i',
+      required: true,
+      description: 'The directory to store the output patches',
+    }),
     // flag with no value (-f, --force)
     force: Flags.boolean({ char: 'f' }),
     preserve: Flags.boolean({ char: 'p' }),
@@ -85,7 +96,7 @@ export default class CreateV1 extends Command {
   public async run(): Promise<any> {
     const { args, flags } = await this.parse(CreateV1);
 
-    CliUx.ux.action.start('Synchronising source files')
+    CliUx.ux.action.start('Synchronising source files');
     await syncSourceFiles(flags.source as URL, flags.sourcePath as string)();
     CliUx.ux.action.stop();
 
@@ -93,10 +104,10 @@ export default class CreateV1 extends Command {
 
     const patch = pipe(
       createPatches({
-        source: flags.sourcePath as string,
+        ...flags,
         configPath: path.resolve(args.config),
         preserve: flags.preserve,
-        diffTool: getWebDiffTool(this.config.root),
+        diffTool: await getWebDiffTool(this.config.root),
         log: this.log
       }),
       TE.mapLeft(
@@ -135,16 +146,16 @@ const syncSourceFiles = (source: URL, sourceDir: string) =>
           ),
           TE.chain(() => downloadFile(remoteFile, localFile)),
           TE.map((status) => {
-            if(status === 200) {
+            if (status === 200) {
               console.log(`Synced source file ${remoteFile} => ${localFile}: ${status}`);
             }
-            return { remoteFile, localFile, status }
+            return { remoteFile, localFile, status };
           })
         );
       }),
       TE.sequenceArray,
     )),
-  )
+  );
 
 const mapFiles = (dir: string) => pipe(
   dir,
@@ -175,69 +186,13 @@ const compareFiles = (filesMap: Map<string, [p1: string, p2: string]>):
     TE.map((entries) => new Map(entries))
   );
 
-const createDictionaryFile = (source: string, dictFile: string) => {
-  const cmd = `zstd${process.platform === 'win32' ? '.exe' : ''} --maxdict=1266011 -r --train "${source}" -o "${dictFile}"`;
-  console.log(`Creating dictionary file with zstd: ${cmd}`);
-  return pipe(
-    TE.tryCatch(
-      () => execAsync(cmd),
-      (reason) => new Error(`Failed to generate dictionary ${reason}`)
-    ),
-    TE.map(() => dictFile)
-  );
-};
-
-// const createPatchFileWasm = (sourceFile: string, targetFile: string, patchFile: string) =>
-//   pipe(
-//     readFileAsBuffer(sourceFile),
-//     TE.bindTo('sourceBuffer'),
-//     TE.bind('targetBuffer', () => readFileAsBuffer(targetFile)),
-//     TE.chain(({ sourceBuffer, targetBuffer }) => TE.tryCatch(
-//       () => writeFileAsync(patchFile, vcdiff.encoder(sourceBuffer, targetBuffer)),
-//       (reason) => new Error(`Failed to generate patch via WASM: ${reason}`)
-//     )),
-//     TE.map(() => {
-//       console.log({
-//         sourceFile,
-//         targetFile,
-//         patchFile,
-//         sourceFileExists: existsSync(sourceFile),
-//         targetFileExists: existsSync(targetFile),
-//         source: statSync(sourceFile).size / 1024 / 1024,
-//         target: statSync(targetFile).size / 1024 / 1024,
-//         delta: statSync(patchFile).size / 1024 / 1024
-//       });
-//       return patchFile;
-//     })
-//   );
-
-const createPatchFileCli = (sourceFile: string, targetFile: string, patchFile: string) => pipe(
-  TE.tryCatch(
-    () => execAsync(`vcdiff encode --stats --dictionary ${sourceFile} < ${targetFile} > ${patchFile}`),
-    (reason) => new Error(`Failed to generate patch ${reason}`)
-  ),
-  TE.map(() => {
-    console.log({
-      sourceFile,
-      targetFile,
-      patchFile,
-      // sourceFileExists: existsSync(sourceFile),
-      // targetFileExists: existsSync(targetFile),
-      source: statSync(sourceFile).size / 1024 / 1024,
-      target: statSync(targetFile).size / 1024 / 1024,
-      delta: statSync(patchFile).size / 1024 / 1024
-    });
-    return patchFile;
-  })
-);
-
-const createPatchFileCUOCli = (diffTool: DiffTool) => (sourceFile: string, targetFile: string, patchFile: string) => pipe(
+const createPatchFileCUOCli = (diffTool: DiffTool) => (sourceDir: string, targetDir: string, patchDir: string, file: string) => pipe(
   TE.tryCatch(
     () => diffTool(
-      path.dirname(sourceFile),
-      path.dirname(targetFile),
-      path.dirname(patchFile),
-      path.basename(targetFile)
+      sourceDir,
+      targetDir,
+      patchDir,
+      file
     ),
     (reason) => new Error(`Failed to generate patch ${reason}`)
   ),
@@ -248,10 +203,23 @@ const createPatchFileCUOCli = (diffTool: DiffTool) => (sourceFile: string, targe
   })
 );
 
-
-
 const createPatches = (
-  { source, configPath, preserve, diffTool }: { source: string, configPath: string, preserve: boolean, diffTool: DiffTool, log: Command['log'] }
+  {
+    sourcePath,
+    targetPath,
+    outputPath,
+    configPath,
+    preserve,
+    diffTool
+  }: {
+    sourcePath: string,
+    targetPath: string,
+    outputPath: string,
+    configPath: string,
+    preserve: boolean,
+    diffTool: DiffTool,
+    log: Command['log']
+  }
 ) =>
   pipe(
     tryParseJson(configSchema, configPath),
@@ -262,28 +230,25 @@ const createPatches = (
         files: A.sort(Str.Ord)(config.patch.files)
       }
     })),
-    TE.chainFirstW(({ patch }) => {
-
-      console.log(`Found ${patch.files.length} files to patch`)
-
-      return pipe(
-        isDirectoryF(patch.outputDirectory),
+    TE.chainFirstW(({ patch }) =>
+      pipe(
+        isDirectoryF(outputPath),
         TE.fold(
-          () => mkdirF(patch.outputDirectory),
+          () => mkdirF(outputPath),
           (right) =>
             preserve
               ? TE.right(right)
               : pipe(
-                rmDirF(patch.outputDirectory),
-                TE.chain(() => mkdirF(patch.outputDirectory))
+                rmDirF(outputPath),
+                TE.chain(() => mkdirF(outputPath))
               ),
         ),
-      );
-    }),
-    TE.chainFirst(({ patch }) => isDirectoryF(patch.targetDirectory)),
+      )),
+    TE.chainFirst(({ patch }) => isDirectoryF(targetPath)),
     TE.bind('dictFile', ({ patch }) =>
       pipe(
-        createDictionaryFile(source, path.join(patch.outputDirectory, 'dict.bin')),
+        TE.of(path.join(sourcePath, 'dict.bin')),
+        TE.chainFirst((dictPath) => copyFileF(dictPath, path.join(outputPath, 'dict.bin'))),
         TE.chain(readFileAsBuffer),
         TE.map((buffer): Patch => ({
           file: 'dict.bin',
@@ -294,13 +259,13 @@ const createPatches = (
       )),
     TE.bindW('sourceFiles', ({ patch }) =>
       pipe(
-        source,
+        sourcePath,
         mapFiles,
         TE.of
       )),
     TE.bindW('targetFiles', ({ patch }) =>
       pipe(
-        patch.targetDirectory,
+        targetPath,
         mapFiles,
         M.filter((key) => !!patch.files.find((i) => normalizeName(i) === normalizeName(key))),
         TE.of
@@ -326,7 +291,7 @@ const createPatches = (
     TE.bind('missingFiles', ({ sharedFiles, dictFile, targetFiles, patch }) => pipe(
       [...targetFiles.keys()],
       A.filter((key) => !sharedFiles.has(key)),
-      A.map((key) => [key, [path.join(patch.outputDirectory, dictFile.file), targetFiles.get(key)!]] as const),
+      A.map((key) => [key, [path.join(outputPath, dictFile.file), targetFiles.get(key)!]] as const),
       (entries) => TE.of(new Map(entries)),
     )),
     TE.bind('patchedFiles', ({ changedFiles, missingFiles, patch, shard, dictFile }) => pipe(
@@ -334,14 +299,7 @@ const createPatches = (
       A.filter(([f]) => !uselessFiles.includes(f)),
       A.map(([_key, [sourceFile, targetFile]]) => pipe(
         path.basename(sourceFile.endsWith(dictFile.file) ? targetFile : sourceFile),
-        (file) => ({
-          file,
-          patchFile: path.join(patch.outputDirectory, `${file}.patch`)
-        }),
-        ({ patchFile }) => {
-          console.log(`Patching ${path.basename(targetFile)}`)
-          return createPatchFileCUOCli(diffTool)(sourceFile, targetFile, patchFile);
-        }
+        (file) => createPatchFileCUOCli(diffTool)(sourcePath, targetPath, outputPath, file)
       )),
       TE.sequenceArray,
       TE.map(flow(
@@ -361,8 +319,8 @@ const createPatches = (
         A.map((key) => path.basename(sourceFiles.get(key)!)),
         (files) => pipe(
           [...sourceFiles.values()],
-          A.filter((f) => f.includes("/Music/")),
-          A.map((f) => f.replace(source, '').replace(/^\//, '')),
+          A.filter((f) => f.includes('/Music/')),
+          A.map((f) => f.replace(sourcePath, '').replace(/^\//, '')),
           A.concat(files)
         )
       ),
@@ -370,7 +328,7 @@ const createPatches = (
     })),
     TE.chain(({ manifest, patch }) => TE.tryCatch(
       () => writeFileAsync(
-        path.join(patch.outputDirectory, 'client-manifest.json'),
+        path.join(outputPath, 'client-manifest.json'),
         JSON.stringify(manifest, null, 2)
       ),
       (reason) => new Error(`Failed writing manifest JSON: ${reason}`)

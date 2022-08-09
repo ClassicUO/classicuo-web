@@ -1,13 +1,13 @@
 {
   "name": "@classicuo/cli",
-  "version": "0.0.0",
+  "version": "0.0.6",
   "description": "CLI tool for shard management",
   "author": "ClassicUO Team",
   "bin": "./bin/run",
-  "homepage": "https://github.com/ClassicUO/classicuo-cli",
+  "homepage": "https://github.com/ClassicUO/classicuo-web",
   "license": "MIT",
   "main": "dist/index.js",
-  "repository": "ClassicUO/classicuo-cli",
+  "repository": "ClassicUO/classicuo-web",
   "files": [
     "/bin",
     "/dist",
@@ -18,6 +18,7 @@
     "@oclif/core": "^1.13.1",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.0.1",
+    "@terascope/fetch-github-release": "^0.8.7",
     "axios": "^0.27.2",
     "fp-ts": "^2.12.2",
     "fp-ts-contrib": "^0.1.29",
@@ -64,14 +65,14 @@
     "lint": "eslint . --ext .ts --config .eslintrc",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "yarn lint",
-    "prepack": "yarn build && oclif manifest && oclif readme",
+    "prepack": "rm -rf bin/classicuo-web-diff-tool-* && yarn build && oclif manifest && oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md",
-    "patch": "./bin/dev patching:create-v1 shard-configs/elemental.json --sourcePath /home/jabin/Downloads/uo_files/7.0.95.0",
+    "patch": "./bin/dev patching:create-v1",
     "hello": "./bin/dev hello friend -f hi"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=16.0.0"
   },
   "bugs": "https://github.com/ClassicUO/classicuo-cli/issues",
   "keywords": [

@@ -10,7 +10,8 @@ import {
   readFile,
   writeFile,
   mkdir, rm, access,
-  constants as fsConstants
+  constants as fsConstants,
+  copyFile
 } from 'fs';
 import path from 'path';
 import { createHash } from 'crypto';
@@ -27,7 +28,7 @@ export const writeFileAsync = util.promisify(writeFile);
 export const statAsync = util.promisify(stat);
 export const mkdirAsync = util.promisify(mkdir);
 export const rmAsync = util.promisify(rm);
-export const accessAsync = util.promisify(access);
+export const copyAsync = util.promisify(copyFile);
 
 
 export const isDirectoryF = TE.fromPredicate<Error, string>(
@@ -43,17 +44,18 @@ export const isDirectoryF = TE.fromPredicate<Error, string>(
 );
 
 export const mkdirF = (dir: string) => TE.tryCatch(
-  () => {
-    return mkdirAsync(dir, { recursive: true });
-  },
-  () => new Error(`Failed to create directory: ${path.dirname(dir)}`)
+  () => mkdirAsync(dir, { recursive: true }),
+  () => new Error(`Failed to create directory: ${dir}`)
 );
 
 export const rmDirF = (dir: string) => TE.tryCatch(
-  () => {
-    return rmAsync(dir, { recursive: true });
-  },
-  () => new Error(`Failed to remove directory: ${path.dirname(dir)}`)
+  () => rmAsync(dir, { recursive: true }),
+  () => new Error(`Failed to remove directory: ${dir}`)
+);
+
+export const copyFileF = (source: string, dest: string) => TE.tryCatch(
+  () => copyAsync(source, dest),
+  () => new Error(`Failed to copy: ${source} => ${dest}`)
 );
 
 const isDirectory = (p: string) => existsSync(p) && statSync(p).isDirectory();

@@ -1,6 +1,6 @@
 ---
-title: FAQ (Shard Owners)
-group: getting-started
+title: FAQ
+group: shard-owners
 description: Frequently asked questions about the ClassicUO Client from shard owners
 ---
 # Shard Owners FAQ

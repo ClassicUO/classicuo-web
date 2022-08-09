@@ -3,5 +3,8 @@
   "private": true,
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@terascope/fetch-github-release": "^0.8.7"
+  }
 }

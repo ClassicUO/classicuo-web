@@ -8,8 +8,6 @@ export const patchSchema = z.object({
 })
 
 export const patchConfigSchema = z.object({
-  targetDirectory: z.string(),
-  outputDirectory: z.string(),
   cdnBase: z.string().url(),
   b2: z.object({
     accountId: z.string(),

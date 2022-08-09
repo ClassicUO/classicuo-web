@@ -53,13 +53,6 @@ cmd.SetHandler
 
 return cmd.Invoke(args);
 
-[UnmanagedCallersOnly]
-static int DoSomething(int test)
-{
-    Console.WriteLine(test);
-    return 0;
-}
-
 static IEnumerable<PatchInfo> Patch(
     DirectoryInfo sourceDir,
     DirectoryInfo targetDir,
@@ -80,7 +73,7 @@ static IEnumerable<PatchInfo> Patch(
     if (uopMulName is null)
     {
         var sourcePath = GetCaseNudgedPathName(sourceDir.FullName, targetFile.Name);
-        var dictPath = GetCaseNudgedPathName(outputDir.FullName, "dict.bin");
+        var dictPath = GetCaseNudgedPathName(sourceDir.FullName, "dict.bin");
         
         var sourceFile = new FileInfo(File.Exists(sourcePath) ? sourcePath : dictPath);
 

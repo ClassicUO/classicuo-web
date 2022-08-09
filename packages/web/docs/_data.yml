@@ -3,5 +3,7 @@ layout: layouts/docs.njk
 groups:
   - id: getting-started
     title: Getting Started
-  - id: guides
-    title: Guides
+  - id: players
+    title: Players
+  - id: shard-owners
+    title: Shard Owners
