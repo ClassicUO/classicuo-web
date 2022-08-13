@@ -8,7 +8,8 @@ import {
   map as M,
   set as S,
   readonlyArray as ROA,
-  string as Str
+  string as Str,
+  ord as Ord
 } from 'fp-ts';
 import { configSchema } from '../../schemas/config';
 import {
@@ -29,7 +30,9 @@ import { downloadFile, httpGet } from '../../utils/http';
 import { sourceManifestSchema } from '../../schemas/manifest';
 import { DiffTool, getWebDiffTool } from '../../utils/exec';
 
-const extensions = ['.mul', '.bin', '.def', '.uop', '.idx', '.rle', '.enu', '.rus', '.mp3']; /* '.bik', '.mp3' */
+export const insensitiveOrd: Ord.Ord<string> = pipe(Str.Ord, Ord.contramap(s => s.toLowerCase()))
+
+const extensions = ['.mul', '.bin', '.def', '.uop', '.idx', '.rle', '.enu', '.rus', '.mp3', '.txt']; /* '.bik', '.mp3' */
 const uselessFiles = [
   'Anim1024.bin',
   'Anim256.bin',
@@ -251,6 +254,7 @@ const createPatches = (
         TE.chainFirst((dictPath) => copyFileF(dictPath, path.join(outputPath, 'dict.bin'))),
         TE.chain(readFileAsBuffer),
         TE.map((buffer): Patch => ({
+          source: '',
           file: 'dict.bin',
           sha256: sha256sum(buffer),
           length: buffer.byteLength,
@@ -307,7 +311,7 @@ const createPatches = (
         A.flatten
       ))
     )),
-    TE.bind('manifest', ({ shard, patch, dictFile, sharedFiles, sourceFiles, patchedFiles }) => TE.of({
+    TE.bind('manifest', ({ shard, patch, dictFile, sharedFiles, sourceFiles, patchedFiles, changedFiles, missingFiles }) => TE.of({
       source: '7.0.95.0',
       target: shard.clientVersion,
       shardId: shard.id,
@@ -316,20 +320,33 @@ const createPatches = (
       dictFile,
       sourceFiles: pipe(
         [...sharedFiles.keys()],
+        A.filter(f => !(changedFiles.has(f) || missingFiles.has(f))),
         A.map((key) => path.basename(sourceFiles.get(key)!)),
         (files) => pipe(
           [...sourceFiles.values()],
           A.filter((f) => f.includes('/Music/')),
           A.map((f) => f.replace(sourcePath, '').replace(/^\//, '')),
           A.concat(files)
-        )
+        ),
+        A.concat(pipe(
+          patchedFiles,
+          A.map(p => p.source),
+        )),
+        A.uniq(insensitiveOrd),
       ),
       patches: patchedFiles
     })),
-    TE.chain(({ manifest, patch }) => TE.tryCatch(
+    TE.chainFirst(({ manifest, patch }) => TE.tryCatch(
       () => writeFileAsync(
         path.join(outputPath, 'client-manifest.json'),
         JSON.stringify(manifest, null, 2)
+      ),
+      (reason) => new Error(`Failed writing manifest JSON: ${reason}`)
+    )),
+    TE.chainFirst(({ manifest, patch, shard }) => TE.tryCatch(
+      () => writeFileAsync(
+        path.join(outputPath, `${shard.id}.json`),
+        JSON.stringify({ shard, patch }, null, 2)
       ),
       (reason) => new Error(`Failed writing manifest JSON: ${reason}`)
     ))

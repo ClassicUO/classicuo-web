@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const patchSchema = z.object({
+  source: z.string(),
   file: z.string(),
   sha256: z.string(),
   length: z.number(),

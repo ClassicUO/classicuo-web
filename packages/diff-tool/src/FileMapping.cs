@@ -44,6 +44,24 @@ public static class FileMapping
     public static string GetMulUopName(string mul) => GetMappedName(MulFileMap, mul.Replace(".mul", "", StringComparison.InvariantCultureIgnoreCase));
     public static string GetUopMulName(string uop) => GetMappedName(UopFileMap, uop.Replace(".uop", "",  StringComparison.InvariantCultureIgnoreCase));
 
+    public static string GetMulIdxName(string mul)
+    {
+        var idx = mul.Replace(".mul", "", StringComparison.InvariantCultureIgnoreCase);
+
+        if (idx.StartsWith("gumpart", StringComparison.InvariantCultureIgnoreCase))
+        {
+            return "gumpidx.mul";
+        }
+
+        if (idx.StartsWith("multi", StringComparison.InvariantCultureIgnoreCase))
+        {
+            return "multi.idx";
+        }
+
+        return idx + "idx.mul";
+    }
+
+
     public static FileType MulNameToType(string mul)
     {
         if (mul.StartsWith("art", StringComparison.InvariantCultureIgnoreCase))

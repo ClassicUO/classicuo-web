@@ -108,3 +108,16 @@ export const readFileAsBuffer = (path: string) => TE.tryCatch(
   () => readFileAsync(path),
   (reason) => new Error(`Failed to read path ${path} ${reason}`)
 );
+
+export const readFileAsString = (path: string) => TE.tryCatch(
+  () => readFileAsync(path, 'utf-8'),
+  (reason) => new Error(`Failed to read path ${path} ${reason}`)
+);
+
+export const writeJson = <T = object>(outputPath: string, contents: T) => TE.tryCatch(
+  () => writeFileAsync(
+    outputPath,
+    JSON.stringify(contents, null, 2)
+  ),
+  (reason) => new Error(`Failed writing JSON: ${reason}`)
+);

@@ -95,9 +95,9 @@ static IEnumerable<PatchInfo> Patch(
     TryConvertUopToMul(targetFile, out target);
 
     var sourceMulFile = new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, uopMulName + ".mul"));
-    var sourceIdxFile = new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, uopMulName.Replace("gumpart", "gump") + "idx.mul"));
+    var sourceIdxFile = new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, GetMulIdxName(uopMulName)));
 
-    if (!sourceMulFile.Exists)
+    if (!sourceMulFile.Exists || !sourceIdxFile.Exists)
     {
         TryConvertUopToMul(new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, targetFile.Name)), out source);
         using var mulStream = sourceMulFile.Create();

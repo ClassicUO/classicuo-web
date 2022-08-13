@@ -115,10 +115,17 @@ Update the following fields:
 
 
 ### `patch`
-| field       | type            | example                                                                          | description                                                                                                                                |
-|-------------|-----------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| **cdnBase** | URL             | [https://cdn.myshard.com/myshard-patches](#)                                     | The full publicly accessible HTTPS URL to your `output` patch folder without the leading slash.                                            |
-| **files**   | Array\<string\> | [<br/>"art.mul", <br/>"artidx.mul", <br/>"gumpart.mul", <br/>"gumpidx.mul"<br/>] | A list of the files your shard needs to function. <br/><br/> **_Important_: Only the files in this list will be available to the client.** |
+| field       | type            | example                                                                          | description                                                                                     |
+|-------------|-----------------|----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| **cdnBase** | URL             | [https://cdn.myshard.com/myshard-patches](#)                                     | The full publicly accessible HTTPS URL to your `output` patch folder without the leading slash. |
+| **files**   | Array\<string\> | [<br/>"art.mul", <br/>"artidx.mul", <br/>"gumpart.mul", <br/>"gumpidx.mul"<br/>] | A list of the files your shard needs to function.                                               |
+
+#### ⚠️ Important ⚠️
+The `files` list is the only files CUO Web will see! Any files missing will not exist to the client.  
+You should list **every** file UO needs to load. The patcher will take care of patching only those with changes.
+
+You can look at the [ZHModern test center JSON file](https://content.zhmodern.com/file/zuluhotel-content/client/8.json) for an example of how a complete file should look.
+
 
 ## 3. Generating the patches
 
@@ -141,7 +148,7 @@ cuo-web-patching
 Open a terminal at the **root** folder (e.g. `cuo-web-patching`), if you're on Windows you should use `Powershell`.
 Execute the patcher, replace the folder paths with the full-path to your **root** folder, and replace `myshard.json` with your shard configuration file.
 ```bash
-npx @classicuo/cli patching:create-v1 myshard.json --sourcePath C:/cuo-web-patching/classicuo-source --targetPath C:/cuo-web-patching/myshard-files --outputPath C:/cuo-web-patching/myshard-patches
+npx @classicuo/cli@latest patching:create-v1 myshard.json --sourcePath C:/cuo-web-patching/classicuo-source --targetPath C:/cuo-web-patching/myshard-files --outputPath C:/cuo-web-patching/myshard-patches
 ```
 _Note: If patching fails please ask for help on the [#for-shard-owners](https://discord.com/channels/458277173208547350/1002460906862690334) discord channel._  
 

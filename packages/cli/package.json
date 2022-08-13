@@ -1,6 +1,6 @@
 {
   "name": "@classicuo/cli",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "CLI tool for shard management",
   "author": "ClassicUO Team",
   "bin": "./bin/run",
@@ -9,7 +9,8 @@
   "main": "dist/index.js",
   "repository": "ClassicUO/classicuo-web",
   "files": [
-    "/bin",
+    "/bin/run",
+    "/bin/run.cmd",
     "/dist",
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
@@ -65,7 +66,7 @@
     "lint": "eslint . --ext .ts --config .eslintrc",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "yarn lint",
-    "prepack": "rm -rf bin/classicuo-web-diff-tool-* && yarn build && oclif manifest && oclif readme",
+    "prepack": "yarn build && oclif manifest && oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md",
     "patch": "./bin/dev patching:create-v1",

@@ -7,7 +7,7 @@ import * as fs from 'fs';
 import { isFile } from './fs';
 const pipeline = util.promisify(stream.pipeline);
 
-export const httpGet = (url: string) => TE.tryCatch<Error, AxiosResponse>(
+export const httpGet = <T = any>(url: string) => TE.tryCatch<Error, AxiosResponse<T>>(
   () => axios.get(url),
   reason => new Error(String(reason))
 );

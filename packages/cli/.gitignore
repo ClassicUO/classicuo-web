@@ -4,5 +4,6 @@ node_modules
 shard-configs
 bin/classicuo-web-diff-tool*
 bin/zstd*
+bin/release.json
 housing.bin
 package.tgz
