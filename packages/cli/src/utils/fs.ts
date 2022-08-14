@@ -48,6 +48,9 @@ export const mkdirF = (dir: string) => TE.tryCatch(
   () => new Error(`Failed to create directory: ${dir}`)
 );
 
+export const pathWithSubfolder = (root: string, p: string) =>
+  path.resolve(p).replace(root, '').replace(/^\//, '')
+
 export const rmDirF = (dir: string) => TE.tryCatch(
   () => rmAsync(dir, { recursive: true }),
   () => new Error(`Failed to remove directory: ${dir}`)
@@ -113,6 +116,20 @@ export const readFileAsString = (path: string) => TE.tryCatch(
   () => readFileAsync(path, 'utf-8'),
   (reason) => new Error(`Failed to read path ${path} ${reason}`)
 );
+
+export const makeDirectoryIfNotExists = (dir: string, preserve: boolean = false) => pipe(
+  isDirectoryF(dir),
+  TE.fold(
+    () => mkdirF(dir),
+    (right) =>
+      preserve
+        ? TE.right(right)
+        : pipe(
+          rmDirF(dir),
+          TE.chain(() => mkdirF(dir))
+        ),
+  ),
+)
 
 export const writeJson = <T = object>(outputPath: string, contents: T) => TE.tryCatch(
   () => writeFileAsync(

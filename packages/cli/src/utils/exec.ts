@@ -44,6 +44,10 @@ export const getWebDiffTool = async (root: string): Promise<DiffTool> => {
   const binPath = path.join(root, 'bin');
   const executablePath = path.join(binPath, name);
   const releasePath = path.join(binPath, 'release.json');
+  
+  if(!process.env.PATH!.includes(binPath)) {
+    process.env.PATH = binPath + (process.platform === 'win32' ? ';' : ':') + process.env.PATH;
+  }
 
   return await pipe(
     httpGet<ReleaseSchema>(`https://api.github.com/repos/classicuo/classicuo-web/releases/latest`),
@@ -78,7 +82,7 @@ export const getWebDiffTool = async (root: string): Promise<DiffTool> => {
     ),
     TE.map((): DiffTool =>
       (sourceDir, targetDir, patchDir, file) =>
-        execAsync(`${executablePath} --source-dir "${sourceDir}" --target-dir "${targetDir}" --output-dir "${patchDir}" ${file}`)),
+        execAsync(`${name} --source-dir "${sourceDir}" --target-dir "${targetDir}" --output-dir "${patchDir}" ${file}`)),
     TE.mapLeft((error) => {
       throw error;
     }),

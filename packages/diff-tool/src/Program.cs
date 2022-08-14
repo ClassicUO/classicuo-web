@@ -65,25 +65,38 @@ static IEnumerable<PatchInfo> Patch(
     if (!targetFile.Exists)
         throw new FileNotFoundException($"Target file doesn't exist: {targetFile}");
 
-    if (outputDir is { Exists: false })
-        outputDir.Create();
+    var subfolder = GetSubfolder(
+        sourceDir,
+        new DirectoryInfo(
+            GetCaseNudgedDirectoryName(
+                sourceDir.FullName,
+                GetSubfolder(targetDir, targetFile.Directory)
+            )
+        )
+    );
+    
+    Directory.CreateDirectory(Path.Combine(outputDir.FullName, subfolder));
 
     var uopMulName = GetUopMulName(fileName);
-
     if (uopMulName is null)
     {
-        var sourcePath = GetCaseNudgedPathName(sourceDir.FullName, targetFile.Name);
-        var dictPath = GetCaseNudgedPathName(sourceDir.FullName, "dict.bin");
-        
+        var sourcePath = GetCaseNudgedPathName(sourceDir.FullName, subfolder, targetFile.Name);
+        var dictPath = GetCaseNudgedPathName(sourceDir.FullName, subfolder, "dict.bin");
         var sourceFile = new FileInfo(File.Exists(sourcePath) ? sourcePath : dictPath);
 
         using var sourceStream = sourceFile.OpenRead();
         using var targetStream = targetFile.OpenRead();
-        var output = File.Create(GetCaseNudgedPathName(outputDir.FullName, $"{targetFile.Name}.patch"));
+        var outputFile = new FileInfo(Path.Combine(outputDir.FullName, subfolder, $"{targetFile.Name}.patch"));
+        outputFile.Directory?.Create();
+        var output = outputFile.Create();
 
         EncodeFile(sourceStream, targetStream, output);
-        yield return new PatchInfo(sourceFile.Name, $"{targetFile.Name}.patch", CalculateSHA256Async(output), output.Length,
-            targetStream.Length);
+        yield return new PatchInfo(
+            Path.Combine(subfolder, sourceFile.Name),
+            Path.Combine(subfolder, outputFile.Name),
+            CalculateSHA256(output), output.Length,
+            targetStream.Length
+        );
         yield break;
     }
 
@@ -94,12 +107,14 @@ static IEnumerable<PatchInfo> Patch(
     // target is UOP file, convert to MUL,IDX
     TryConvertUopToMul(targetFile, out target);
 
-    var sourceMulFile = new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, uopMulName + ".mul"));
-    var sourceIdxFile = new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, GetMulIdxName(uopMulName)));
+    var sourceMulFile = new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, subfolder, uopMulName + ".mul"));
+    var sourceIdxFile = new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, subfolder, GetMulIdxName(uopMulName)));
 
+#if DEBUG
     if (!sourceMulFile.Exists || !sourceIdxFile.Exists)
     {
-        TryConvertUopToMul(new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, targetFile.Name)), out source);
+        TryConvertUopToMul(new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, subfolder, targetFile.Name)),
+            out source);
         using var mulStream = sourceMulFile.Create();
 
         source.mul.Seek(0, SeekOrigin.Begin);
@@ -113,6 +128,7 @@ static IEnumerable<PatchInfo> Patch(
         }
     }
     else
+#endif
     {
         source = (sourceMulFile.OpenRead(), sourceIdxFile.Exists ? sourceIdxFile.OpenRead() : null);
     }
@@ -120,18 +136,31 @@ static IEnumerable<PatchInfo> Patch(
     try
     {
         using var outputMulPatch =
-            File.Open(GetCaseNudgedPathName(outputDir.FullName, sourceMulFile.Name + ".patch"), FileMode.Create);
+            File.Open(GetCaseNudgedPathName(outputDir.FullName, subfolder, sourceMulFile.Name + ".patch"),
+                FileMode.Create);
         EncodeFile(source.mul, target.mul, outputMulPatch);
-        yield return new PatchInfo(sourceMulFile.Name, sourceMulFile.Name + ".patch", CalculateSHA256Async(outputMulPatch),
-            outputMulPatch.Length, target.mul.Length);
+
+        yield return new PatchInfo(
+            Path.Combine(subfolder, sourceMulFile.Name),
+            Path.Combine(subfolder, sourceMulFile.Name) + ".patch",
+            CalculateSHA256(outputMulPatch),
+            outputMulPatch.Length,
+            target.mul.Length
+        );
 
         if (source.idx is not null && target.idx is not null)
         {
             using var outputIdxPatch =
-                File.Open(GetCaseNudgedPathName(outputDir.FullName, sourceIdxFile.Name + ".patch"), FileMode.Create);
+                File.Open(GetCaseNudgedPathName(outputDir.FullName, subfolder, sourceIdxFile.Name + ".patch"),
+                    FileMode.Create);
             EncodeFile(source.idx, target.idx, outputIdxPatch);
-            yield return new PatchInfo(sourceIdxFile.Name, sourceIdxFile.Name + ".patch", CalculateSHA256Async(outputIdxPatch),
-                outputIdxPatch.Length, target.idx.Length);
+            yield return new PatchInfo(
+                Path.Combine(subfolder, sourceIdxFile.Name),
+                Path.Combine(subfolder, sourceIdxFile.Name) + ".patch",
+                CalculateSHA256(outputIdxPatch),
+                outputIdxPatch.Length,
+                target.idx.Length
+            );
         }
     }
     finally
@@ -237,7 +266,7 @@ static bool TryGetClientVersionFromExe(string clientpath, out string version)
     return false;
 }
 
-static string CalculateSHA256Async(Stream stream)
+static string CalculateSHA256(Stream stream)
 {
     stream.Seek(0, SeekOrigin.Begin);
     var block = ArrayPool<byte>.Shared.Rent(8192);
@@ -268,32 +297,6 @@ static bool IsValidUOFile(FileInfo f) => f.Extension switch
     ".mul" or ".idx" or ".uop" or ".txt" or ".def" or ".rle" or ".mp3" or ".midi" => true,
     _ => false
 } || f.Name.StartsWith("cliloc.", StringComparison.InvariantCultureIgnoreCase);
-
-static string GetCaseNudgedPathName(params string[] paths)
-{
-    var path = Path.Combine(paths);
-    var retPath = path;
-    var dir = Path.GetDirectoryName(path);
-    var pattern = Path.GetFileName(path);
-
-    var foundFiles = Directory.GetFiles(dir);
-    int countMatch = 0;
-    foreach (var foundFile in foundFiles)
-    {
-        if (foundFile.Equals(path, StringComparison.InvariantCultureIgnoreCase))
-        {
-            countMatch++;
-            retPath = foundFile;
-        }
-    }
-
-    if (countMatch > 1)
-    {
-        throw new Exception($"Ambiguous filename '{pattern}'");
-    }
-
-    return retPath;
-}
 
 
 static string RemoveRootPath(string root, string path) =>

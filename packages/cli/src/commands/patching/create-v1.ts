@@ -16,21 +16,20 @@ import {
   copyAsync, copyFileF,
   execAsync,
   getFilesRecursively,
-  isDirectoryF,
+  isDirectoryF, makeDirectoryIfNotExists,
   mkdirF,
-  normalizeName, readFileAsBuffer,
+  normalizeName, pathWithSubfolder, readFileAsBuffer,
   readFileAsync, rmDirF,
   sha256sum,
-  tryParseJson, writeFileAsync
+  tryParseJson, writeFileAsync, writeJson
 } from '../../utils/fs';
 import path from 'path';
-import { existsSync, mkdirSync, rmdirSync, statSync } from 'fs';
 import { Patch } from '../../schemas/patch';
 import { downloadFile, httpGet } from '../../utils/http';
 import { sourceManifestSchema } from '../../schemas/manifest';
 import { DiffTool, getWebDiffTool } from '../../utils/exec';
 
-export const insensitiveOrd: Ord.Ord<string> = pipe(Str.Ord, Ord.contramap(s => s.toLowerCase()))
+export const insensitiveOrd: Ord.Ord<string> = pipe(Str.Ord, Ord.contramap(s => s.toLowerCase()));
 
 const extensions = ['.mul', '.bin', '.def', '.uop', '.idx', '.rle', '.enu', '.rus', '.mp3', '.txt']; /* '.bik', '.mp3' */
 const uselessFiles = [
@@ -59,7 +58,6 @@ const uselessFiles = [
   'string_dictionary.uop',
   'vercfg.bin'
 ].map(normalizeName);
-// let vcdiff: Awaited<ReturnType<typeof VcdiffWasm>>;
 
 export default class CreateV1 extends Command {
   static description = 'Create patches for version 1 of ClassicUO web patching using VCDIFF';
@@ -102,8 +100,6 @@ export default class CreateV1 extends Command {
     CliUx.ux.action.start('Synchronising source files');
     await syncSourceFiles(flags.source as URL, flags.sourcePath as string)();
     CliUx.ux.action.stop();
-
-    process.env.PATH = `${this.config.root}/bin` + (process.platform === 'win32' ? ';' : ':') + process.env.PATH;
 
     const patch = pipe(
       createPatches({
@@ -189,7 +185,7 @@ const compareFiles = (filesMap: Map<string, [p1: string, p2: string]>):
     TE.map((entries) => new Map(entries))
   );
 
-const createPatchFileCUOCli = (diffTool: DiffTool) => (sourceDir: string, targetDir: string, patchDir: string, file: string) => pipe(
+const getDiffToolPatcher = (diffTool: DiffTool, sourceDir: string, targetDir: string, patchDir: string) => (file: string) => pipe(
   TE.tryCatch(
     () => diffTool(
       sourceDir,
@@ -204,6 +200,52 @@ const createPatchFileCUOCli = (diffTool: DiffTool) => (sourceDir: string, target
     console.log(result);
     return result;
   })
+);
+
+const createDictionary = (sourcePath: string, outputPath: string, dictName = 'dict.bin') =>
+  pipe(
+    TE.of(path.join(sourcePath, dictName)),
+    TE.chainFirst((dictPath) => copyFileF(dictPath, path.join(outputPath, dictName))),
+    TE.chain(readFileAsBuffer),
+    TE.map((buffer): Patch => ({
+      source: '*',
+      file: dictName,
+      sha256: sha256sum(buffer),
+      length: buffer.byteLength,
+      size: buffer.byteLength
+    }))
+  );
+
+const createSourceFileList = (
+  {
+    sharedFiles,
+    changedFiles,
+    missingFiles,
+    sourceFiles,
+    patchedFiles,
+    sourcePath
+  }: {
+    sharedFiles: Set<string>,
+    changedFiles: Map<string, [string, string]>,
+    missingFiles: Map<string, [string, string]>,
+    sourceFiles: Map<string, string>,
+    patchedFiles: Patch[],
+    sourcePath: string
+  }) => pipe(
+  [...sharedFiles.keys()],
+  A.filter(f => !(changedFiles.has(f) || missingFiles.has(f))),
+  A.map((key) => path.basename(sourceFiles.get(key)!)),
+  (files) => pipe(
+    [...sourceFiles.values()],
+    A.filter((f) => f.includes('/Music/')),
+    A.map((f) => f.replace(sourcePath, '').replace(/^\//, '')),
+    A.concat(files)
+  ),
+  A.concat(pipe(
+    patchedFiles,
+    A.map(p => p.source),
+  )),
+  A.uniq(insensitiveOrd),
 );
 
 const createPatches = (
@@ -226,47 +268,11 @@ const createPatches = (
 ) =>
   pipe(
     tryParseJson(configSchema, configPath),
-    TE.map((config) => ({
-      ...config,
-      patch: {
-        ...config.patch,
-        files: A.sort(Str.Ord)(config.patch.files)
-      }
-    })),
-    TE.chainFirstW(({ patch }) =>
-      pipe(
-        isDirectoryF(outputPath),
-        TE.fold(
-          () => mkdirF(outputPath),
-          (right) =>
-            preserve
-              ? TE.right(right)
-              : pipe(
-                rmDirF(outputPath),
-                TE.chain(() => mkdirF(outputPath))
-              ),
-        ),
-      )),
-    TE.chainFirst(({ patch }) => isDirectoryF(targetPath)),
-    TE.bind('dictFile', ({ patch }) =>
-      pipe(
-        TE.of(path.join(sourcePath, 'dict.bin')),
-        TE.chainFirst((dictPath) => copyFileF(dictPath, path.join(outputPath, 'dict.bin'))),
-        TE.chain(readFileAsBuffer),
-        TE.map((buffer): Patch => ({
-          source: '',
-          file: 'dict.bin',
-          sha256: sha256sum(buffer),
-          length: buffer.byteLength,
-          size: buffer.byteLength
-        }))
-      )),
-    TE.bindW('sourceFiles', ({ patch }) =>
-      pipe(
-        sourcePath,
-        mapFiles,
-        TE.of
-      )),
+    TE.chainFirstW(() => makeDirectoryIfNotExists(outputPath, preserve)),
+    TE.chainFirst(() => isDirectoryF(targetPath)),
+    TE.bind('dictFile', () => createDictionary(sourcePath, outputPath)),
+    TE.bindW('createPatchF', () => pipe(getDiffToolPatcher(diffTool, sourcePath, targetPath, outputPath), TE.of)),
+    TE.bindW('sourceFiles', ({ patch }) => pipe( sourcePath, mapFiles, TE.of )),
     TE.bindW('targetFiles', ({ patch }) =>
       pipe(
         targetPath,
@@ -295,15 +301,14 @@ const createPatches = (
     TE.bind('missingFiles', ({ sharedFiles, dictFile, targetFiles, patch }) => pipe(
       [...targetFiles.keys()],
       A.filter((key) => !sharedFiles.has(key)),
-      A.map((key) => [key, [path.join(outputPath, dictFile.file), targetFiles.get(key)!]] as const),
+      A.map((key): [string, [string, string]] => [key, [path.join(outputPath, dictFile.file), targetFiles.get(key)!]]),
       (entries) => TE.of(new Map(entries)),
     )),
-    TE.bind('patchedFiles', ({ changedFiles, missingFiles, patch, shard, dictFile }) => pipe(
+    TE.bind('patchedFiles', ({ changedFiles, missingFiles, createPatchF }) => pipe(
       [...changedFiles, ...missingFiles],
       A.filter(([f]) => !uselessFiles.includes(f)),
-      A.map(([_key, [sourceFile, targetFile]]) => pipe(
-        path.basename(sourceFile.endsWith(dictFile.file) ? targetFile : sourceFile),
-        (file) => createPatchFileCUOCli(diffTool)(sourcePath, targetPath, outputPath, file)
+      A.map(([_key, [_sourceFile, targetFile]]) => pipe(
+        createPatchF(pathWithSubfolder(targetPath, targetFile))
       )),
       TE.sequenceArray,
       TE.map(flow(
@@ -311,45 +316,18 @@ const createPatches = (
         A.flatten
       ))
     )),
-    TE.bind('manifest', ({ shard, patch, dictFile, sharedFiles, sourceFiles, patchedFiles, changedFiles, missingFiles }) => TE.of({
+    TE.bind('manifest', ({ shard, patch, dictFile, ...files }) => TE.of({
       source: '7.0.95.0',
       target: shard.clientVersion,
       shardId: shard.id,
       cdnBase: patch.cdnBase,
       version: 1,
       dictFile,
-      sourceFiles: pipe(
-        [...sharedFiles.keys()],
-        A.filter(f => !(changedFiles.has(f) || missingFiles.has(f))),
-        A.map((key) => path.basename(sourceFiles.get(key)!)),
-        (files) => pipe(
-          [...sourceFiles.values()],
-          A.filter((f) => f.includes('/Music/')),
-          A.map((f) => f.replace(sourcePath, '').replace(/^\//, '')),
-          A.concat(files)
-        ),
-        A.concat(pipe(
-          patchedFiles,
-          A.map(p => p.source),
-        )),
-        A.uniq(insensitiveOrd),
-      ),
-      patches: patchedFiles
+      sourceFiles: createSourceFileList({ ...files, sourcePath }),
+      patches: files.patchedFiles
     })),
-    TE.chainFirst(({ manifest, patch }) => TE.tryCatch(
-      () => writeFileAsync(
-        path.join(outputPath, 'client-manifest.json'),
-        JSON.stringify(manifest, null, 2)
-      ),
-      (reason) => new Error(`Failed writing manifest JSON: ${reason}`)
-    )),
-    TE.chainFirst(({ manifest, patch, shard }) => TE.tryCatch(
-      () => writeFileAsync(
-        path.join(outputPath, `${shard.id}.json`),
-        JSON.stringify({ shard, patch }, null, 2)
-      ),
-      (reason) => new Error(`Failed writing manifest JSON: ${reason}`)
-    ))
+    TE.chainFirst(({ manifest }) => writeJson(path.join(outputPath, 'client-manifest.json'), manifest)),
+    TE.chainFirst(({ patch, shard }) => writeJson(path.join(outputPath, `${shard.id}.json`), { shard, patch }))
   );
 
 

@@ -82,4 +82,43 @@ public static class FileMapping
         throw new ArgumentException($"Unknown MUL FileType mapping {mul} => ?");
     }
 
+
+    public static string GetSubfolder(DirectoryInfo root, DirectoryInfo path) => 
+        Path.TrimEndingDirectorySeparator(path.FullName)
+            .Replace(Path.TrimEndingDirectorySeparator(root.FullName), "")
+            .TrimStart(Path.DirectorySeparatorChar);
+    
+    public static string GetCaseNudgedPathName(params string[] paths)
+    {
+        var path = Path.Combine(paths);
+        var dir = GetCaseNudgedDirectoryName(Path.GetDirectoryName(path));
+        var pattern = Path.GetFileName(path);
+
+        var files = Directory
+            .GetFiles(dir, pattern, new EnumerationOptions { MatchCasing = MatchCasing.CaseInsensitive });
+    
+        if (files.Length > 1)
+        {
+            throw new Exception($"Ambiguous filename '{pattern}'");
+        }
+
+        return files.FirstOrDefault() ?? path;
+    }
+
+    public static string GetCaseNudgedDirectoryName(params string[] paths)
+    {
+        var path = Path.Combine(paths);
+        var parent = Path.GetDirectoryName(path);
+
+        if (!Path.Exists(parent))
+        {
+            parent = GetCaseNudgedDirectoryName(parent);
+        }
+
+        var dirName = path.Replace(parent, "", StringComparison.InvariantCultureIgnoreCase).Trim(Path.DirectorySeparatorChar);
+        var dirs = Directory.GetDirectories(parent, dirName, new EnumerationOptions { MatchCasing = MatchCasing.CaseInsensitive });
+
+        return dirs.FirstOrDefault() ?? path;
+    }
+
 }
