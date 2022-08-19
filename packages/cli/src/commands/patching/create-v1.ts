@@ -31,7 +31,7 @@ import { DiffTool, getWebDiffTool } from '../../utils/exec';
 
 export const insensitiveOrd: Ord.Ord<string> = pipe(Str.Ord, Ord.contramap(s => s.toLowerCase()));
 
-const extensions = ['.mul', '.bin', '.def', '.uop', '.idx', '.rle', '.enu', '.rus', '.mp3', '.txt']; /* '.bik', '.mp3' */
+const extensions = ['.mul', '.bin', '.def', '.uop', '.idx', '.rle', '.enu', '.rus', '.mp3', '.txt', '.mid']; /* '.bik', '.mp3' */
 const uselessFiles = [
   'Anim1024.bin',
   'Anim256.bin',

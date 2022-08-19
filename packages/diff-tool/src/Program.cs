@@ -81,7 +81,7 @@ static IEnumerable<PatchInfo> Patch(
     if (uopMulName is null)
     {
         var sourcePath = GetCaseNudgedPathName(sourceDir.FullName, subfolder, targetFile.Name);
-        var dictPath = GetCaseNudgedPathName(sourceDir.FullName, subfolder, "dict.bin");
+        var dictPath = GetCaseNudgedPathName(sourceDir.FullName, "dict.bin");
         var sourceFile = new FileInfo(File.Exists(sourcePath) ? sourcePath : dictPath);
 
         using var sourceStream = sourceFile.OpenRead();
@@ -92,7 +92,7 @@ static IEnumerable<PatchInfo> Patch(
 
         EncodeFile(sourceStream, targetStream, output);
         yield return new PatchInfo(
-            Path.Combine(subfolder, sourceFile.Name),
+            File.Exists(sourcePath) ? Path.Combine(subfolder, sourceFile.Name) : sourceFile.Name,
             Path.Combine(subfolder, outputFile.Name),
             CalculateSHA256(output), output.Length,
             targetStream.Length

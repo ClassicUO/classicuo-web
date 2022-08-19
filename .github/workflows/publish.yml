@@ -24,10 +24,10 @@ jobs:
         run: deno task build
         working-directory: ./packages/web
 
-      - name: Deploy to Deno Deploy
-        uses: denoland/deployctl@v1
+      - name: Publish
+        uses: cloudflare/wrangler-action@2.0.0
         with:
-          project: classicuo-web
-          import-map: "./import_map.json"
-          entrypoint: serve.ts
-          root: ./packages/web
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: pages publish --commit-dirty --branch main --project-name=web-classicuo ./packages/web/_site
+          workingDirectory: ./packages/web

@@ -44,7 +44,7 @@ export const getWebDiffTool = async (root: string): Promise<DiffTool> => {
   const binPath = path.join(root, 'bin');
   const executablePath = path.join(binPath, name);
   const releasePath = path.join(binPath, 'release.json');
-  
+
   if(!process.env.PATH!.includes(binPath)) {
     process.env.PATH = binPath + (process.platform === 'win32' ? ';' : ':') + process.env.PATH;
   }
