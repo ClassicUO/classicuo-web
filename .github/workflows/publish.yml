@@ -1,4 +1,4 @@
-name: Publish on Deno Deploy
+name: Publish
 
 on:
   push:
@@ -30,4 +30,3 @@ jobs:
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           apiToken: ${{ secrets.CF_API_TOKEN }}
           command: pages publish --commit-dirty --branch main --project-name=web-classicuo ./packages/web/_site
-          workingDirectory: ./packages/web
