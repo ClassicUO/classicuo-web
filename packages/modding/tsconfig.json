@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "ES2020",
+    "module": "ESNext",
+    "removeComments": false,
+    "sourceMap": false,
+    "moduleResolution": "node",
+    "lib": ["ESNext", "DOM"],
+    "noUnusedParameters": false,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "baseUrl": "./src",
+    "declaration": true
+  },
+  "include": [
+    "src"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "@classicuo/modding",
+  "packageManager": "yarn@3.2.0",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "license": "MIT",
+  "source": "./src/index.ts",
+  "main": "./dist/esm/index.js",
+  "module": "./dist/cjs/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ClassicUO/classicuo-web.git",
+    "directory": "packages/modding"
+  },
+  "scripts": {
+    "build:esm": "tsc --outDir dist/esm",
+    "build:cjs": "tsc --outDir dist/cjs",
+    "build": "rm -rf dist && yarn build:esm && yarn build:cjs",
+    "test": "test"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.17",
+    "@types/react-dom": "^17.0.17",
+    "@types/styled-components": "^5.1.26",
+    "prettier": "^2.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.5",
+    "typescript": "^4.7.4"
+  },
+  "peerDependencies": {
+    "quickjs-emscripten": "*",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.5"
+  }
+}
