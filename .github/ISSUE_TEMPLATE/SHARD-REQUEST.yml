@@ -27,6 +27,30 @@ body:
     validations:
       required: false
   - type: input
+    id: shard-logo
+    attributes:
+      label: Shard Logo
+      description: Please provide a URL to your shards logo
+      placeholder: https://google.com/logo.png
+    validations:
+      required: true
+  - type: input
+    id: shard-discord
+    attributes:
+      label: Shard Discord
+      description: Please provide a URL to your shards discord server (if any)
+      placeholder: https://google.com/logo.png
+    validations:
+      required: false
+  - type: input
+    id: shard-region
+    attributes:
+      label: Shard Region/Country
+      description: Please the short country/region code that your shard resides in
+      placeholder: e.g. US, AU or BR etc.
+    validations:
+      required: true
+  - type: input
     id: shard-endpoint
     attributes:
       label: Shard ip/port

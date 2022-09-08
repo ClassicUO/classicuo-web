@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
+import { client, player } from '@classicuo/modding';
 
 const Input = styled.input`
   min-height: 32px;
@@ -22,15 +23,15 @@ const Input = styled.input`
 export const ChatInput = () => (
   <Input
     placeholder={'Type a message'}
-    onKeyDown={(e) => {
-      const value = e.currentTarget.value;
-      if (e.key !== 'Enter' || !value) {
+    onKeyDown={async (ev) => {
+      const target = ev.target as HTMLInputElement;
+      const value = target.value;
+
+      if (ev.key !== 'Enter' || !value) {
         return;
       }
-
-      // TODO: Experimental
-      (globalThis as any).sendSayMessage(value);
-      e.currentTarget.value = '';
+      await client.say(value);
+      target.value = '';
     }}
   />
 );

@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { ChatMessage } from './ChatMessage';
 import { formatMessage, JournalEntry, MessageFilter } from './index';
 import React, { useEffect, useState } from 'react';
+import { addEventListener, removeEventListener } from '@classicuo/modding';
+import { removeListener } from 'process';
 
 export const Area = styled.div`
   flex-grow: 1;
@@ -37,9 +39,12 @@ export const ChatArea: React.FC<{ messageFilter: MessageFilter; limit?: number }
   const [entries, setEntries] = useState<JournalEntry[]>([]);
 
   useEffect(() => {
-    // TODO: Experimental
-    (globalThis as any).onJournalEntry = (ev: JournalEntry) => {
+    const id = addEventListener('journalEntry', (ev: JournalEntry) => {
       setEntries((prevEntries) => [ev, ...prevEntries]);
+    });
+
+    return () => {
+      removeEventListener(id);
     };
   }, []);
 
