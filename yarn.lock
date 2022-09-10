@@ -367,6 +367,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@classicuo/modding-example@workspace:packages/modding-example"
   dependencies:
+    "@classicuo/modding": "workspace:*"
     "@parcel/core": ^2.7.0
     "@parcel/optimizer-data-url": ^2.7.0
     "@parcel/transformer-inline-string": ^2.7.0
@@ -384,7 +385,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@classicuo/modding@workspace:packages/modding":
+"@classicuo/modding@workspace:*, @classicuo/modding@workspace:packages/modding":
   version: 0.0.0-use.local
   resolution: "@classicuo/modding@workspace:packages/modding"
   dependencies:

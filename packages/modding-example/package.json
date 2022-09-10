@@ -5,7 +5,7 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "start:dev": "node parcel.mjs",
-    "build": "parcel build"
+    "build": "NODE_ENV=production node parcel.mjs"
   },
   "devDependencies": {
     "@parcel/core": "^2.7.0",
@@ -20,7 +20,7 @@
     "prettier": "^2.7.1"
   },
   "dependencies": {
-    "@classicuo/modding": "*", 
+    "@classicuo/modding": "workspace:*",
     "@styled-icons/boxicons-logos": "^10.38.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

@@ -33,8 +33,13 @@ const bundler = new Parcel({
   }
 });
 
-await bundler.watch((_error, _buildEvent) => {
-  // console.log(`✨ Tunnel running, accessible via: ${tunnel?.url}.`);
-});
+if(process.env.NODE_ENV !== 'production') {
+  await bundler.watch((_error, _buildEvent) => {
+    // console.log(`✨ Tunnel running, accessible via: ${tunnel?.url}.`);
+  });
+}
+else {
+  await bundler.run();
+}
 
 
