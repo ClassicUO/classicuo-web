@@ -15,7 +15,17 @@ declare const addEventListener: <T extends EventNames<EventMap>>(
  * Remove the listeners of a given event.
  */
 declare const removeEventListener: <T extends EventNames<EventMap>>(listenerId: number) => void;
+declare const addExtraPlayerBody: (
+  graphicId: number,
+  gumpArtId: number,
+  animId: number,
+  isFemale: boolean,
+  race: number,
+  copyEquipConv?: boolean
+) => void;
+declare const setProfileOptionAllowed: (name: string, allowed: boolean) => void;
 
 declare const client: Client;
 declare const player: Player;
-export { client, player, addEventListener, removeEventListener };
+
+export { client, player, addEventListener, removeEventListener, addExtraPlayerBody, setProfileOptionAllowed };
