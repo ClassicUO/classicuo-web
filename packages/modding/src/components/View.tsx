@@ -1,6 +1,7 @@
 import { CSSProperties, PropsWithChildren, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import React from 'react';
 import styled from 'styled-components';
+import { pointer } from './Cursors';
 
 export enum DraggingState {
   undefined = -1,
@@ -112,15 +113,28 @@ export const View: React.FC<
     resizeable: boolean;
     draggable: boolean;
     initialPosition?: { x: number; y: number };
+    cursors?: {
+      dragging?: string;
+      draggable?: string;
+      pointer?: string;
+    };
   }>
-> = ({ draggable, initialPosition, children, ...props }) => {
+> = ({ cursors, draggable, initialPosition, children, ...props }) => {
   const dragging = useDragging();
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const cursor =
+    (draggable
+      ? dragging.state === DraggingState.moves
+        ? cursors?.dragging
+        : cursors?.draggable
+      : cursors?.pointer) || pointer;
 
   const style: CSSProperties = {
     position: 'absolute',
     left: dragging.ref.current ? dragging.elementOffset.x : initialPosition?.x || 0,
-    top: dragging.ref.current ? dragging.elementOffset.y : initialPosition?.y || 0
+    top: dragging.ref.current ? dragging.elementOffset.y : initialPosition?.y || 0,
+    cursor
   };
 
   return (

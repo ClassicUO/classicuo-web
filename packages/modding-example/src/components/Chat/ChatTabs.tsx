@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import { ChatTabEntry, defaultTabs, MessageFilter } from './index';
+import { cursors } from '@classicuo/modding';
 
 export const TabsContainer = styled.div`
   display: flex;
@@ -13,7 +14,6 @@ export const TabButton = styled.button<{ active: boolean }>`
   background-color: ${({ active }) => (active ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 0, 0, 0.6)')};
   border: 0;
   color: white;
-  cursor: pointer;
   font-family: 'Roboto Mono', sans-serif;
   font-size: 14px;
   height: 24px;
@@ -25,6 +25,8 @@ export const TabButton = styled.button<{ active: boolean }>`
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: pre;
+
+  cursor: ${cursors.pointer};
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.4);

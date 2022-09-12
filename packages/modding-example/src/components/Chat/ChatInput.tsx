@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import { client, player } from '@classicuo/modding';
+import { client, player, cursors } from '@classicuo/modding';
 
 const Input = styled.input`
   min-height: 32px;
@@ -18,6 +18,8 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
+
+  cursor: ${cursors.writable};
 `;
 
 export const ChatInput = () => (
