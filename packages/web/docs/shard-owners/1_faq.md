@@ -33,7 +33,7 @@ People will take it and make modified clients all over again.
 With all that said, we might be open to allowing larger shards to host their own game proxy. However, we'd need to decouple some parts of th authentication system to do that.
 
 ### I have custom MUL/UOP files for my shard, can I use them with the web client?
-We have a working version of file patching, we will release more details soon.
+Yes, you can bring your own modified files, see the [Patching guide](https://classicuo.org/docs/shard-owners/patching/) for more info.
 
 ### I have a customized ClassicUO client for my shard, how can I modify the web client?
 We're working on exposing tools to shard owners for adding custom UI and interactivity powered by React.   

@@ -18,10 +18,6 @@ Optionally you can clear the storage, but this will of course result in needing 
 
 A web based assistant is in development at the moment which will support similar functionality to Razor.
 
-### Why can't I open the global map?
-
-There's a complicated bug preventing the texture generation of the global map at the moment. It's on our roadmap to fix.
-
 ### How can I increase my FPS past 60/120/144?
 
 Currently, Chrome uses VSYNC which locks your FPS to your monitors refresh rate, e.g. 60HZ -> 60fps.
