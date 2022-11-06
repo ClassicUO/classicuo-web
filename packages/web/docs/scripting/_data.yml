@@ -1,0 +1,11 @@
+type: docs
+layout: layouts/docs.njk
+groups:
+  - id: Modules
+    title: Modules
+  - id: enums
+    title: Enumerations
+  - id: classes
+    title: Classes
+  - id: interfaces
+    title: Interfaces
