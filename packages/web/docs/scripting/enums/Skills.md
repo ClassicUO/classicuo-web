@@ -2,12 +2,10 @@
 title: "Skills"
 description: "Enumeration: Skills"
 group: "enums"
-url: "/scripting/enums/Skills/"
+url: "/scripting/Skills/"
 ---
 
 # Enumeration: Skills
-
-[classes/enums](/scripting/modules).Skills
 
 ## Enumeration Members
 
@@ -29,21 +27,21 @@ ___
 
 ___
 
-### AnimalTaming
+### ItemID
 
-• **AnimalTaming** = ``35``
-
-___
-
-### Archery
-
-• **Archery** = ``31``
+• **ItemID** = ``3``
 
 ___
 
 ### ArmsLore
 
 • **ArmsLore** = ``4``
+
+___
+
+### Parry
+
+• **Parry** = ``5``
 
 ___
 
@@ -59,9 +57,15 @@ ___
 
 ___
 
-### Bushido
+### Fletching
 
-• **Bushido** = ``52``
+• **Fletching** = ``8``
+
+___
+
+### Peacemaking
+
+• **Peacemaking** = ``9``
 
 ___
 
@@ -80,12 +84,6 @@ ___
 ### Cartography
 
 • **Cartography** = ``12``
-
-___
-
-### Chivalry
-
-• **Chivalry** = ``51``
 
 ___
 
@@ -113,9 +111,9 @@ ___
 
 ___
 
-### Fencing
+### Healing
 
-• **Fencing** = ``42``
+• **Healing** = ``17``
 
 ___
 
@@ -125,27 +123,9 @@ ___
 
 ___
 
-### Fletching
-
-• **Fletching** = ``8``
-
-___
-
-### Focus
-
-• **Focus** = ``50``
-
-___
-
 ### Forensics
 
 • **Forensics** = ``19``
-
-___
-
-### Healing
-
-• **Healing** = ``17``
 
 ___
 
@@ -161,9 +141,9 @@ ___
 
 ___
 
-### Imbuing
+### Provocation
 
-• **Imbuing** = ``56``
+• **Provocation** = ``22``
 
 ___
 
@@ -173,27 +153,9 @@ ___
 
 ___
 
-### ItemID
-
-• **ItemID** = ``3``
-
-___
-
 ### Lockpicking
 
 • **Lockpicking** = ``24``
-
-___
-
-### Lumberjacking
-
-• **Lumberjacking** = ``44``
-
-___
-
-### Macing
-
-• **Macing** = ``41``
 
 ___
 
@@ -209,69 +171,9 @@ ___
 
 ___
 
-### Meditation
+### Tactics
 
-• **Meditation** = ``46``
-
-___
-
-### Mining
-
-• **Mining** = ``45``
-
-___
-
-### Musicianship
-
-• **Musicianship** = ``29``
-
-___
-
-### Mysticism
-
-• **Mysticism** = ``55``
-
-___
-
-### Necromancy
-
-• **Necromancy** = ``49``
-
-___
-
-### Ninjitsu
-
-• **Ninjitsu** = ``53``
-
-___
-
-### Parry
-
-• **Parry** = ``5``
-
-___
-
-### Peacemaking
-
-• **Peacemaking** = ``9``
-
-___
-
-### Poisoning
-
-• **Poisoning** = ``30``
-
-___
-
-### Provocation
-
-• **Provocation** = ``22``
-
-___
-
-### RemoveTrap
-
-• **RemoveTrap** = ``48``
+• **Tactics** = ``27``
 
 ___
 
@@ -281,9 +183,21 @@ ___
 
 ___
 
-### Spellweaving
+### Musicianship
 
-• **Spellweaving** = ``54``
+• **Musicianship** = ``29``
+
+___
+
+### Poisoning
+
+• **Poisoning** = ``30``
+
+___
+
+### Archery
+
+• **Archery** = ``31``
 
 ___
 
@@ -299,39 +213,21 @@ ___
 
 ___
 
-### Stealth
-
-• **Stealth** = ``47``
-
-___
-
-### Swords
-
-• **Swords** = ``40``
-
-___
-
-### Tactics
-
-• **Tactics** = ``27``
-
-___
-
 ### Tailoring
 
 • **Tailoring** = ``34``
 
 ___
 
-### TasteID
+### AnimalTaming
 
-• **TasteID** = ``36``
+• **AnimalTaming** = ``35``
 
 ___
 
-### Throwing
+### TasteID
 
-• **Throwing** = ``57``
+• **TasteID** = ``36``
 
 ___
 
@@ -353,6 +249,108 @@ ___
 
 ___
 
+### Swords
+
+• **Swords** = ``40``
+
+___
+
+### Macing
+
+• **Macing** = ``41``
+
+___
+
+### Fencing
+
+• **Fencing** = ``42``
+
+___
+
 ### Wrestling
 
 • **Wrestling** = ``43``
+
+___
+
+### Lumberjacking
+
+• **Lumberjacking** = ``44``
+
+___
+
+### Mining
+
+• **Mining** = ``45``
+
+___
+
+### Meditation
+
+• **Meditation** = ``46``
+
+___
+
+### Stealth
+
+• **Stealth** = ``47``
+
+___
+
+### RemoveTrap
+
+• **RemoveTrap** = ``48``
+
+___
+
+### Necromancy
+
+• **Necromancy** = ``49``
+
+___
+
+### Focus
+
+• **Focus** = ``50``
+
+___
+
+### Chivalry
+
+• **Chivalry** = ``51``
+
+___
+
+### Bushido
+
+• **Bushido** = ``52``
+
+___
+
+### Ninjitsu
+
+• **Ninjitsu** = ``53``
+
+___
+
+### Spellweaving
+
+• **Spellweaving** = ``54``
+
+___
+
+### Mysticism
+
+• **Mysticism** = ``55``
+
+___
+
+### Imbuing
+
+• **Imbuing** = ``56``
+
+___
+
+### Throwing
+
+• **Throwing** = ``57``

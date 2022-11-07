@@ -2,72 +2,46 @@
 title: "Layers"
 description: "Enumeration: Layers"
 group: "enums"
-url: "/scripting/enums/Layers/"
+url: "/scripting/Layers/"
 ---
 
 # Enumeration: Layers
 
-[classes/enums](/scripting/modules).Layers
-
 ## Enumeration Members
 
-### Arms
+### Invalid
 
-• **Arms** = ``19``
-
-___
-
-### Backpack
-
-• **Backpack** = ``21``
+• **Invalid** = ``0``
 
 ___
 
-### Bank
+### OneHanded
 
-• **Bank** = ``29``
-
-___
-
-### Beard
-
-• **Beard** = ``16``
+• **OneHanded** = ``1``
 
 ___
 
-### Bracelet
+### TwoHanded
 
-• **Bracelet** = ``14``
-
-___
-
-### Cloak
-
-• **Cloak** = ``20``
+• **TwoHanded** = ``2``
 
 ___
 
-### Earrings
+### Shoes
 
-• **Earrings** = ``18``
-
-___
-
-### Face
-
-• **Face** = ``15``
+• **Shoes** = ``3``
 
 ___
 
-### Gloves
+### Pants
 
-• **Gloves** = ``7``
+• **Pants** = ``4``
 
 ___
 
-### Hair
+### Shirt
 
-• **Hair** = ``11``
+• **Shirt** = ``5``
 
 ___
 
@@ -77,9 +51,105 @@ ___
 
 ___
 
-### Invalid
+### Gloves
 
-• **Invalid** = ``0``
+• **Gloves** = ``7``
+
+___
+
+### Ring
+
+• **Ring** = ``8``
+
+___
+
+### Talisman
+
+• **Talisman** = ``9``
+
+___
+
+### Necklace
+
+• **Necklace** = ``10``
+
+___
+
+### Hair
+
+• **Hair** = ``11``
+
+___
+
+### Waist
+
+• **Waist** = ``12``
+
+___
+
+### Torso
+
+• **Torso** = ``13``
+
+___
+
+### Bracelet
+
+• **Bracelet** = ``14``
+
+___
+
+### Face
+
+• **Face** = ``15``
+
+___
+
+### Beard
+
+• **Beard** = ``16``
+
+___
+
+### Tunic
+
+• **Tunic** = ``17``
+
+___
+
+### Earrings
+
+• **Earrings** = ``18``
+
+___
+
+### Arms
+
+• **Arms** = ``19``
+
+___
+
+### Cloak
+
+• **Cloak** = ``20``
+
+___
+
+### Backpack
+
+• **Backpack** = ``21``
+
+___
+
+### Robe
+
+• **Robe** = ``22``
+
+___
+
+### Skirt
+
+• **Skirt** = ``23``
 
 ___
 
@@ -95,45 +165,9 @@ ___
 
 ___
 
-### Necklace
+### ShopBuyRestock
 
-• **Necklace** = ``10``
-
-___
-
-### OneHanded
-
-• **OneHanded** = ``1``
-
-___
-
-### Pants
-
-• **Pants** = ``4``
-
-___
-
-### Ring
-
-• **Ring** = ``8``
-
-___
-
-### Robe
-
-• **Robe** = ``22``
-
-___
-
-### Shirt
-
-• **Shirt** = ``5``
-
-___
-
-### Shoes
-
-• **Shoes** = ``3``
+• **ShopBuyRestock** = ``26``
 
 ___
 
@@ -143,48 +177,12 @@ ___
 
 ___
 
-### ShopBuyRestock
-
-• **ShopBuyRestock** = ``26``
-
-___
-
 ### ShopSell
 
 • **ShopSell** = ``28``
 
 ___
 
-### Skirt
+### Bank
 
-• **Skirt** = ``23``
-
-___
-
-### Talisman
-
-• **Talisman** = ``9``
-
-___
-
-### Torso
-
-• **Torso** = ``13``
-
-___
-
-### Tunic
-
-• **Tunic** = ``17``
-
-___
-
-### TwoHanded
-
-• **TwoHanded** = ``2``
-
-___
-
-### Waist
-
-• **Waist** = ``12``
+• **Bank** = ``29``

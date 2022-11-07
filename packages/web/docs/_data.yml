@@ -7,5 +7,5 @@ groups:
     title: Players
   - id: shard-owners
     title: Shard Owners
-  - id: Modules
+  - id: Globals
     title: Scripting

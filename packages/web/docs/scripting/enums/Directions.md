@@ -2,32 +2,12 @@
 title: "Directions"
 description: "Enumeration: Directions"
 group: "enums"
-url: "/scripting/enums/Directions/"
+url: "/scripting/Directions/"
 ---
 
 # Enumeration: Directions
 
-[classes/enums](/scripting/modules).Directions
-
 ## Enumeration Members
-
-### Down
-
-• **Down** = ``3``
-
-___
-
-### East
-
-• **East** = ``2``
-
-___
-
-### Left
-
-• **Left** = ``5``
-
-___
 
 ### North
 
@@ -41,18 +21,36 @@ ___
 
 ___
 
+### East
+
+• **East** = ``2``
+
+___
+
+### Down
+
+• **Down** = ``3``
+
+___
+
 ### South
 
 • **South** = ``4``
 
 ___
 
-### Up
+### Left
 
-• **Up** = ``7``
+• **Left** = ``5``
 
 ___
 
 ### West
 
 • **West** = ``6``
+
+___
+
+### Up
+
+• **Up** = ``7``

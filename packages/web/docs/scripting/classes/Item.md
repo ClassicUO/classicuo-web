@@ -2,12 +2,10 @@
 title: "Item"
 description: "Class: Item"
 group: "classes"
-url: "/scripting/classes/Item/"
+url: "/scripting/Item/"
 ---
 
 # Class: Item
-
-[classes/views](/scripting/modules).Item
 
 ## Hierarchy
 
@@ -15,51 +13,11 @@ url: "/scripting/classes/Item/"
 
   ↳ **`Item`**
 
-## Constructors
-
-### constructor
-
-• **new Item**()
-
-#### Inherited from
-
-[Entity](../Entity).[constructor](../Entity#constructor)
-
-## Properties
+## Accessors
 
 ### serial
 
-• `Readonly` **serial**: `number`
-
-#### Inherited from
-
-[Entity](../Entity).[serial](../Entity#serial)
-
-## Accessors
-
-### amount
-
-• `get` **amount**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### container
-
-• `get` **container**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### direction
-
-• `get` **direction**(): `number`
+• `get` **serial**(): `number`
 
 #### Returns
 
@@ -67,21 +25,7 @@ ___
 
 #### Inherited from
 
-Entity.direction
-
-___
-
-### flags
-
-• `get` **flags**(): `number`
-
-#### Returns
-
-`number`
-
-#### Inherited from
-
-Entity.flags
+Entity.serial
 
 ___
 
@@ -96,72 +40,6 @@ ___
 #### Inherited from
 
 Entity.graphic
-
-___
-
-### hits
-
-• `get` **hits**(): `number`
-
-#### Returns
-
-`number`
-
-#### Inherited from
-
-Entity.hits
-
-___
-
-### hue
-
-• `get` **hue**(): `number`
-
-#### Returns
-
-`number`
-
-#### Inherited from
-
-Entity.hue
-
-___
-
-### layer
-
-• `get` **layer**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### maxHits
-
-• `get` **maxHits**(): `number`
-
-#### Returns
-
-`number`
-
-#### Inherited from
-
-Entity.maxHits
-
-___
-
-### name
-
-• `get` **name**(): `string`
-
-#### Returns
-
-`string`
-
-#### Inherited from
-
-Entity.name
 
 ___
 
@@ -205,49 +83,11 @@ ___
 
 Entity.z
 
-## Methods
-
-### serialize
-
-▸ **serialize**(): `Object`
-
-#### Returns
-
-`Object`
-
-| Name | Type |
-| :------ | :------ |
-| `_tag` | `string` |
-| `serial` | `number` |
-
-#### Inherited from
-
-[Entity](../Entity).[serialize](../Entity#serialize)
-
 ___
 
-### toJSON
+### name
 
-▸ **toJSON**(): `Object`
-
-#### Returns
-
-`Object`
-
-| Name | Type |
-| :------ | :------ |
-| `_tag` | `string` |
-| `serial` | `number` |
-
-#### Inherited from
-
-[Entity](../Entity).[toJSON](../Entity#toJSON)
-
-___
-
-### toString
-
-▸ **toString**(): `string`
+• `get` **name**(): `string`
 
 #### Returns
 
@@ -255,4 +95,104 @@ ___
 
 #### Inherited from
 
-[Entity](../Entity).[toString](../Entity#toString)
+Entity.name
+
+___
+
+### flags
+
+• `get` **flags**(): `number`
+
+#### Returns
+
+`number`
+
+#### Inherited from
+
+Entity.flags
+
+___
+
+### hue
+
+• `get` **hue**(): `number`
+
+#### Returns
+
+`number`
+
+#### Inherited from
+
+Entity.hue
+
+___
+
+### hits
+
+• `get` **hits**(): `number`
+
+#### Returns
+
+`number`
+
+#### Inherited from
+
+Entity.hits
+
+___
+
+### maxHits
+
+• `get` **maxHits**(): `number`
+
+#### Returns
+
+`number`
+
+#### Inherited from
+
+Entity.maxHits
+
+___
+
+### direction
+
+• `get` **direction**(): `number`
+
+#### Returns
+
+`number`
+
+#### Inherited from
+
+Entity.direction
+
+___
+
+### container
+
+• `get` **container**(): `number`
+
+#### Returns
+
+`number`
+
+___
+
+### amount
+
+• `get` **amount**(): `number`
+
+#### Returns
+
+`number`
+
+___
+
+### layer
+
+• `get` **layer**(): `number`
+
+#### Returns
+
+`number`

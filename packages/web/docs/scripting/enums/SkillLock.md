@@ -2,14 +2,18 @@
 title: "SkillLock"
 description: "Enumeration: SkillLock"
 group: "enums"
-url: "/scripting/enums/SkillLock/"
+url: "/scripting/SkillLock/"
 ---
 
 # Enumeration: SkillLock
 
-[classes/enums](/scripting/modules).SkillLock
-
 ## Enumeration Members
+
+### Up
+
+• **Up** = ``0``
+
+___
 
 ### Down
 
@@ -20,9 +24,3 @@ ___
 ### Locked
 
 • **Locked** = ``2``
-
-___
-
-### Up
-
-• **Up** = ``0``

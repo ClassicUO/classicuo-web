@@ -2,18 +2,10 @@
 title: "Console"
 description: "Interface: Console"
 group: "interfaces"
-url: "/scripting/interfaces/Console/"
+url: "/scripting/Console/"
 ---
 
 # Interface: Console
-
-[global](/scripting/modules).Console
-
-## Properties
-
-### clear
-
-• **clear**: `VoidFunction`
 
 ## Methods
 

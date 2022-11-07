@@ -1,8 +1,8 @@
 type: docs
 layout: layouts/docs.njk
 groups:
-  - id: Modules
-    title: Modules
+  - id: Globals
+    title: Reference
   - id: enums
     title: Enumerations
   - id: classes
