@@ -7,9 +7,11 @@ url: "/scripting/Item/"
 
 # Class: Item
 
+[Item](/scripting/globals).Item
+
 ## Hierarchy
 
-- [`Entity`](../Entity)
+- [`Entity`](../modules/#Entity)
 
   ↳ **`Item`**
 

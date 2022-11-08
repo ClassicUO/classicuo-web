@@ -7,15 +7,13 @@ url: "/scripting/Entity/"
 
 # Class: Entity
 
+[Entity](/scripting/globals).Entity
+
 ## Hierarchy
 
-- `GameObject`
+- [`GameObject`](../modules/#GameObject)
 
   ↳ **`Entity`**
-
-  ↳↳ [`Mobile`](../Mobile)
-
-  ↳↳ [`Item`](../Item)
 
 ## Accessors
 

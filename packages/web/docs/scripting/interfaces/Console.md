@@ -7,6 +7,8 @@ url: "/scripting/Console/"
 
 # Interface: Console
 
+[globalThis](/scripting/globals).Console
+
 ## Methods
 
 ### log

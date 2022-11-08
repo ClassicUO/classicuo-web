@@ -7,6 +7,8 @@ url: "/scripting/Directions/"
 
 # Enumeration: Directions
 
+[enums](/scripting/globals).Directions
+
 ## Enumeration Members
 
 ### North

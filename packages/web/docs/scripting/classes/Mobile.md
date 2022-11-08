@@ -7,13 +7,13 @@ url: "/scripting/Mobile/"
 
 # Class: Mobile
 
+[Mobile](/scripting/globals).Mobile
+
 ## Hierarchy
 
-- [`Entity`](../Entity)
+- [`Entity`](../modules/#Entity)
 
   ↳ **`Mobile`**
-
-  ↳↳ [`Player`](../Player)
 
 ## Accessors
 

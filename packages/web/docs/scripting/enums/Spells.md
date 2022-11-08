@@ -7,6 +7,8 @@ url: "/scripting/Spells/"
 
 # Enumeration: Spells
 
+[enums](/scripting/globals).Spells
+
 ## Enumeration Members
 
 ### Clumsy

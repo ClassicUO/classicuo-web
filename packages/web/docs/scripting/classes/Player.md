@@ -7,6 +7,8 @@ url: "/scripting/Player/"
 
 # Class: Player
 
+[Player](/scripting/globals).Player
+
 This class references the current player whilst in-game and is accessible on the global scope as the `player` variable.
 
 **`Example`**
@@ -23,7 +25,7 @@ while(true) {
 
 ## Hierarchy
 
-- [`Mobile`](../Mobile)
+- [`Mobile`](../modules/#Mobile)
 
   ↳ **`Player`**
 

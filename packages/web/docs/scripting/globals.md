@@ -19,12 +19,6 @@ ___
 
 • `Const` **player**: [`Player`](../Player)
 
-___
-
-### console
-
-• `Const` **console**: [`Console`](../Console)
-
 ## Functions
 
 ### sleep

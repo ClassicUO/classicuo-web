@@ -7,6 +7,8 @@ url: "/scripting/SkillLock/"
 
 # Enumeration: SkillLock
 
+[enums](/scripting/globals).SkillLock
+
 ## Enumeration Members
 
 ### Up

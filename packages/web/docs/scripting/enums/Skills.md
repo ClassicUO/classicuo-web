@@ -7,6 +7,8 @@ url: "/scripting/Skills/"
 
 # Enumeration: Skills
 
+[enums](/scripting/globals).Skills
+
 ## Enumeration Members
 
 ### Alchemy

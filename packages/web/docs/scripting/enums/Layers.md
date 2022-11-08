@@ -7,6 +7,8 @@ url: "/scripting/Layers/"
 
 # Enumeration: Layers
 
+[enums](/scripting/globals).Layers
+
 ## Enumeration Members
 
 ### Invalid
