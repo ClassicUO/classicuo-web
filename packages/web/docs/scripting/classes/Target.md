@@ -160,18 +160,6 @@ target.terrainRelativeToEntity(mob.serial, 5, true, 0x5a2);
 
 ___
 
-### isOpen
-
-▸ **isOpen**(): `boolean`
-
-Check if target is open
-
-#### Returns
-
-`boolean`
-
-___
-
 ### wait
 
 ▸ **wait**(`timeout?`): `boolean`
@@ -211,3 +199,39 @@ Close the target
 #### Returns
 
 `void`
+
+## Accessors
+
+### open
+
+• `get` **open**(): `boolean`
+
+Check if target is open
+
+#### Returns
+
+`boolean`
+
+___
+
+### lastSerial
+
+• `get` **lastSerial**(): `number`
+
+Serial of the last target
+
+#### Returns
+
+`number`
+
+___
+
+### queryTarget
+
+• `get` **queryTarget**(): `TargetInfo`
+
+Creates a target and returns information about the result
+
+#### Returns
+
+`TargetInfo`
