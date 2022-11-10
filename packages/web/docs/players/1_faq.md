@@ -31,3 +31,7 @@ Always check your shards rules first.
 ### What do I do if the game freezes?
 
 You will need to refresh the tab and reload into the game. If you can reproduce the crash please file a bug report on Discord.
+
+### What do I do if the game runs poorly?
+
+You can try to check if the `Harwared accelerated` option is enabled
