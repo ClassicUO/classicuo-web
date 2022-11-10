@@ -19,7 +19,35 @@ ___
 
 • `Const` **player**: [`Player`](../Player)
 
+___
+
+### journal
+
+• `Const` **journal**: [`Journal`](../Journal)
+
+___
+
+### target
+
+• `Const` **target**: [`Target`](../Target)
+
 ## Functions
+
+### log
+
+▸ **log**(...`args`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `...args` | `any`[] |
+
+#### Returns
+
+`void`
+
+___
 
 ### sleep
 

@@ -1256,7 +1256,7 @@ Run/turn a single step in a direction
 **`Example`**
 
 ```ts
-player.run(Directors.South);
+player.run(Directions.South);
 ```
 
 #### Parameters
