@@ -34,4 +34,4 @@ You will need to refresh the tab and reload into the game. If you can reproduce 
 
 ### What do I do if the game runs poorly?
 
-You can try to check if the `Harwared accelerated` option is enabled
+You can try to check if the `Hardware accelerated` option is enabled
