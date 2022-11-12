@@ -1393,6 +1393,8 @@ player.walk(Directors.North);
 
 `boolean`
 
+`True` if character can walk
+
 ___
 
 ### run
@@ -1416,6 +1418,8 @@ player.run(Directions.South);
 #### Returns
 
 `boolean`
+
+`True` if character can run
 
 ___
 

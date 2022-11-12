@@ -122,6 +122,27 @@ ___
 
 ___
 
+### findItemOnLayer
+
+• **findItemOnLayer**: (`serial`: `number`, `layer`: [`Layers`](../Layers)) => `undefined` \| [`Item`](../Item)
+
+#### Type declaration
+
+▸ (`serial`, `layer`): `undefined` \| [`Item`](../Item)
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `serial` | `number` |
+| `layer` | [`Layers`](../Layers) |
+
+##### Returns
+
+`undefined` \| [`Item`](../Item)
+
+___
+
 ### getStatic
 
 • **getStatic**: (`graphic`: `number`) => `undefined` \| { `graphic`: `number` ; `flags`: `number`  }

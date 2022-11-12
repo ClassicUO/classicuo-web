@@ -281,6 +281,17 @@ ___
 
 • `get` **container**(): `number`
 
+Get the item's parent container
+
+**`Example`**
+
+```ts
+const item = client.findType(axeType);
+if (item.container > 0) {
+   client.sysMsg("the item is into a container");
+}
+```
+
 #### Returns
 
 `number`
@@ -291,6 +302,17 @@ ___
 
 • `get` **amount**(): `number`
 
+Get the item's amount
+
+**`Example`**
+
+```ts
+const item = client.findObject(0x40001234);
+if (item.amount > 5) {
+   client.sysMsg("amount of ${item.amount}");
+}
+```
+
 #### Returns
 
 `number`
@@ -299,8 +321,17 @@ ___
 
 ### layer
 
-• `get` **layer**(): `number`
+• `get` **layer**(): [`Layers`](../Layers)
+
+Get the item's layer if any
+
+**`Example`**
+
+```ts
+const robe = client.findItemOnLayer(player.serial, Layers.Robe);
+console.log(robe.layer);
+```
 
 #### Returns
 
-`number`
+[`Layers`](../Layers)
