@@ -132,16 +132,6 @@ if(entity) {
 
 ___
 
-### flags
-
-• `get` **flags**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
 ### hue
 
 • `get` **hue**(): `number`
@@ -234,3 +224,13 @@ if(entity) {
 #### Returns
 
 `number`
+
+___
+
+### isHidden
+
+• `get` **isHidden**(): `boolean`
+
+#### Returns
+
+`boolean`

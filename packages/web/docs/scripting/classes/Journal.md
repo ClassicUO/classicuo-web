@@ -9,11 +9,11 @@ url: "/scripting/Journal/"
 
 [Journal](/scripting/globals).Journal
 
-## Properties
+## Constructors
 
-### client
+### constructor
 
-• `Private` **client**: `any`
+• **new Journal**()
 
 ## Methods
 

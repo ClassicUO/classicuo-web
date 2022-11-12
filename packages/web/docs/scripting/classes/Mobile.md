@@ -152,20 +152,6 @@ Entity.name
 
 ___
 
-### flags
-
-• `get` **flags**(): `number`
-
-#### Returns
-
-`number`
-
-#### Inherited from
-
-Entity.flags
-
-___
-
 ### hue
 
 • `get` **hue**(): `number`
@@ -277,6 +263,20 @@ Entity.direction
 
 ___
 
+### isHidden
+
+• `get` **isHidden**(): `boolean`
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+Entity.isHidden
+
+___
+
 ### stamina
 
 • `get` **stamina**(): `number`
@@ -327,6 +327,16 @@ ___
 
 ___
 
+### isYellowHits
+
+• `get` **isYellowHits**(): `boolean`
+
+#### Returns
+
+`boolean`
+
+___
+
 ### isFemale
 
 • `get` **isFemale**(): `boolean`
@@ -350,6 +360,26 @@ ___
 ### inWarMode
 
 • `get` **inWarMode**(): `boolean`
+
+#### Returns
+
+`boolean`
+
+___
+
+### isParalyzed
+
+• `get` **isParalyzed**(): `boolean`
+
+#### Returns
+
+`boolean`
+
+___
+
+### isDead
+
+• `get` **isDead**(): `boolean`
 
 #### Returns
 

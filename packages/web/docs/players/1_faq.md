@@ -14,6 +14,11 @@ If you run into a bug please file an issue on our github: https://github.com/Cla
 No, the client files are stored locally inside your Chrome storage. You can see the on-disk usage at the bottom of the server list.
 Optionally you can clear the storage, but this will of course result in needing to re-download the files next time you click Play.
 
+### Why do I need to login using Discord?
+
+Primarily authentication helps us prevent cheating as shard owners can choose to ban people via Discord account rather than just an IP which can be easily changed.
+In the future we have plans to store user profiles in the cloud, so you can go to any device and keep your same macros, scripts, hotkeys from device to device.
+
 ### Will there be an assistant like Razor?
 
 A web based assistant is in development at the moment which will support similar functionality to Razor.

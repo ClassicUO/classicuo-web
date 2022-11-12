@@ -152,20 +152,6 @@ Mobile.name
 
 ___
 
-### flags
-
-• `get` **flags**(): `number`
-
-#### Returns
-
-`number`
-
-#### Inherited from
-
-Mobile.flags
-
-___
-
 ### hue
 
 • `get` **hue**(): `number`
@@ -277,6 +263,20 @@ Mobile.direction
 
 ___
 
+### isHidden
+
+• `get` **isHidden**(): `boolean`
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+Mobile.isHidden
+
+___
+
 ### stamina
 
 • `get` **stamina**(): `number`
@@ -347,6 +347,20 @@ Mobile.isPoisoned
 
 ___
 
+### isYellowHits
+
+• `get` **isYellowHits**(): `boolean`
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+Mobile.isYellowHits
+
+___
+
 ### isFemale
 
 • `get` **isFemale**(): `boolean`
@@ -386,6 +400,34 @@ ___
 #### Inherited from
 
 Mobile.inWarMode
+
+___
+
+### isParalyzed
+
+• `get` **isParalyzed**(): `boolean`
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+Mobile.isParalyzed
+
+___
+
+### isDead
+
+• `get` **isDead**(): `boolean`
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+Mobile.isDead
 
 ___
 

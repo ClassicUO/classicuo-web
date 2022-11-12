@@ -9,11 +9,11 @@ url: "/scripting/Target/"
 
 [Target](/scripting/globals).Target
 
-## Properties
+## Constructors
 
-### client
+### constructor
 
-• `Private` **client**: `any`
+• **new Target**()
 
 ## Methods
 

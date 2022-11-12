@@ -122,34 +122,6 @@ ___
 
 ___
 
-### queryClientTarget
-
-• **queryClientTarget**: (`isGround?`: `boolean`) => { `serial`: `number` ; `graphic`: `number` ; `x`: `number` ; `y`: `number` ; `z`: `number`  }
-
-#### Type declaration
-
-▸ (`isGround?`): `Object`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `isGround?` | `boolean` |
-
-##### Returns
-
-`Object`
-
-| Name | Type |
-| :------ | :------ |
-| `serial` | `number` |
-| `graphic` | `number` |
-| `x` | `number` |
-| `y` | `number` |
-| `z` | `number` |
-
-___
-
 ### getStatic
 
 • **getStatic**: (`graphic`: `number`) => `undefined` \| { `graphic`: `number` ; `flags`: `number`  }

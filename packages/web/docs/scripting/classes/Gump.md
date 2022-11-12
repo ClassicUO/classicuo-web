@@ -39,12 +39,6 @@ ___
 
 `boolean`
 
-## Properties
-
-### client
-
-• `Private` **client**: `any`
-
 ## Methods
 
 ### containsText

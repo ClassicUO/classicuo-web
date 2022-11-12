@@ -152,20 +152,6 @@ Entity.name
 
 ___
 
-### flags
-
-• `get` **flags**(): `number`
-
-#### Returns
-
-`number`
-
-#### Inherited from
-
-Entity.flags
-
-___
-
 ### hue
 
 • `get` **hue**(): `number`
@@ -274,6 +260,20 @@ if(entity) {
 #### Inherited from
 
 Entity.direction
+
+___
+
+### isHidden
+
+• `get` **isHidden**(): `boolean`
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+Entity.isHidden
 
 ___
 
