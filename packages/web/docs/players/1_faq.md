@@ -16,7 +16,8 @@ Optionally you can clear the storage, but this will of course result in needing 
 
 ### Why do I need to login using Discord?
 
-Primarily authentication helps us prevent cheating as shard owners can choose to ban people via Discord account rather than just an IP which can be easily changed.
+Primarily, authentication helps us prevent cheating as shard owners can choose to ban people via Discord account rather than just an IP which can be easily changed.
+
 In the future we have plans to store user profiles in the cloud, so you can go to any device and keep your same macros, scripts, hotkeys from device to device.
 
 ### Will there be an assistant like Razor?
