@@ -377,11 +377,11 @@ ___
 
 ### notoriety
 
-• `get` **notoriety**(): `number`
+• `get` **notoriety**(): [`Notorieties`](../Notorieties)
 
 #### Returns
 
-`number`
+[`Notorieties`](../Notorieties)
 
 #### Inherited from
 

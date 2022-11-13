@@ -335,3 +335,26 @@ console.log(robe.layer);
 #### Returns
 
 [`Layers`](../Layers)
+
+___
+
+### contents
+
+• `get` **contents**(): `undefined` \| [`Item`](../Item)[]
+
+Get the item's contents
+
+**`Example`**
+
+```ts
+const itemList = player.backpack.contents;
+for (const item of itemlist) {
+  if (item.contents.length > 0)
+    console.log("this item is a backpack's sub-container!");
+}
+
+```
+
+#### Returns
+
+`undefined` \| [`Item`](../Item)[]
