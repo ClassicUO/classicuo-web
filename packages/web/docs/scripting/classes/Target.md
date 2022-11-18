@@ -21,21 +21,41 @@ url: "/scripting/Target/"
 
 ▸ **entity**(`serial`): `void`
 
-Target a Mobile or an Item
+Target a Mobile or an Item with the currently open target
 
 **`Example`**
 
 ```ts
 client.castSpell(Spells.Heal);
 target.wait();
-target.entity(player.serial);
+target.entity(player);
 ```
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `serial` | `number` |
+| `serial` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+
+#### Returns
+
+`void`
+
+___
+
+### self
+
+▸ **self**(): `void`
+
+Target self with the currently open target
+
+**`Example`**
+
+```ts
+client.castSpell(Spells.Heal);
+target.wait();
+target.self();
+```
 
 #### Returns
 
@@ -123,7 +143,7 @@ ___
 
 ### terrainRelativeToEntity
 
-▸ **terrainRelativeToEntity**(`serial`, `range`, `forward`, `graphic?`): `void`
+▸ **terrainRelativeToEntity**(`entity`, `range`, `forward`, `graphic?`): `void`
 
 Target a Tile or Static from a specific Item or Mobile
 
@@ -133,7 +153,7 @@ This will target the file in front or behind the Mobile
 ```ts
 client.castSpell(Spells.Teleport);
 target.wait();
-target.terrainRelativeToEntity(mob.serial, 5, true);
+target.terrainRelativeToEntity(mob, 5, true);
 ```
 
 **`Example`**
@@ -142,14 +162,14 @@ This will target the static on a specific tile in front or behind the Mobile
 ```ts
 client.castSpell(Spells.Teleport);
 target.wait();
-target.terrainRelativeToEntity(mob.serial, 5, true, 0x5a2);
+target.terrainRelativeToEntity(mob, 5, true, 0x5a2);
 ```
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `serial` | `number` |
+| `entity` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
 | `range` | `number` |
 | `forward` | `boolean` |
 | `graphic?` | `number` |
@@ -162,15 +182,52 @@ ___
 
 ### wait
 
-▸ **wait**(`timeout?`): `boolean`
+▸ **wait**(`timeoutMs?`): `boolean`
 
-Wait for target with a specific amount of time. Default = 5sec
+Wait for the target to open within a specific amount of time.
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `timeout?` | `number` |
+| `timeoutMs?` | `number` |
+
+#### Returns
+
+`boolean`
+
+___
+
+### waitTargetEntity
+
+▸ **waitTargetEntity**(`entity`, `timeoutMs?`): `boolean`
+
+Waits for the target to open, and then targets the desired entity
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `entity` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+| `timeoutMs?` | `number` |
+
+#### Returns
+
+`boolean`
+
+___
+
+### waitTargetSelf
+
+▸ **waitTargetSelf**(`timeoutMs?`): `boolean`
+
+Wait for target with a specific amount of time, when open target self.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `timeoutMs?` | `number` |
 
 #### Returns
 

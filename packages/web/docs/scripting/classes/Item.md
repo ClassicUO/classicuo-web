@@ -64,7 +64,7 @@ Returns 0 if entity is no longer on screen.
 **`Example`**
 
 ```ts
-const entity = client.findObject(player.serial); // Replace with any other entity serial
+const entity = client.findObject(player); // Replace with any other entity serial
 console.log(entity.x)
 ```
 
@@ -88,7 +88,7 @@ Returns 0 if entity is no longer on screen.
 **`Example`**
 
 ```ts
-const entity = client.findObject(player.serial);
+const entity = client.findObject(player);
 console.log(entity.y)
 ```
 
@@ -112,7 +112,7 @@ Returns 0 if entity is no longer on screen.
 **`Example`**
 
 ```ts
-const entity = client.findObject(player.serial);
+const entity = client.findObject(player);
 console.log(entity.z)
 ```
 
@@ -328,7 +328,7 @@ Get the item's layer if any
 **`Example`**
 
 ```ts
-const robe = client.findItemOnLayer(player.serial, Layers.Robe);
+const robe = client.findItemOnLayer(player, Layers.Robe);
 console.log(robe.layer);
 ```
 
@@ -358,3 +358,23 @@ for (const item of itemlist) {
 #### Returns
 
 `undefined` \| [`Item`](../Item)[]
+
+## Methods
+
+### serialFrom
+
+▸ `Static` **serialFrom**(`value`): `number`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `any` |
+
+#### Returns
+
+`number`
+
+#### Inherited from
+
+Entity.serialFrom

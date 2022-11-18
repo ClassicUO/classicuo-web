@@ -34,7 +34,7 @@ ___
 
 ### headMsg
 
-• **headMsg**: (`message`: `string`, `serial`: `number`, `hue?`: `number`) => ``null``
+• **headMsg**: (`message`: `string`, `serial`: `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject), `hue?`: `number`) => ``null``
 
 #### Type declaration
 
@@ -45,7 +45,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `message` | `string` |
-| `serial` | `number` |
+| `serial` | `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject) |
 | `hue?` | `number` |
 
 ##### Returns
@@ -56,7 +56,7 @@ ___
 
 ### openPaperdoll
 
-• **openPaperdoll**: (`serial`: `number`) => ``null``
+• **openPaperdoll**: (`serial`: `undefined` \| `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject)) => ``null``
 
 #### Type declaration
 
@@ -66,7 +66,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `serial` | `number` |
+| `serial` | `undefined` \| `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject) |
 
 ##### Returns
 
@@ -76,7 +76,7 @@ ___
 
 ### findObject
 
-• **findObject**: (`serial`: `number`, `hue?`: `number`, `sourceSerial?`: `number`, `amount?`: `number`, `range?`: `number`) => `undefined` \| [`Item`](../Item) \| [`Mobile`](../Mobile)
+• **findObject**: (`serial`: `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject), `hue?`: `number`, `sourceSerial?`: `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject), `amount?`: `number`, `range?`: `number`) => `undefined` \| [`Item`](../Item) \| [`Mobile`](../Mobile)
 
 #### Type declaration
 
@@ -86,9 +86,9 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `serial` | `number` |
+| `serial` | `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject) |
 | `hue?` | `number` |
-| `sourceSerial?` | `number` |
+| `sourceSerial?` | `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject) |
 | `amount?` | `number` |
 | `range?` | `number` |
 
@@ -100,7 +100,7 @@ ___
 
 ### findType
 
-• **findType**: (`graphic`: `number`, `hue?`: `number`, `sourceSerial?`: `number`, `amount?`: `number`, `range?`: `number`) => `undefined` \| [`Item`](../Item) \| [`Mobile`](../Mobile)
+• **findType**: (`graphic`: `number`, `hue?`: `number`, `sourceSerial?`: `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject), `amount?`: `number`, `range?`: `number`) => `undefined` \| [`Item`](../Item) \| [`Mobile`](../Mobile)
 
 #### Type declaration
 
@@ -112,7 +112,7 @@ ___
 | :------ | :------ |
 | `graphic` | `number` |
 | `hue?` | `number` |
-| `sourceSerial?` | `number` |
+| `sourceSerial?` | `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject) |
 | `amount?` | `number` |
 | `range?` | `number` |
 
@@ -124,7 +124,7 @@ ___
 
 ### findItemOnLayer
 
-• **findItemOnLayer**: (`serial`: `number`, `layer`: [`Layers`](../Layers)) => `undefined` \| [`Item`](../Item)
+• **findItemOnLayer**: (`serial`: `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject), `layer`: [`Layers`](../Layers)) => `undefined` \| [`Item`](../Item)
 
 #### Type declaration
 
@@ -134,7 +134,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `serial` | `number` |
+| `serial` | `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject) |
 | `layer` | [`Layers`](../Layers) |
 
 ##### Returns

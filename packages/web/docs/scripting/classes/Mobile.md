@@ -64,7 +64,7 @@ Returns 0 if entity is no longer on screen.
 **`Example`**
 
 ```ts
-const entity = client.findObject(player.serial); // Replace with any other entity serial
+const entity = client.findObject(player); // Replace with any other entity serial
 console.log(entity.x)
 ```
 
@@ -88,7 +88,7 @@ Returns 0 if entity is no longer on screen.
 **`Example`**
 
 ```ts
-const entity = client.findObject(player.serial);
+const entity = client.findObject(player);
 console.log(entity.y)
 ```
 
@@ -112,7 +112,7 @@ Returns 0 if entity is no longer on screen.
 **`Example`**
 
 ```ts
-const entity = client.findObject(player.serial);
+const entity = client.findObject(player);
 console.log(entity.z)
 ```
 
@@ -421,3 +421,23 @@ ___
 | `twoHanded?` | [`Item`](../Item) |
 | `cloak?` | [`Item`](../Item) |
 | `mount?` | [`Item`](../Item) |
+
+## Methods
+
+### serialFrom
+
+▸ `Static` **serialFrom**(`value`): `number`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `any` |
+
+#### Returns
+
+`number`
+
+#### Inherited from
+
+Entity.serialFrom

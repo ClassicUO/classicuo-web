@@ -29,6 +29,539 @@ while(true) {
 
   ↳ **`Player`**
 
+## Methods
+
+### serialFrom
+
+▸ `Static` **serialFrom**(`value`): `number`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `any` |
+
+#### Returns
+
+`number`
+
+#### Inherited from
+
+Mobile.serialFrom
+
+___
+
+### say
+
+▸ **say**(`message`, `hue?`): `void`
+
+Sends a chat message as your player, with an optional hue for the message.
+
+**`Example`**
+
+```ts
+player.say('Hello there!');
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `message` | `string` |
+| `hue?` | `number` |
+
+#### Returns
+
+`void`
+
+___
+
+### cast
+
+▸ **cast**(`spell`): `void`
+
+Casts a spell
+
+**`Example`**
+
+```ts
+player.cast(Spells.Agility);
+target.wait();
+target.entity(player);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `spell` | `string` \| [`Spells`](../Spells) |
+
+#### Returns
+
+`void`
+
+___
+
+### castTo
+
+▸ **castTo**(`spell`, `serial`, `timeout?`): `void`
+
+Casts a spell and automatically targets the given serial on the next target
+
+**`Example`**
+
+```ts
+player.castTo(Spells.Heal, player);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `spell` | `string` \| [`Spells`](../Spells) |
+| `serial` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+| `timeout?` | `number` |
+
+#### Returns
+
+`void`
+
+___
+
+### useSkill
+
+▸ **useSkill**(`skill`, `target?`, `timeout?`): `void`
+
+Uses a skill
+
+**`Example`**
+
+Use skill without a target
+```ts
+player.useSkill(Skills.Meditation);
+
+@example Use skill and target yourself
+```ts
+player.useSkill(Skills.Anatomy);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `skill` | [`Skills`](../Skills) |
+| `target?` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+| `timeout?` | `number` |
+
+#### Returns
+
+`void`
+
+___
+
+### equip
+
+▸ **equip**(`serial`): ``null``
+
+Attempts to equip an item if possible
+
+**`Example`**
+
+```ts
+const axe = client.findType(0x0F49); // Axe graphic ID
+player.equip(axe);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `serial` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+
+#### Returns
+
+``null``
+
+___
+
+### attack
+
+▸ **attack**(`serial`): ``null``
+
+Attacks a mobile
+
+**`Example`**
+
+```ts
+player.attack(target.lastSerial);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `serial` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+
+#### Returns
+
+``null``
+
+___
+
+### fly
+
+▸ **fly**(): ``null``
+
+Attempt to fly... if you can.
+
+**`Example`**
+
+```ts
+player.fly();
+```
+
+#### Returns
+
+``null``
+
+___
+
+### land
+
+▸ **land**(): ``null``
+
+Turn off flying and land
+
+**`Example`**
+
+```ts
+player.land();
+```
+
+#### Returns
+
+``null``
+
+___
+
+### use
+
+▸ **use**(`serial`): ``null``
+
+Attempts to use an object if possible
+
+**`Example`**
+
+```ts
+const dagger = client.findType(0x0F52); // Dagger graphic ID
+player.use(dagger);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `serial` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+
+#### Returns
+
+``null``
+
+___
+
+### click
+
+▸ **click**(`serial`): ``null``
+
+Simulates clicking an object
+
+**`Example`**
+
+```ts
+player.click(player);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `serial` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+
+#### Returns
+
+``null``
+
+___
+
+### useType
+
+▸ **useType**(`graphic`, `hue?`, `sourceSerial?`, `range?`): ``null``
+
+Attempts to use an object of a certain type
+
+**`Example`**
+
+```ts
+player.useType(0x0F52);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `graphic` | `number` |
+| `hue?` | `number` |
+| `sourceSerial?` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+| `range?` | `number` |
+
+#### Returns
+
+``null``
+
+___
+
+### moveItem
+
+▸ **moveItem**(`serial`, `container`, `x?`, `y?`, `z?`, `amount?`): `boolean`
+
+Attempts to move an object between containers
+
+**`Example`**
+
+```ts
+if(player.equippedItems.robe) {
+  player.moveItem(player.equippedItems.robe, player.backpack);
+}
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `serial` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+| `container` | `number` |
+| `x?` | `number` |
+| `y?` | `number` |
+| `z?` | `number` |
+| `amount?` | `number` |
+
+#### Returns
+
+`boolean`
+
+___
+
+### moveItemOnGroundOffset
+
+▸ **moveItemOnGroundOffset**(`serial`, `x?`, `y?`, `z?`, `amount?`): `boolean`
+
+Attempts to move an object around on the ground using an offset
+
+**`Example`**
+
+```ts
+const targetInfo = target.queryTarget();
+if(targetInfo) {
+  player.moveItemOnGroundOffset(targetInfo, 1, 0, 0); // Move item to the east
+}
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `serial` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+| `x?` | `number` |
+| `y?` | `number` |
+| `z?` | `number` |
+| `amount?` | `number` |
+
+#### Returns
+
+`boolean`
+
+___
+
+### moveType
+
+▸ **moveType**(`graphic`, `src`, `dest`, `x?`, `y?`, `z?`, `hue?`, `amount?`, `range?`): `boolean`
+
+Attempts to move an object of a certain type between containers
+
+**`Example`**
+
+```ts
+player.moveType(0x0F52, player.backpack, bag);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `graphic` | `number` |
+| `src` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+| `dest` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+| `x?` | `number` |
+| `y?` | `number` |
+| `z?` | `number` |
+| `hue?` | `number` |
+| `amount?` | `number` |
+| `range?` | `number` |
+
+#### Returns
+
+`boolean`
+
+___
+
+### moveTypeOnGroundOffset
+
+▸ **moveTypeOnGroundOffset**(`graphic`, `src`, `x?`, `y?`, `z?`, `hue?`, `amount?`, `range?`): ``null``
+
+Attempts to move an object of a certain type onto the ground
+
+**`Example`**
+
+```ts
+player.moveType(0x0F52, player.backpack); // Move item to the east
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `graphic` | `number` |
+| `src` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+| `x?` | `number` |
+| `y?` | `number` |
+| `z?` | `number` |
+| `hue?` | `number` |
+| `amount?` | `number` |
+| `range?` | `number` |
+
+#### Returns
+
+``null``
+
+___
+
+### setAbility
+
+▸ **setAbility**(`primary`, `active`): ``null``
+
+Toggle ability on/off
+
+**`Example`**
+
+```ts
+player.setAbility(true, false); // Turn primary ability off
+player.setAbility(false, true); // Turn secondary ability on
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `primary` | `boolean` |
+| `active` | `boolean` |
+
+#### Returns
+
+``null``
+
+___
+
+### walk
+
+▸ **walk**(`direction`): `boolean`
+
+Walk/turn a single step in a direction
+
+**`Example`**
+
+```ts
+player.walk(Directors.North);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `direction` | [`Directions`](../Directions) |
+
+#### Returns
+
+`boolean`
+
+`True` if character can walk
+
+___
+
+### run
+
+▸ **run**(`direction`): `boolean`
+
+Run/turn a single step in a direction
+
+**`Example`**
+
+```ts
+player.run(Directions.South);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `direction` | [`Directions`](../Directions) |
+
+#### Returns
+
+`boolean`
+
+`True` if character can run
+
+___
+
+### setSkillLock
+
+▸ **setSkillLock**(`skill`, `lock`): ``null``
+
+Set the status of a skill lock
+
+**`Example`**
+
+```ts
+player.setSkillLock(Skills.Anatomy, SkillLock.Down);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `skill` | [`Skills`](../Skills) |
+| `lock` | [`SkillLock`](../SkillLock) |
+
+#### Returns
+
+``null``
+
+___
+
+### hasBuffDebuff
+
+▸ **hasBuffDebuff**(`buffID`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `buffID` | [`BuffDebuffs`](../BuffDebuffs) |
+
+#### Returns
+
+`boolean`
+
 ## Accessors
 
 ### graphic
@@ -64,7 +597,7 @@ Returns 0 if entity is no longer on screen.
 **`Example`**
 
 ```ts
-const entity = client.findObject(player.serial); // Replace with any other entity serial
+const entity = client.findObject(player); // Replace with any other entity serial
 console.log(entity.x)
 ```
 
@@ -88,7 +621,7 @@ Returns 0 if entity is no longer on screen.
 **`Example`**
 
 ```ts
-const entity = client.findObject(player.serial);
+const entity = client.findObject(player);
 console.log(entity.y)
 ```
 
@@ -112,7 +645,7 @@ Returns 0 if entity is no longer on screen.
 **`Example`**
 
 ```ts
-const entity = client.findObject(player.serial);
+const entity = client.findObject(player);
 console.log(entity.z)
 ```
 
@@ -816,6 +1349,26 @@ ___
 
 ___
 
+### primaryAbility
+
+• `get` **primaryAbility**(): [`Abilities`](../Abilities)
+
+#### Returns
+
+[`Abilities`](../Abilities)
+
+___
+
+### secondaryAbility
+
+• `get` **secondaryAbility**(): [`Abilities`](../Abilities)
+
+#### Returns
+
+[`Abilities`](../Abilities)
+
+___
+
 ### hunger
 
 • `get` **hunger**(): `number`
@@ -953,495 +1506,3 @@ ___
 #### Returns
 
 `undefined` \| [`Item`](../Item)
-
-## Methods
-
-### say
-
-▸ **say**(`message`, `hue?`): `void`
-
-Sends a chat message as your player, with an optional hue for the message.
-
-**`Example`**
-
-```ts
-player.say('Hello there!');
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `message` | `string` |
-| `hue?` | `number` |
-
-#### Returns
-
-`void`
-
-___
-
-### cast
-
-▸ **cast**(`spell`): ``null``
-
-Casts a spell
-
-**`Example`**
-
-```ts
-player.cast(Spells.Agility);
-target.wait();
-target.entity(player.serial);
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `spell` | [`Spells`](../Spells) |
-
-#### Returns
-
-``null``
-
-___
-
-### castTo
-
-▸ **castTo**(`spell`, `serial`, `timeout?`): `void`
-
-Casts a spell and automatically targets the given serial on the next target
-
-**`Example`**
-
-```ts
-player.castTo(Spells.Heal, player.serial);
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `spell` | [`Spells`](../Spells) |
-| `serial` | `number` |
-| `timeout?` | `number` |
-
-#### Returns
-
-`void`
-
-___
-
-### useSkill
-
-▸ **useSkill**(`skill`): ``null``
-
-Uses a skill
-
-**`Example`**
-
-```ts
-player.useSkill(Skills.Anatomy);
-target.wait();
-target.entity(player.serial);
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `skill` | [`Skills`](../Skills) |
-
-#### Returns
-
-``null``
-
-___
-
-### equip
-
-▸ **equip**(`serial`): ``null``
-
-Attempts to equip an item if possible
-
-**`Example`**
-
-```ts
-const axe = client.findType(0x0F49); // Axe graphic ID
-player.equip(axe.serial);
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `serial` | `number` |
-
-#### Returns
-
-``null``
-
-___
-
-### attack
-
-▸ **attack**(`serial`): ``null``
-
-Attacks a mobile
-
-**`Example`**
-
-```ts
-player.attack(target.lastSerial);
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `serial` | `number` |
-
-#### Returns
-
-``null``
-
-___
-
-### fly
-
-▸ **fly**(): ``null``
-
-Attempt to fly... if you can.
-
-**`Example`**
-
-```ts
-player.fly();
-```
-
-#### Returns
-
-``null``
-
-___
-
-### land
-
-▸ **land**(): ``null``
-
-Turn off flying and land
-
-**`Example`**
-
-```ts
-player.land();
-```
-
-#### Returns
-
-``null``
-
-___
-
-### use
-
-▸ **use**(`serial`): ``null``
-
-Attempts to use an object if possible
-
-**`Example`**
-
-```ts
-const dagger = client.findType(0x0F52); // Dagger graphic ID
-player.use(dagger.serial);
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `serial` | `number` |
-
-#### Returns
-
-``null``
-
-___
-
-### click
-
-▸ **click**(`serial`): ``null``
-
-Simulates clicking an object
-
-**`Example`**
-
-```ts
-player.click(player.serial);
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `serial` | `number` |
-
-#### Returns
-
-``null``
-
-___
-
-### useType
-
-▸ **useType**(`graphic`, `hue?`, `sourceSerial?`, `range?`): ``null``
-
-Attempts to use an object of a certain type
-
-**`Example`**
-
-```ts
-player.useType(0x0F52);
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `graphic` | `number` |
-| `hue?` | `number` |
-| `sourceSerial?` | `number` |
-| `range?` | `number` |
-
-#### Returns
-
-``null``
-
-___
-
-### moveItem
-
-▸ **moveItem**(`serial`, `container`, `x?`, `y?`, `z?`, `amount?`): `boolean`
-
-Attempts to move an object between containers
-
-**`Example`**
-
-```ts
-if(player.equippedItems.robe) {
-  player.moveItem(player.equippedItems.robe.serial, player.backpack.serial);
-}
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `serial` | `number` |
-| `container` | `number` |
-| `x?` | `number` |
-| `y?` | `number` |
-| `z?` | `number` |
-| `amount?` | `number` |
-
-#### Returns
-
-`boolean`
-
-___
-
-### moveItemOnGroundOffset
-
-▸ **moveItemOnGroundOffset**(`serial`, `x?`, `y?`, `z?`, `amount?`): `boolean`
-
-Attempts to move an object around on the ground using an offset
-
-**`Example`**
-
-```ts
-const targetInfo = target.queryTarget();
-if(targetInfo.serial) {
-  player.moveItemOnGroundOffset(targetInfo.serial, 1, 0, 0); // Move item to the east
-}
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `serial` | `number` |
-| `x?` | `number` |
-| `y?` | `number` |
-| `z?` | `number` |
-| `amount?` | `number` |
-
-#### Returns
-
-`boolean`
-
-___
-
-### moveType
-
-▸ **moveType**(`graphic`, `src`, `dest`, `x?`, `y?`, `z?`, `hue?`, `amount?`, `range?`): `boolean`
-
-Attempts to move an object of a certain type between containers
-
-**`Example`**
-
-```ts
-player.moveType(0x0F52, player.backpack.serial, bag.serial);
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `graphic` | `number` |
-| `src` | `number` |
-| `dest` | `number` |
-| `x?` | `number` |
-| `y?` | `number` |
-| `z?` | `number` |
-| `hue?` | `number` |
-| `amount?` | `number` |
-| `range?` | `number` |
-
-#### Returns
-
-`boolean`
-
-___
-
-### moveTypeOnGroundOffset
-
-▸ **moveTypeOnGroundOffset**(`graphic`, `src`, `x?`, `y?`, `z?`, `hue?`, `amount?`, `range?`): ``null``
-
-Attempts to move an object of a certain type onto the ground
-
-**`Example`**
-
-```ts
-player.moveType(0x0F52, player.backpack.serial); // Move item to the east
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `graphic` | `number` |
-| `src` | `number` |
-| `x?` | `number` |
-| `y?` | `number` |
-| `z?` | `number` |
-| `hue?` | `number` |
-| `amount?` | `number` |
-| `range?` | `number` |
-
-#### Returns
-
-``null``
-
-___
-
-### setAbility
-
-▸ **setAbility**(`primary`, `active`): ``null``
-
-Toggle ability on/off
-
-**`Example`**
-
-```ts
-player.setAbility(true, false); // Turn primary ability off
-player.setAbility(false, true); // Turn secondary ability on
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `primary` | `boolean` |
-| `active` | `boolean` |
-
-#### Returns
-
-``null``
-
-___
-
-### walk
-
-▸ **walk**(`direction`): `boolean`
-
-Walk/turn a single step in a direction
-
-**`Example`**
-
-```ts
-player.walk(Directors.North);
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `direction` | [`Directions`](../Directions) |
-
-#### Returns
-
-`boolean`
-
-`True` if character can walk
-
-___
-
-### run
-
-▸ **run**(`direction`): `boolean`
-
-Run/turn a single step in a direction
-
-**`Example`**
-
-```ts
-player.run(Directions.South);
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `direction` | [`Directions`](../Directions) |
-
-#### Returns
-
-`boolean`
-
-`True` if character can run
-
-___
-
-### setSkillLock
-
-▸ **setSkillLock**(`skill`, `lock`): ``null``
-
-Set the status of a skill lock
-
-**`Example`**
-
-```ts
-player.setSkillLock(Skills.Anatomy, SkillLock.Down);
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `skill` | [`Skills`](../Skills) |
-| `lock` | [`SkillLock`](../SkillLock) |
-
-#### Returns
-
-``null``

@@ -41,6 +41,26 @@ ___
 
 ## Methods
 
+### serialFrom
+
+▸ `Static` **serialFrom**(`value`): `number`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `any` |
+
+#### Returns
+
+`number`
+
+#### Inherited from
+
+GameObject.serialFrom
+
+___
+
 ### containsText
 
 ▸ **containsText**(`value`): `boolean`
