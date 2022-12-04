@@ -9,6 +9,11 @@ export type EventListener<T extends ValidEventTypes, K extends EventNames<T>> = 
 
 export interface EventMap {
   journalEntry: (ev: JournalEntry) => void;
+  gumpUpdate: (ev: any) => void;
+  gumpClose: (ev: any) => void;
+  playerCreated: (ev: any) => void;
+  worldClear: (ev: any) => void;
+  profileLoaded: (ev: any) => void;
 }
 
 export interface JournalEntry {

@@ -1,5 +1,5 @@
-import { Client } from "./api/client";
-import { Player } from "./api/player";
+import { Client } from './api/client';
+import { Player } from './api/player';
 
 global {
   const player: Player;

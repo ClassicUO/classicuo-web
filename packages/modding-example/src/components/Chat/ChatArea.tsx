@@ -3,7 +3,6 @@ import { ChatMessage } from './ChatMessage';
 import { formatMessage, JournalEntry, MessageFilter } from './index';
 import React, { useEffect, useState } from 'react';
 import { addEventListener, removeEventListener } from '@classicuo/modding';
-import { removeListener } from 'process';
 
 export const Area = styled.div`
   flex-grow: 1;

@@ -1,6 +1,7 @@
 import { EventListener, EventMap, EventNames, JournalEntry } from './events';
 import { Client } from './client';
 import { Player } from './player';
+import { ShardRules } from '../types';
 
 /**
  * Add a listener for a given event.
@@ -24,8 +25,17 @@ declare const addExtraPlayerBody: (
   copyEquipConv?: boolean
 ) => void;
 declare const setProfileOptionAllowed: (name: string, allowed: boolean) => void;
+declare const setShardRules: (flags: ShardRules) => boolean;
 
 declare const client: Client;
 declare const player: Player;
 
-export { client, player, addEventListener, removeEventListener, addExtraPlayerBody, setProfileOptionAllowed };
+export {
+  client,
+  player,
+  addEventListener,
+  removeEventListener,
+  addExtraPlayerBody,
+  setProfileOptionAllowed,
+  setShardRules
+};

@@ -1,20 +1,18 @@
 import { fileURLToPath } from 'url';
 import { Parcel } from '@parcel/core';
-import localtunnel from 'localtunnel';
 
 const port = 2222;
-
-// const tunnel = await localtunnel({ port });
+const prod = process.env.NODE_ENV === 'production';
 
 const bundler = new Parcel({
-  entries: ['src/index.html'],
+  entries: ['src/mod.tsx', 'src/index.html'],
   mode: process.env.NODE_ENV,
-  serveOptions: {
+  serveOptions: !prod && {
     port
   },
   targets: {
     main: {
-      distDir: 'build',
+      distDir: 'dist',
       context: 'browser',
       includeNodeModules: true,
       engines: {
@@ -33,13 +31,12 @@ const bundler = new Parcel({
   }
 });
 
-if(process.env.NODE_ENV !== 'production') {
+if (prod) {
+  await bundler.run();
+} else {
   await bundler.watch((_error, _buildEvent) => {
     // console.log(`✨ Tunnel running, accessible via: ${tunnel?.url}.`);
   });
-}
-else {
-  await bundler.run();
 }
 
 

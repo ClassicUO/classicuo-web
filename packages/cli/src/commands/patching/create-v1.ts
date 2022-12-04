@@ -18,6 +18,7 @@ import {
   execAsync,
   getFilesRecursively,
   isDirectoryF,
+  isFile,
   makeDirectoryIfNotExists,
   mkdirF,
   normalizeName,
@@ -35,6 +36,7 @@ import { Patch } from '../../schemas/patch';
 import { downloadFile, httpGet } from '../../utils/http';
 import { sourceManifestSchema } from '../../schemas/manifest';
 import { DiffTool, getWebDiffTool } from '../../utils/exec';
+import { shardSchema } from '../../schemas/shard';
 
 export const insensitiveOrd: Ord.Ord<string> = pipe(
   Str.Ord,
@@ -346,11 +348,12 @@ const createPatches = ({
     ),
     TE.bind('manifest', ({ shard, patch, dictFile, ...files }) =>
       TE.of({
+        version: 2,
         source: '7.0.95.0',
         target: shard.clientVersion,
         shardId: shard.id,
         cdnBase: patch.cdnBase,
-        version: 1,
+        mods: shard.mods,
         dictFile,
         sourceFiles: createSourceFileList({ ...files, sourcePath }),
         patches: files.patchedFiles

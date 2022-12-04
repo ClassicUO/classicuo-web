@@ -77,7 +77,7 @@ static IEnumerable<PatchInfo> Patch(
     
     Directory.CreateDirectory(Path.Combine(outputDir.FullName, subfolder));
 
-    var uopMulName = GetUopMulName(fileName);
+    var uopMulName = GetUopMulName(targetFile.Name);
     if (uopMulName is null)
     {
         var sourcePath = GetCaseNudgedPathName(sourceDir.FullName, subfolder, targetFile.Name);

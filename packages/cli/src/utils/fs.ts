@@ -49,7 +49,7 @@ export const mkdirF = (dir: string) => TE.tryCatch(
 );
 
 export const pathWithSubfolder = (root: string, p: string) =>
-  path.resolve(p).replace(root, '').replace(/^\//, '')
+  path.resolve(p).replace(root, '').replace(new RegExp(`^${String.fromCharCode(92)}${path.sep}`), '')
 
 export const rmDirF = (dir: string) => TE.tryCatch(
   () => rmAsync(dir, { recursive: true }),
@@ -82,8 +82,8 @@ export const getFilesRecursively = (p: string) => {
   return files.concat(getFiles(p));
 };
 
-export const normalizeName = (f: string) => path.basename(f).toLowerCase().replace(/^\/+/, '');
-export const normalizeDir = (f: string) => f.toLowerCase().replace(/^\/+/, '');
+export const normalizeName = (f: string) => path.basename(f).toLowerCase().replace(new RegExp(`^${String.fromCharCode(92)}${path.sep}+`), '');
+export const normalizeDir = (f: string) => f.toLowerCase().replace(new RegExp(`^${String.fromCharCode(92)}${path.sep}+`), '');
 
 export const sha256sum = (data: Uint8Array) => createHash('sha256').update(data).digest('hex');
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Chat } from './components/Chat/Chat';
-import { mountInterfaceRoot, setProfileOptionAllowed, addExtraPlayerBody } from '@classicuo/modding';
+import { mountInterfaceRoot, setProfileOptionAllowed, addExtraPlayerBody, setShardRules } from '@classicuo/modding';
+import { addEventListener, removeEventListener } from '@classicuo/modding';
 
 mountInterfaceRoot(Chat);
 
@@ -14,3 +15,10 @@ setProfileOptionAllowed('Hide vegetation', false);
 setProfileOptionAllowed('Trees to stumps', false);
 setProfileOptionAllowed('Enable Death Screen', false);
 setProfileOptionAllowed('Black & White mode for dead player', false);
+
+setShardRules({
+  scripting: 'disabled',
+  agents: 'disabled'
+});
+
+addEventListener('gumpUpdate', (event) => console.log('Gump Update!', event));
