@@ -1,4 +1,8 @@
 import { z } from 'zod';
+import { sourceManifestSchema } from './manifest';
+import { shardRulesSchema } from './rules';
+
+export type Shard = z.infer<typeof shardSchema>;
 
 export const shardSchema = z.object({
   id: z.number(),
@@ -11,6 +15,7 @@ export const shardSchema = z.object({
       })
     )
     .optional(),
+  rules: shardRulesSchema.optional(),
   logo: z.string().url(),
   name: z.string(),
   region: z.string(),

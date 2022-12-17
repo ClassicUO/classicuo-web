@@ -5,7 +5,8 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "start:dev": "node parcel.mjs",
-    "build": "NODE_ENV=production node parcel.mjs"
+    "build": "NODE_ENV=production node parcel.mjs",
+    "test": "jest"
   },
   "devDependencies": {
     "@parcel/core": "^2.7.0",

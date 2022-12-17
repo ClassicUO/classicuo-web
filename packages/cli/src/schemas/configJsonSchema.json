@@ -1,0 +1,3162 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/webCuoPatchConfig",
+  "definitions": {
+    "webCuoPatchConfig": {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "shard": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "manifest": {
+              "type": "string",
+              "format": "uri"
+            },
+            "mods": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri"
+                  }
+                },
+                "required": [
+                  "name",
+                  "url"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "rules": {
+              "type": "object",
+              "properties": {
+                "web": {
+                  "type": "object",
+                  "properties": {
+                    "scripting": {
+                      "type": "string",
+                      "enum": [
+                        "enabled",
+                        "disabled",
+                        "disable-ts"
+                      ]
+                    },
+                    "features": {
+                      "type": "object",
+                      "properties": {
+                        "dressAgent": {
+                          "type": "boolean",
+                          "default": true
+                        },
+                        "friends": {
+                          "type": "boolean",
+                          "default": true
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "scripting"
+                  ],
+                  "additionalProperties": false
+                },
+                "options": {
+                  "type": "object",
+                  "properties": {
+                    "profileOverrides": {
+                      "type": "object",
+                      "properties": {
+                        "enableSound": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "soundVolume": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 100
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enableMusic": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "musicVolume": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 100
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enableFootstepsSound": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enableCombatMusic": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "reproduceSoundsInBackground": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "chatFont": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 1
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "speechDelay": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 100
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "scaleSpeechDelay": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "saveJournalToFile": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "forceUnicodeJournal": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "ignoreAllianceMessages": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "ignoreGuildMessages": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "speechHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 690
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "whisperHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 51
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "emoteHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 33
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "yellHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 33
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "partyMessageHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 68
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "guildMessageHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 68
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "allyMessageHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 87
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "chatMessageHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 598
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "innocentHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 90
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "partyAuraHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 68
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "friendHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 68
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "criminalHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 946
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "canAttackHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 946
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enemyHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 49
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "murdererHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 35
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "beneficHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 89
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "harmfulHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 32
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "neutralHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 945
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enabledSpellHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enabledSpellFormat": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "spellDisplayFormat": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "string",
+                              "default": "{power} [{spell}]"
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "poisonHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 68
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "paralyzedHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 332
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "invulnerableHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 48
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enabledCriminalActionQuery": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enabledBeneficialCriminalActionQuery": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enableStatReport": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enableSkillReport": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "useOldStatusGump": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "backpackStyle": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "highlightGameObjects": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "highlightMobilesByParalize": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "highlightMobilesByPoisoned": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "highlightMobilesByInvul": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "showMobilesHP": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "mobileHPType": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "mobileHPShowWhen": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "drawRoofs": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "treeToStumps": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enableCaveBorder": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "hideVegetation": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "fieldsType": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "noColorObjectsOutOfRange": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "useCircleOfTransparency": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "circleOfTransparencyRadius": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 100
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "circleOfTransparencyType": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "vendorGumpHeight": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 60
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "defaultScale": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 1
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enableMousewheelScaleZoom": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "saveScaleAfterClose": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "restoreScaleAfterUnpressCtrl": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "bandageSelfOld": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enableDeathScreen": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enableBlackWhiteEffect": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "useTooltip": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "tooltipTextHue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 65535
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "tooltipDelayBeforeDisplay": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 250
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "tooltipDisplayZoom": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 100
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "tooltipBackgroundOpacity": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 70
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "tooltipFont": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 1
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enablePathfind": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "useShiftToPathfind": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "alwaysRun": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "alwaysRunUnlessHidden": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "smoothMovements": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "holdDownKeyTab": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "holdShiftForContext": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "holdShiftToSplitStack": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "windowClientBounds": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "object",
+                              "properties": {
+                                "X": {
+                                  "type": "number"
+                                },
+                                "Y": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "X",
+                                "Y"
+                              ],
+                              "additionalProperties": false,
+                              "default": {
+                                "X": 600,
+                                "Y": 480
+                              }
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "containerDefaultPosition": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "object",
+                              "properties": {
+                                "X": {
+                                  "type": "number"
+                                },
+                                "Y": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "X",
+                                "Y"
+                              ],
+                              "additionalProperties": false,
+                              "default": {
+                                "X": 24,
+                                "Y": 24
+                              }
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "gameWindowPosition": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "object",
+                              "properties": {
+                                "X": {
+                                  "type": "number"
+                                },
+                                "Y": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "X",
+                                "Y"
+                              ],
+                              "additionalProperties": false,
+                              "default": {
+                                "X": 10,
+                                "Y": 10
+                              }
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "gameWindowLock": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "gameWindowFullSize": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "windowBorderless": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "gameWindowSize": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "object",
+                              "properties": {
+                                "X": {
+                                  "type": "number"
+                                },
+                                "Y": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "X",
+                                "Y"
+                              ],
+                              "additionalProperties": false,
+                              "default": {
+                                "X": 600,
+                                "Y": 480
+                              }
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "topbarGumpPosition": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "object",
+                              "properties": {
+                                "X": {
+                                  "type": "number"
+                                },
+                                "Y": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "X",
+                                "Y"
+                              ],
+                              "additionalProperties": false,
+                              "default": {
+                                "X": 0,
+                                "Y": 0
+                              }
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "topbarGumpIsMinimized": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "topbarGumpIsDisabled": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "useAlternativeLights": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "useCustomLightLevel": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "lightLevel": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "useColoredLights": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "useDarkNights": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "closeHealthBarType": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "activateChatAfterEnter": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "activateChatAdditionalButtons": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "activateChatShiftEnterSupport": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "useObjectsFading": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "holdDownKeyAltToCloseAnchored": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "closeAllAnchoredGumpsInGroupWithRightClick": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "holdAltToMoveGumps": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "hideScreenshotStoredInMessage": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "castSpellsByOneClick": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "buffBarTime": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "fastSpellsAssign": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "autoOpenDoors": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "smoothDoors": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "autoOpenCorpses": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "autoOpenCorpseRange": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 2
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "corpseOpenOptions": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 3
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "skipEmptyCorpse": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "disableDefaultHotkeys": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "disableArrowBtn": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "disableTabBtn": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "disableCtrlQWBtn": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "disableAutoMove": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "enableDragSelect": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "dragSelectModifierKey": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "overrideContainerLocation": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "overrideContainerLocationSetting": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "overrideContainerLocationPosition": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "object",
+                              "properties": {
+                                "X": {
+                                  "type": "number"
+                                },
+                                "Y": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "X",
+                                "Y"
+                              ],
+                              "additionalProperties": false,
+                              "default": {
+                                "X": 200,
+                                "Y": 200
+                              }
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "dragSelectHumanoidsOnly": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "dragSelectStartX": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 100
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "dragSelectStartY": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 100
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "dragSelectAsAnchor": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "nameOverheadTypeAllowed": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "nameOverheadToggled": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "showTargetRangeIndicator": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "partyInviteGump": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "customBarsToggled": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "cbBlackBGToggled": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "showInfoBar": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "infoBarHighlightType": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "infoBarItems": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "default": null
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "macros": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "default": null
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "counterBarEnabled": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "counterBarHighlightOnUse": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "counterBarHighlightOnAmount": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "counterBarDisplayAbbreviatedAmount": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "counterBarAbbreviatedAmount": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 1000
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "counterBarHighlightAmount": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 5
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "counterBarCellSize": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 40
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "counterBarRows": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 1
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "counterBarColumns": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 1
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "showSkillsChangedMessage": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "showSkillsChangedDeltaValue": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 1
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "showStatsChangedMessage": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "shadowsEnabled": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "shadowsStatics": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "terrainShadowsLevel": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 15
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "auraUnderFeetType": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "auraOnMouse": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "partyAura": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "useXBR": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "hideChatGradient": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "standardSkillsGump": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "showNewMobileNameIncoming": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "showNewCorpseNameIncoming": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "grabBagSerial": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "gridLootType": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 0
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "reduceFPSWhenInactive": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "overrideAllFonts": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "overrideAllFontsIsUnicode": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "sallosEasyGrab": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "journalDarkMode": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "containersScale": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 100
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "scaleItemsInsideContainers": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "doubleClickToLootInsideContainers": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "useLargeContainerGumps": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "relativeDragAndDropItems": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "highlightContainerWhenSelected": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "showHouseContent": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "saveHealthbars": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "textFading": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "useSmoothBoatMovement": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "ignoreStaminaCheck": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "showJournalClient": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "showJournalObjects": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "showJournalSystem": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "showJournalGuildAlly": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapWidth": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 400
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapHeight": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 400
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapFont": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 3
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapFlipMap": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapTopMost": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapFreeView": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapShowParty": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapZoomIndex": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "number",
+                              "default": 4
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapShowCoordinates": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapShowMouseCoordinates": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapShowMobiles": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapShowPlayerName": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapShowPlayerBar": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapShowGroupName": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapShowGroupBar": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapShowMarkers": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapShowMarkersNames": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapShowMultis": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapHiddenMarkerFiles": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "string",
+                              "default": ""
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapHiddenZoneFiles": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "string",
+                              "default": ""
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "worldMapShowGridIfZoomed": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "web",
+                "options"
+              ],
+              "additionalProperties": false
+            },
+            "logo": {
+              "type": "string",
+              "format": "uri"
+            },
+            "name": {
+              "type": "string"
+            },
+            "region": {
+              "type": "string"
+            },
+            "focus": {
+              "type": "string"
+            },
+            "website": {
+              "type": "string",
+              "format": "uri"
+            },
+            "discord": {
+              "type": "string",
+              "format": "uri"
+            },
+            "encryption": {
+              "type": "number"
+            },
+            "clientVersion": {
+              "type": "string"
+            },
+            "useVerdata": {
+              "type": "boolean"
+            },
+            "mapLayouts": {
+              "type": "string"
+            },
+            "useTokenAuth": {
+              "type": "boolean"
+            },
+            "testing": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "id",
+            "manifest",
+            "logo",
+            "name",
+            "region",
+            "focus",
+            "website",
+            "encryption",
+            "clientVersion",
+            "useVerdata",
+            "mapLayouts",
+            "useTokenAuth"
+          ],
+          "additionalProperties": false
+        },
+        "patch": {
+          "type": "object",
+          "properties": {
+            "cdnBase": {
+              "type": "string",
+              "format": "uri"
+            },
+            "b2": {
+              "type": "object",
+              "properties": {
+                "accountId": {
+                  "type": "string"
+                },
+                "applicationKey": {
+                  "type": "string"
+                },
+                "bucket": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "accountId",
+                "applicationKey",
+                "bucket"
+              ],
+              "additionalProperties": false
+            },
+            "files": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "cdnBase",
+            "files"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "shard",
+        "patch"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

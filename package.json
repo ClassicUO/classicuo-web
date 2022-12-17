@@ -9,5 +9,10 @@
   },
   "devDependencies": {
     "process": "^0.11.10"
+  },
+  "scripts": {
+    "publish:modding": "cd packages/modding; npm version patch; npm publish --access public",
+    "publish:cli": "cd packages/cli; npm version patch; npm publish --access public",
+    "publish:all": "yarn run publish:modding && yarn run publish:cli"
   }
 }

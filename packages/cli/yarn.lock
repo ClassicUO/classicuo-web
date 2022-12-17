@@ -298,6 +298,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@classicuo/cli@workspace:."
   dependencies:
+    "@classicuo/modding": "workspace:*"
     "@oclif/core": ^1.13.1
     "@oclif/plugin-help": ^5
     "@oclif/plugin-plugins": ^2.0.1
@@ -321,11 +322,24 @@ __metadata:
     tslib: ^2.3.1
     typescript: ^4.7.4
     vcdiff-wasm: ^1.0.10
-    zod: ^3.17.10
+    zod: ^3.20.2
+    zod-to-json-schema: 3.19.0
   bin:
     cli: ./bin/run
   languageName: unknown
   linkType: soft
+
+"@classicuo/modding@file:../modding::locator=%40classicuo%2Fcli%40workspace%3A.":
+  version: 0.0.20
+  resolution: "@classicuo/modding@file:../modding#../modding::hash=684e46&locator=%40classicuo%2Fcli%40workspace%3A."
+  peerDependencies:
+    quickjs-emscripten: "*"
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    styled-components: ^5.3.5
+  checksum: ce0ba07c607b3a70e1d296a379e21fbc5e6ea1891c02f169622a12191cb85354229ab383122da7efe212ece2ef2ccefe6f3f150e58219e7a356631c28eb16346
+  languageName: node
+  linkType: hard
 
 "@cspotcode/source-map-support@npm:^0.8.0":
   version: 0.8.1
@@ -7816,9 +7830,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.17.10":
-  version: 3.17.10
-  resolution: "zod@npm:3.17.10"
-  checksum: 5de630b8eceda3de211cce0a734b629f8c4ca4bc887127b0ebd57e9c9be23204725e60adf2faf1c5ccb9b660c7588a8b04f60dfda1ed8e67a789e93c15f838f1
+"zod-to-json-schema@npm:3.19.0":
+  version: 3.19.0
+  resolution: "zod-to-json-schema@npm:3.19.0"
+  peerDependencies:
+    zod: ^3.19.0
+  checksum: 37f69972676ae98b7871c2c5e3b76902de8865580de592a7304ccfd6481014b76c2d61e3d3326077cba90bb991279cdd083347f2238abb1ee6aa45580d66f875
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.20.2":
+  version: 3.20.2
+  resolution: "zod@npm:3.20.2"
+  checksum: 04172f7e9350372684ccd298d4716908edc9113751295b6c4e1b3ea84e2af8997e504b33ba36f4741417bb2a5dc90bfd40501f6b0e7389df10e42a63d6d8366c
   languageName: node
   linkType: hard

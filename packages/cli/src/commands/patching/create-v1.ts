@@ -32,11 +32,9 @@ import {
   writeJson
 } from '../../utils/fs';
 import path from 'path';
-import { Patch } from '../../schemas/patch';
 import { downloadFile, httpGet } from '../../utils/http';
-import { sourceManifestSchema } from '../../schemas/manifest';
+import { sourceManifestSchema, Patch } from '@classicuo/modding';
 import { DiffTool, getWebDiffTool } from '../../utils/exec';
-import { shardSchema } from '../../schemas/shard';
 
 export const insensitiveOrd: Ord.Ord<string> = pipe(
   Str.Ord,
@@ -354,6 +352,7 @@ const createPatches = ({
         shardId: shard.id,
         cdnBase: patch.cdnBase,
         mods: shard.mods,
+        rules: shard.rules,
         dictFile,
         sourceFiles: createSourceFileList({ ...files, sourcePath }),
         patches: files.patchedFiles

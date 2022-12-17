@@ -1,9 +1,11 @@
 import { z } from 'zod';
-import { shardSchema } from './shard';
-import { patchConfigSchema } from './patch';
-
+import { shardSchema, patchConfigSchema } from '@classicuo/modding';
+import configJsonSchema from './configJsonSchema.json';
 
 export const configSchema = z.object({
+  $schema: z.string().optional(),
   shard: shardSchema,
-  patch: patchConfigSchema,
-})
+  patch: patchConfigSchema
+});
+
+export { configJsonSchema };

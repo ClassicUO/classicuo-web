@@ -1,6 +1,6 @@
 {
   "name": "@classicuo/cli",
-  "version": "0.0.12",
+  "version": "0.0.20",
   "description": "CLI tool for shard management",
   "author": "ClassicUO Team",
   "bin": "./bin/run",
@@ -15,7 +15,22 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "lint": "eslint . --ext .ts --config .eslintrc",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "posttest": "yarn lint",
+    "prepack": "yarn install && ts-node generate-schemas.ts && yarn build && oclif manifest && oclif readme",
+    "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif readme && git add README.md",
+    "patch": "./bin/dev patching:create-v1",
+    "hello": "./bin/dev hello friend -f hi"
+  },
+  "resolutions": {
+    "@classicuo/modding": "file:../modding"
+  },
   "dependencies": {
+    "@classicuo/modding": "workspace:*",
     "@oclif/core": "^1.13.1",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.0.1",
@@ -24,7 +39,7 @@
     "fp-ts": "^2.12.2",
     "fp-ts-contrib": "^0.1.29",
     "vcdiff-wasm": "^1.0.10",
-    "zod": "^3.17.10"
+    "zod": "^3.20.2"
   },
   "devDependencies": {
     "@oclif/test": "^2",
@@ -41,7 +56,8 @@
     "shx": "^0.3.3",
     "ts-node": "^10.8.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "zod-to-json-schema": "3.19.0"
   },
   "oclif": {
     "bin": "@classicuo/cli",
@@ -60,17 +76,6 @@
         "description": "Create MUL/UOP .patch files"
       }
     }
-  },
-  "scripts": {
-    "build": "shx rm -rf dist && tsc -b",
-    "lint": "eslint . --ext .ts --config .eslintrc",
-    "postpack": "shx rm -f oclif.manifest.json",
-    "posttest": "yarn lint",
-    "prepack": "yarn build && oclif manifest && oclif readme",
-    "test": "mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif readme && git add README.md",
-    "patch": "./bin/dev patching:create-v1",
-    "hello": "./bin/dev hello friend -f hi"
   },
   "engines": {
     "node": ">=16.0.0"
