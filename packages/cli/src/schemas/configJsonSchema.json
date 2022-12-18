@@ -2008,6 +2008,20 @@
                           },
                           "additionalProperties": false
                         },
+                        "nameOverheadShowGump": {
+                          "type": "object",
+                          "properties": {
+                            "defaultValue": {
+                              "type": "boolean",
+                              "default": true
+                            },
+                            "disabledWithReason": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        },
                         "showTargetRangeIndicator": {
                           "type": "object",
                           "properties": {
@@ -3050,8 +3064,7 @@
                 }
               },
               "required": [
-                "web",
-                "options"
+                "web"
               ],
               "additionalProperties": false
             },

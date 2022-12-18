@@ -1,7 +1,7 @@
 import { configSchema } from './src/schemas/config';
-import { z } from 'zod';
 import zodToJsonSchema from 'zod-to-json-schema';
 import { writeFileSync } from 'fs';
+// @ts-ignore
 import path from 'path';
 
 const jsonSchema = zodToJsonSchema(configSchema, 'webCuoPatchConfig');

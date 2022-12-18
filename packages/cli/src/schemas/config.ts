@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { shardSchema, patchConfigSchema } from '@classicuo/modding';
-import configJsonSchema from './configJsonSchema.json';
+import * as configJsonSchema from './configJsonSchema.json';
 
 export const configSchema = z.object({
   $schema: z.string().optional(),

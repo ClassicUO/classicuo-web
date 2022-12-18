@@ -1,6 +1,6 @@
 {
   "name": "@classicuo/cli",
-  "version": "0.0.20",
+  "version": "0.0.28",
   "description": "CLI tool for shard management",
   "author": "ClassicUO Team",
   "bin": "./bin/run",
@@ -20,14 +20,12 @@
     "lint": "eslint . --ext .ts --config .eslintrc",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "yarn lint",
-    "prepack": "yarn install && ts-node generate-schemas.ts && yarn build && oclif manifest && oclif readme",
+    "generate:schema": "ts-node generate-schemas.ts",
+    "prepack": "yarn run generate:schema && yarn build && oclif manifest && oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md",
     "patch": "./bin/dev patching:create-v1",
     "hello": "./bin/dev hello friend -f hi"
-  },
-  "resolutions": {
-    "@classicuo/modding": "file:../modding"
   },
   "dependencies": {
     "@classicuo/modding": "workspace:*",
