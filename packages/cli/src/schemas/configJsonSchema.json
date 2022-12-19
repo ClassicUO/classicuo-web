@@ -43,18 +43,21 @@
                     "enabled",
                     "disabled",
                     "disable-ts"
-                  ]
+                  ],
+                  "description": "Enables/Disables the scripting features of the assistant"
                 },
                 "features": {
                   "type": "object",
                   "properties": {
                     "dressAgent": {
                       "type": "boolean",
-                      "default": true
+                      "default": true,
+                      "description": "Enables/Disables the dress assistant"
                     },
                     "friends": {
                       "type": "boolean",
-                      "default": true
+                      "default": true,
+                      "description": "Enables/Disables the friends/enemies list inside the assistant"
                     }
                   },
                   "additionalProperties": false
@@ -3058,10 +3061,12 @@
                       "additionalProperties": false
                     }
                   },
-                  "additionalProperties": false
+                  "additionalProperties": false,
+                  "description": "Overrides for a player profiles with the ability to set default values and/or disable completely"
                 }
               },
-              "additionalProperties": false
+              "additionalProperties": false,
+              "description": "Game options rules"
             }
           },
           "required": [
