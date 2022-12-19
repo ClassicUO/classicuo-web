@@ -22,8 +22,8 @@ jobs:
 
       - name: Build site
         run: |
-          deno task styles
           deno task build
+          deno task styles
         working-directory: ./packages/web
 
       - name: Publish
