@@ -3,10 +3,10 @@ import z from 'zod';
 export interface GameProfile extends z.infer<typeof profileSchema> {}
 
 export const profileSchema = z.object({
-  enableSound: z.boolean().default(true),
-  soundVolume: z.number().default(100),
-  enableMusic: z.boolean().default(true),
-  musicVolume: z.number().default(100),
+  enableSound: z.boolean().default(true).describe('Enables/Disables game sound'),
+  soundVolume: z.number().default(100).describe('Overall game sound volume level'),
+  enableMusic: z.boolean().default(true).describe('Enables/Disables game music'),
+  musicVolume: z.number().default(100).describe('Game music volume level'),
   enableFootstepsSound: z.boolean().default(true),
   enableCombatMusic: z.boolean().default(true),
   reproduceSoundsInBackground: z.boolean().default(false),
@@ -228,3 +228,5 @@ export const profileSchema = z.object({
   worldMapHiddenZoneFiles: z.string().default(''),
   worldMapShowGridIfZoomed: z.boolean().default(true)
 });
+
+profileSchema.shape.enableSound.description;

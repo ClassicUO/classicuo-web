@@ -21,6 +21,7 @@ const toGameOptionsOverrideType = <K extends keyof ProfileSchemaShape, S extends
       defaultValue: schema.optional() as z.ZodOptional<S>,
       disabledWithReason: z.string().min(1).optional()
     })
+    .describe(schema.description ?? '')
     .optional()
 ];
 
@@ -35,19 +36,28 @@ export const profileOverridesSchema = z.object(
 
 export const shardRulesSchema = z.object({
   web: z.object({
-    scripting: z.union([z.literal('enabled'), z.literal('disabled'), z.literal('disable-ts')]),
+    scripting: z
+      .union([z.literal('enabled'), z.literal('disabled'), z.literal('disable-ts')])
+      .describe('Enables/Disables the scripting features of the assistant'),
     features: z
       .object({
-        dressAgent: z.boolean().default(true).optional(),
-        friends: z.boolean().default(true).optional()
+        dressAgent: z.boolean().default(true).optional().describe('Enables/Disables the dress assistant'),
+        friends: z
+          .boolean()
+          .default(true)
+          .optional()
+          .describe('Enables/Disables the friends/enemies list inside the assistant')
       })
       .optional()
   }),
   options: z
     .object({
-      profileOverrides: profileOverridesSchema.optional()
+      profileOverrides: profileOverridesSchema
+        .optional()
+        .describe('Overrides for a player profiles with the ability to set default values and/or disable completely')
     })
     .optional()
+    .describe('Game options rules')
 });
 
 export type ShardRules = z.infer<typeof shardRulesSchema>;

@@ -754,7 +754,7 @@ __metadata:
     typescript: ^4.7.4
     vcdiff-wasm: ^1.0.10
     zod: ^3.20.2
-    zod-to-json-schema: 3.19.0
+    zod-to-json-schema: 3.20.1
   bin:
     cli: ./bin/run
   languageName: unknown
@@ -11349,12 +11349,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod-to-json-schema@npm:3.19.0":
-  version: 3.19.0
-  resolution: "zod-to-json-schema@npm:3.19.0"
+"zod-to-json-schema@npm:3.20.1":
+  version: 3.20.1
+  resolution: "zod-to-json-schema@npm:3.20.1"
   peerDependencies:
-    zod: ^3.19.0
-  checksum: 37f69972676ae98b7871c2c5e3b76902de8865580de592a7304ccfd6481014b76c2d61e3d3326077cba90bb991279cdd083347f2238abb1ee6aa45580d66f875
+    zod: ^3.20.0
+  checksum: 405a81bce92631af6ecd5021026a565d4d281c4d44f3de7d1941eaa49bbfa726c930ad7275438ce6df98504dae2ae5d640a54d49cfc74e5a56d1e1d80723ed01
   languageName: node
   linkType: hard
 
