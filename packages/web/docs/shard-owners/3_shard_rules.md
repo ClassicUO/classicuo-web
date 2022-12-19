@@ -30,7 +30,8 @@ You can turn off scripting by setting the `scripting` rule to `disabled`:
 
 ## Disabling web features
 
-You can turn off other web features by setting their flags under the `features` key
+You can turn off other web features by setting their flags under the `features` key. 
+To see all available features check the [JSON Schema of the patching config](https://json-schema.app/view/%23/%23%2Fdefinitions%2FshardSchema/%23%2Fdefinitions%2FshardSchema%2Fproperties%2Frules?url=https%3A%2F%2Funpkg.com%2F%40classicuo%2Fcli%40latest%2Fdist%2Fschemas%2FconfigJsonSchema.json).
 
 ```json
   // nested under: shard -> rules
@@ -44,7 +45,7 @@ You can turn off other web features by setting their flags under the `features` 
 ```
 
 ## Setting profile defaults
-You can view the available rules you can set by browsing the [JSON Schema of the patching config](https://json-schema.app/view/%23/%23%2Fdefinitions%2FshardSchema/%23%2Fdefinitions%2FshardSchema%2Fproperties%2Frules/%23%2Fdefinitions%2FshardSchema%2Fproperties%2Frules%2Fproperties%2Foptions/%23%2Fdefinitions%2FshardSchema%2Fproperties%2Frules%2Fproperties%2Foptions%2Fproperties%2FprofileOverrides?url=https%3A%2F%2Fgist.githubusercontent.com%2Fjabinb%2F18e29c09af3356a1dc1d5c799078985a%2Fraw%2F376746f3fbc299b415b073105be3a3b927db2625%2FconfigJsonSchema.json).
+You can view the available rules you can set by browsing the [JSON Schema of the patching config](https://json-schema.app/view/%23/%23%2Fdefinitions%2FshardSchema/%23%2Fdefinitions%2FshardSchema%2Fproperties%2Frules/%23%2Fdefinitions%2FshardSchema%2Fproperties%2Frules%2Fproperties%2Foptions/%23%2Fdefinitions%2FshardSchema%2Fproperties%2Frules%2Fproperties%2Foptions%2Fproperties%2FprofileOverrides?url=https%3A%2F%2Funpkg.com%2F%40classicuo%2Fcli%40latest%2Fdist%2Fschemas%2FconfigJsonSchema.json).
 
 To define a default for when a new player joins your shard you can set only `defaultValue` and not set `disabledWithReason`:
 
