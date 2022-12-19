@@ -127,7 +127,7 @@ the default and then prevent the player from changing it later.
             "disabledWithReason": "Regarded as unfair for gameplay"
           },
           "drawRoofs": {
-            "defaultValue": false,
+            "defaultValue": true,
             "disabledWithReason": "Regarded as unfair for gameplay"
           },
           "hideVegetation": {
