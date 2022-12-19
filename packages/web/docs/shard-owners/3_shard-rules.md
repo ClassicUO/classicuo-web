@@ -15,7 +15,7 @@ in order to add your rules as they are stored in the same configuration file.
 Your shard rules live inside your shards JSON configuration file, e.g. `myShard.json` which you set up during the [patching guide](https://classicuo.org/docs/shard-owners/patching/).
 Simply insert a new section into the file called `rules` underneath the `shard` key:
 
-![shard-rules-json.jpg](/static/images/shard-rules/shard-rules-json.jpg)
+![shard-rules-json.jpg](/images/shard-rules/shard-rules-json.jpg)
 
 ## Disabling Scripting
 
@@ -63,7 +63,7 @@ For example, for new players you can enable `autoOpenDoors` (but still allow the
 
 Any new player will automatically have this:
 
-![defaults-autoOpenDoors.png](/static/images/shard-rules/defaults-autoOpenDoors.png)
+![defaults-autoOpenDoors.png](/images/shard-rules/defaults-autoOpenDoors.png)
 
 ## Disabling + locking profile options
 To lock a setting to a certain value you can combine `defaultValue` and `disabledWithReason`. This will allow you to set
@@ -77,7 +77,7 @@ the default and then prevent the player from changing it later.
     },
   }
 ```
-![disabled-autoOpenDoors.png](/static/images/shard-rules/disabled-autoOpenDoors.png)
+![disabled-autoOpenDoors.png](/images/shard-rules/disabled-autoOpenDoors.png)
 
 ### Example: Disabling profile options `useCustomLightLevel` `useAlternativeLights`
 
