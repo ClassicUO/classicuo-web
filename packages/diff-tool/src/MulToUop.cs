@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using System.Buffers.Binary;
 
 namespace LegacyMUL
 {
@@ -452,6 +453,39 @@ namespace LegacyMUL
                                 writerIdx.Write(chunkID + 1);
                                 break;
                             }
+                            case FileType.MultiMUL:
+                            {
+                                var span = chunkData.AsSpan().Slice(sizeof(uint));
+                                var count = BinaryPrimitives.ReadUInt32LittleEndian(span);
+                                span = span.Slice(sizeof(uint));
+
+                                // 16 is the new block multi size
+                                var multiChunkData = new byte[count * 16];
+
+                                for (int j = 0; j < count; ++j)
+                                {
+                                    // copy compatible mul data only [first 10 bytes]
+                                    span.Slice(0, 10).CopyTo(multiChunkData.AsSpan(j * 16));
+
+                                    span = span.Slice
+                                    (
+                                        2 + // id
+                                        2 + // x
+                                        2 + // y
+                                        2 + // z
+                                        2   // flags
+                                    );
+
+                                    var clilocCount = BinaryPrimitives.ReadInt32LittleEndian(span);
+                                    span = span.Slice(sizeof(uint) + clilocCount * sizeof(uint));
+                                }
+
+                                chunkData = multiChunkData;
+                                writerIdx.Write(multiChunkData.Length); // Size
+                                writerIdx.Write((int)0); // Extra
+
+                                break;
+                            }
                             default:
                             {
                                 writerIdx.Write(chunkData.Length); // Size
@@ -477,15 +511,15 @@ namespace LegacyMUL
             // TODO: Only go until the last used entry? Does the client mind?
             if (writerIdx != null)
             {
-                for (int i = 0; i < used.Length; ++i)
-                {
-                    if (!used[i])
-                    {
-                        writerIdx.Seek(i * 12, SeekOrigin.Begin);
-                        writerIdx.Write(-1);
-                        writerIdx.Write((long)0);
-                    }
-                }
+                // for (int i = 0; i < used.Length; ++i)
+                // {
+                //     if (!used[i])
+                //     {
+                //         writerIdx.Seek(i * 12, SeekOrigin.Begin);
+                //         writerIdx.Write(-1);
+                //         writerIdx.Write((long)0);
+                //     }
+                // }
             }
 
             /*
@@ -537,6 +571,7 @@ namespace LegacyMUL
                 }
                 case FileType.MultiMUL:
                 {
+                    maxId = ushort.MaxValue;
                     return new string[] { "build/multicollection/{0:000000}.bin", "" };
                 }
                 default:
