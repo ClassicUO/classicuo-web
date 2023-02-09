@@ -455,35 +455,47 @@ namespace LegacyMUL
                             }
                             case FileType.MultiMUL:
                             {
-                                var span = chunkData.AsSpan().Slice(sizeof(uint));
-                                var count = BinaryPrimitives.ReadUInt32LittleEndian(span);
-                                span = span.Slice(sizeof(uint));
-
-                                // 16 is the new block multi size
-                                var multiChunkData = new byte[count * 16];
-
-                                for (int j = 0; j < count; ++j)
+                                using (var multiReader = new BinaryReader(new MemoryStream(chunkData)))
+                                using (var multiWriter = new BinaryWriter(new MemoryStream()))
                                 {
-                                    // copy compatible mul data only [first 10 bytes]
-                                    span.Slice(0, 10).CopyTo(multiChunkData.AsSpan(j * 16));
+                                    multiReader.ReadUInt32();
+                                    var count = multiReader.ReadUInt32();
 
-                                    span = span.Slice
-                                    (
-                                        2 + // id
-                                        2 + // x
-                                        2 + // y
-                                        2 + // z
-                                        2   // flags
-                                    );
+                                    for (int j = 0; j < count; ++j)
+                                    {
+                                        var id = multiReader.ReadUInt16();
+                                        var x = multiReader.ReadInt16();
+                                        var y = multiReader.ReadInt16();
+                                        var z = multiReader.ReadInt16();
+                                        var flags = multiReader.ReadUInt16();
+                                        var clilocCount = multiReader.ReadInt32();
 
-                                    var clilocCount = BinaryPrimitives.ReadInt32LittleEndian(span);
-                                    span = span.Slice(sizeof(uint) + clilocCount * sizeof(uint));
+                                        if (clilocCount > 0)
+                                        {
+                                            multiReader.BaseStream.Seek(clilocCount * sizeof(uint), SeekOrigin.Current);
+                                        }
+
+                                        multiWriter.Write(id);
+                                        multiWriter.Write(x);
+                                        multiWriter.Write(y);
+                                        multiWriter.Write(z);
+                                        multiWriter.Write(flags switch
+                                        {
+                                            256 => 0x0000000100000001,
+                                            257 => 0x0000000100000000,
+                                            _ or 0 => 1
+                                        });
+                                    }
+
+                                    var len = (int)multiWriter.BaseStream.Position;
+                                    multiWriter.BaseStream.Seek(0, SeekOrigin.Begin);
+                                    chunkData = new byte[len];
+                                    multiWriter.BaseStream.Read(chunkData);
                                 }
 
-                                chunkData = multiChunkData;
-                                writerIdx.Write(multiChunkData.Length); // Size
+                                writerIdx.Write(chunkData.Length); // Size
                                 writerIdx.Write((int)0); // Extra
-
+                                
                                 break;
                             }
                             default:
