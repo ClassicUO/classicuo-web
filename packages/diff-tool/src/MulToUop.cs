@@ -482,7 +482,8 @@ namespace LegacyMUL
                                         multiWriter.Write(flags switch
                                         {
                                             256 => 0x0000000100000001,
-                                            257 => 0x0000000100000000,
+                                            257 => 0, // Ignored by CUO, should be 0x0000000100000000
+                                            1 => 0,
                                             _ or 0 => 1
                                         });
                                     }
