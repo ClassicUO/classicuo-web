@@ -118,7 +118,7 @@ player.castTo(Spells.Heal, player);
 
 | Name | Type |
 | :------ | :------ |
-| `spell` | `string` \| [`Spells`](../Spells) |
+| `spell` | [`Spells`](../Spells) \| ``"Clumsy"`` \| ``"CreateFood"`` \| ``"Feeblemind"`` \| ``"Heal"`` \| ``"MagicArrow"`` \| ``"NightSight"`` \| ``"ReactiveArmor"`` \| ``"Weaken"`` \| ``"Agility"`` \| ``"Cunning"`` \| ``"Cure"`` \| ``"Harm"`` \| ``"MagicTrap"`` \| ``"RemoveTrap"`` \| ``"Protection"`` \| ``"Strength"`` \| ``"Bless"`` \| ``"Fireball"`` \| ``"MagicLock"`` \| ``"Poison"`` \| ``"Telekinesis"`` \| ``"Teleport"`` \| ``"Unlock"`` \| ``"WallOfStone"`` \| ``"ArchCure"`` \| ``"ArchProtection"`` \| ``"Curse"`` \| ``"FireField"`` \| ``"GreaterHeal"`` \| ``"Lightning"`` \| ``"ManaDrain"`` \| ``"Recall"`` \| ``"BladeSpirits"`` \| ``"DispelField"`` \| ``"Incognito"`` \| ``"MagicReflect"`` \| ``"MindBlast"`` \| ``"Paralyze"`` \| ``"PoisonField"`` \| ``"SummonCreature"`` \| ``"Dispel"`` \| ``"EnergyBolt"`` \| ``"Explosion"`` \| ``"Invisibility"`` \| ``"Mark"`` \| ``"MassCurse"`` \| ``"ParalyzeField"`` \| ``"Reveal"`` \| ``"ChainLightning"`` \| ``"EnergyField"`` \| ``"FlameStrike"`` \| ``"GateTravel"`` \| ``"ManaVampire"`` \| ``"MassDispel"`` \| ``"MeteorSwarm"`` \| ``"Polymorph"`` \| ``"Earthquake"`` \| ``"EnergyVortex"`` \| ``"Resurrection"`` \| ``"AirElemental"`` \| ``"SummonDaemon"`` \| ``"EarthElemental"`` \| ``"FireElemental"`` \| ``"WaterElemental"`` \| ``"AnimateDead"`` \| ``"BloodOath"`` \| ``"CorpseSkin"`` \| ``"CurseWeapon"`` \| ``"EvilOmen"`` \| ``"HorrificBeast"`` \| ``"LichForm"`` \| ``"MindRot"`` \| ``"PainSpike"`` \| ``"PoisonStrike"`` \| ``"Strangle"`` \| ``"SummonFamiliar"`` \| ``"VampiricEmbrace"`` \| ``"VengefulSpirit"`` \| ``"Wither"`` \| ``"WraithForm"`` \| ``"Exorcism"`` \| ``"CleanseByFire"`` \| ``"CloseWounds"`` \| ``"ConsecrateWeapon"`` \| ``"DispelEvil"`` \| ``"DivineFury"`` \| ``"EnemyOfOne"`` \| ``"HolyLight"`` \| ``"NobleSacrifice"`` \| ``"RemoveCurse"`` \| ``"SacredJourney"`` \| ``"HonorableExecution"`` \| ``"Confidence"`` \| ``"Evasion"`` \| ``"CounterAttack"`` \| ``"LightningStrike"`` \| ``"MomentumStrike"`` \| ``"FocusAttack"`` \| ``"DeathStrike"`` \| ``"AnimalForm"`` \| ``"KiAttack"`` \| ``"SurpriseAttack"`` \| ``"Backstab"`` \| ``"Shadowjump"`` \| ``"MirrorImage"`` \| ``"ArcaneCircle"`` \| ``"GiftOfRenewal"`` \| ``"ImmolatingWeapon"`` \| ``"Attunement"`` \| ``"Thunderstorm"`` \| ``"NaturesFury"`` \| ``"SummonFey"`` \| ``"SummonFiend"`` \| ``"ReaperForm"`` \| ``"Wildfire"`` \| ``"EssenceOfWind"`` \| ``"DryadAllure"`` \| ``"EtherealVoyage"`` \| ``"WordOfDeath"`` \| ``"GiftOfLife"`` \| ``"ArcaneEmpowerment"`` \| ``"NetherBolt"`` \| ``"HealingStone"`` \| ``"PurgeMagic"`` \| ``"Enchant"`` \| ``"Sleep"`` \| ``"EagleStrike"`` \| ``"AnimatedWeapon"`` \| ``"StoneForm"`` \| ``"SpellTrigger"`` \| ``"MassSleep"`` \| ``"CleansingWinds"`` \| ``"Bombard"`` \| ``"SpellPlague"`` \| ``"HailStorm"`` \| ``"NetherCyclone"`` \| ``"RisingColossus"`` \| ``"Inspire"`` \| ``"Invigorate"`` \| ``"Resilience"`` \| ``"Perseverance"`` \| ``"Tribulation"`` \| ``"Despair"`` \| ``"DeathRay"`` \| ``"EtherealBurst"`` \| ``"NetherBlast"`` \| ``"MysticWeapon"`` \| ``"CommandUndead"`` \| ``"Conduit"`` \| ``"ManaShield"`` \| ``"SummonReaper"`` \| ``"EnchantedSummoning"`` \| ``"AnticipateHit"`` \| ``"Warcry"`` \| ``"Rejuvenate"`` \| ``"HolyFist"`` \| ``"Shadow"`` \| ``"WhiteTigerForm"`` \| ``"FlamingShot"`` \| ``"PlayingTheOdds"`` \| ``"Thrust"`` \| ``"Pierce"`` \| ``"Stagger"`` \| ``"Toughness"`` \| ``"Onslaught"`` \| ``"FocusedEye"`` \| ``"ElementalFury"`` \| ``"CalledShot"`` \| ``"WarriorsGifts"`` \| ``"ShieldBash"`` \| ``"Bodyguard"`` \| ``"HeightenSenses"`` \| ``"Tolerance"`` \| ``"InjectedStrike"`` \| ``"Potency"`` \| ``"Rampage"`` \| ``"FistsOfFury"`` \| ``"Knockout"`` \| ``"Whispering"`` \| ``"CombatTraining"`` \| ``"Boarding"`` |
 | `serial` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
 | `timeout?` | `number` |
 
@@ -149,7 +149,38 @@ player.useSkill(Skills.Anatomy);
 
 | Name | Type |
 | :------ | :------ |
-| `skill` | [`Skills`](../Skills) |
+| `skill` | ``"RemoveTrap"`` \| [`Skills`](../Skills) \| ``"Alchemy"`` \| ``"Anatomy"`` \| ``"AnimalLore"`` \| ``"ItemID"`` \| ``"ArmsLore"`` \| ``"Parry"`` \| ``"Begging"`` \| ``"Blacksmith"`` \| ``"Fletching"`` \| ``"Peacemaking"`` \| ``"Camping"`` \| ``"Carpentry"`` \| ``"Cartography"`` \| ``"Cooking"`` \| ``"DetectHidden"`` \| ``"Discordance"`` \| ``"EvalInt"`` \| ``"Healing"`` \| ``"Fishing"`` \| ``"Forensics"`` \| ``"Herding"`` \| ``"Hiding"`` \| ``"Provocation"`` \| ``"Inscribe"`` \| ``"Lockpicking"`` \| ``"Magery"`` \| ``"MagicResist"`` \| ``"Tactics"`` \| ``"Snooping"`` \| ``"Musicianship"`` \| ``"Poisoning"`` \| ``"Archery"`` \| ``"SpiritSpeak"`` \| ``"Stealing"`` \| ``"Tailoring"`` \| ``"AnimalTaming"`` \| ``"TasteID"`` \| ``"Tinkering"`` \| ``"Tracking"`` \| ``"Veterinary"`` \| ``"Swords"`` \| ``"Macing"`` \| ``"Fencing"`` \| ``"Wrestling"`` \| ``"Lumberjacking"`` \| ``"Mining"`` \| ``"Meditation"`` \| ``"Stealth"`` \| ``"Necromancy"`` \| ``"Focus"`` \| ``"Chivalry"`` \| ``"Bushido"`` \| ``"Ninjitsu"`` \| ``"Spellweaving"`` \| ``"Mysticism"`` \| ``"Imbuing"`` \| ``"Throwing"`` |
+| `target?` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
+| `timeout?` | `number` |
+
+#### Returns
+
+`void`
+
+___
+
+### useVirtue
+
+▸ **useVirtue**(`virtue`, `target?`, `timeout?`): `void`
+
+Uses a virtue
+
+**`Example`**
+
+Use virtue without a target
+```ts
+player.useVirtue(Virtues.Honor);
+
+@example Use virtue and target yourself
+```ts
+player.useVirtue(Virtues.Honor);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `virtue` | [`Virtues`](../Virtues) \| ``"Honor"`` \| ``"Sacrifice"`` \| ``"Valor"`` |
 | `target?` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
 | `timeout?` | `number` |
 
@@ -339,7 +370,7 @@ if(player.equippedItems.robe) {
 | Name | Type |
 | :------ | :------ |
 | `serial` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
-| `container` | `number` |
+| `container` | [`SerialOrEntity`](../modules/#SerialOrEntity) |
 | `x?` | `number` |
 | `y?` | `number` |
 | `z?` | `number` |
@@ -1366,136 +1397,6 @@ ___
 #### Returns
 
 [`Abilities`](../Abilities)
-
-___
-
-### hunger
-
-• `get` **hunger**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### shortTermMurders
-
-• `get` **shortTermMurders**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### longTermMurders
-
-• `get` **longTermMurders**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### healBonus
-
-• `get` **healBonus**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### magicImmunity
-
-• `get` **magicImmunity**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### magicReflect
-
-• `get` **magicReflect**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### physicalProtection
-
-• `get` **physicalProtection**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### poisonProtection
-
-• `get` **poisonProtection**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### fireProtection
-
-• `get` **fireProtection**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### waterProtection
-
-• `get` **waterProtection**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### airProtection
-
-• `get` **airProtection**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### earthProtection
-
-• `get` **earthProtection**(): `number`
-
-#### Returns
-
-`number`
-
-___
-
-### necroProtection
-
-• `get` **necroProtection**(): `number`
-
-#### Returns
-
-`number`
 
 ___
 

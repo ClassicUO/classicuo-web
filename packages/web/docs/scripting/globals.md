@@ -31,6 +31,12 @@ ___
 
 • `Const` **target**: [`Target`](../Target)
 
+___
+
+### ignoreList
+
+• `Const` **ignoreList**: [`IgnoreList`](../IgnoreList)
+
 ## Functions
 
 ### log

@@ -180,6 +180,24 @@ target.terrainRelativeToEntity(mob, 5, true, 0x5a2);
 
 ___
 
+### query
+
+▸ **query**(`isGround?`): `TargetInfo`
+
+Creates a target and returns information about the result
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `isGround?` | `boolean` |
+
+#### Returns
+
+`TargetInfo`
+
+___
+
 ### wait
 
 ▸ **wait**(`timeoutMs?`): `boolean`
@@ -283,12 +301,12 @@ Serial of the last target
 
 ___
 
-### queryTarget
+### lastObjectSerial
 
-• `get` **queryTarget**(): `TargetInfo`
+• `get` **lastObjectSerial**(): `number`
 
-Creates a target and returns information about the result
+Serial of the last target
 
 #### Returns
 
-`TargetInfo`
+`number`

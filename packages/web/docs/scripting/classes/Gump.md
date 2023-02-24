@@ -61,6 +61,32 @@ GameObject.serialFrom
 
 ___
 
+### reply
+
+▸ **reply**(`buttonID`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `buttonID` | `number` |
+
+#### Returns
+
+`void`
+
+___
+
+### close
+
+▸ **close**(): `void`
+
+#### Returns
+
+`void`
+
+___
+
 ### containsText
 
 ▸ **containsText**(`value`): `boolean`
