@@ -275,6 +275,132 @@ player.land();
 
 ___
 
+### toggleFlying
+
+▸ **toggleFlying**(): `unknown`
+
+Toggles flying, provided you are a Gargoyle.
+
+**`Example`**
+
+```ts
+client.toggleFlying();
+```
+
+#### Returns
+
+`unknown`
+
+___
+
+### useItemInHand
+
+▸ **useItemInHand**(): `unknown`
+
+Uses the item currently in your left-hand first, otherwise it will try the right.
+
+**`Example`**
+
+```ts
+client.useItemInHand();
+```
+
+#### Returns
+
+`unknown`
+
+___
+
+### useLastObject
+
+▸ **useLastObject**(): `unknown`
+
+Uses the last object you double-clicked
+
+**`Example`**
+
+```ts
+client.useLastObject();
+```
+
+#### Returns
+
+`unknown`
+
+___
+
+### openDoor
+
+▸ **openDoor**(): `unknown`
+
+Uses any door directly in-front of where the player is facing
+
+**`Example`**
+
+```ts
+client.openDoor();
+```
+
+#### Returns
+
+`unknown`
+
+___
+
+### bow
+
+▸ **bow**(): `unknown`
+
+Triggers the `Bow` emote
+
+**`Example`**
+
+```ts
+client.bow();
+```
+
+#### Returns
+
+`unknown`
+
+___
+
+### salute
+
+▸ **salute**(): `unknown`
+
+Triggers the `Salute` emote
+
+**`Example`**
+
+```ts
+client.salute();
+```
+
+#### Returns
+
+`unknown`
+
+___
+
+### toggleWarMode
+
+▸ **toggleWarMode**(): `unknown`
+
+Toggle War Mode
+
+**`Example`**
+
+```ts
+client.toggleWarMode();
+```
+
+#### Returns
+
+`unknown`
+
+___
+
 ### use
 
 ▸ **use**(`serial`): ``null``

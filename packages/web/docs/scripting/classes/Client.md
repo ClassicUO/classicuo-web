@@ -188,50 +188,6 @@ client.allNames();
 
 ___
 
-### bow
-
-• **bow**: () => `unknown`
-
-#### Type declaration
-
-▸ (): `unknown`
-
-Triggers the `Bow` emote
-
-**`Example`**
-
-```ts
-client.bow();
-```
-
-##### Returns
-
-`unknown`
-
-___
-
-### salute
-
-• **salute**: () => `unknown`
-
-#### Type declaration
-
-▸ (): `unknown`
-
-Triggers the `Salute` emote
-
-**`Example`**
-
-```ts
-client.salute();
-```
-
-##### Returns
-
-`unknown`
-
-___
-
 ### quitGame
 
 • **quitGame**: () => `unknown`
@@ -298,28 +254,6 @@ client.closeGump();
 
 ___
 
-### toggleGargoyleFly
-
-• **toggleGargoyleFly**: () => `unknown`
-
-#### Type declaration
-
-▸ (): `unknown`
-
-Toggles flying, provided you are a Gargoyle.
-
-**`Example`**
-
-```ts
-client.toggleGargoyleFly();
-```
-
-##### Returns
-
-`unknown`
-
-___
-
 ### closeCorpses
 
 • **closeCorpses**: () => `unknown`
@@ -378,50 +312,6 @@ Closes all inactive healthbars (i.e. dead or off-screen entities).
 
 ```ts
 client.closeInactiveHealthBars();
-```
-
-##### Returns
-
-`unknown`
-
-___
-
-### useItemInHand
-
-• **useItemInHand**: () => `unknown`
-
-#### Type declaration
-
-▸ (): `unknown`
-
-Uses the item currently in your left-hand first, otherwise it will try the right.
-
-**`Example`**
-
-```ts
-client.useItemInHand();
-```
-
-##### Returns
-
-`unknown`
-
-___
-
-### useLastObject
-
-• **useLastObject**: () => `unknown`
-
-#### Type declaration
-
-▸ (): `unknown`
-
-Uses the last object you double-clicked
-
-**`Example`**
-
-```ts
-client.useLastObject();
 ```
 
 ##### Returns
@@ -584,28 +474,6 @@ client.toggleAuras();
 
 ___
 
-### openDoor
-
-• **openDoor**: () => `unknown`
-
-#### Type declaration
-
-▸ (): `unknown`
-
-Uses any door directly in-front of where the player is facing
-
-**`Example`**
-
-```ts
-client.toggleAuras();
-```
-
-##### Returns
-
-`unknown`
-
-___
-
 ### getStatic
 
 • **getStatic**: (`graphic`: `number`) => `undefined` \| { `graphic`: `number` ; `flags`: `number`  }
@@ -664,3 +532,17 @@ ___
 ##### Returns
 
 `undefined` \| { `graphic`: `number` ; `x`: `number` ; `y`: `number` ; `z`: `number` ; `flags`: `number` ; `isLand`: `boolean`  }[]
+
+___
+
+### getEntityOrControlAtCursor
+
+• **getEntityOrControlAtCursor**: () => `any`
+
+#### Type declaration
+
+▸ (): `any`
+
+##### Returns
+
+`any`

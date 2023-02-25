@@ -68,3 +68,19 @@ ___
 #### Returns
 
 `void`
+
+___
+
+### exit
+
+▸ **exit**(`reason?`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `reason?` | `string` |
+
+#### Returns
+
+`void`
