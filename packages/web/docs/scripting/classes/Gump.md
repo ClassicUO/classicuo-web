@@ -63,7 +63,6 @@ Check if the gump is still open, i.e. the server hasn't closed it or the player.
 const gump = Gump.findOrWait(0xBB1B5472, 100);
 if(!gump) {
   exit("There's no gump open!");
-  exit();
 }
 
 // ... somewhere further down the script
