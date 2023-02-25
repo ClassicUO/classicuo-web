@@ -284,7 +284,7 @@ Toggles flying, provided you are a Gargoyle.
 **`Example`**
 
 ```ts
-client.toggleFlying();
+player.toggleFlying();
 ```
 
 #### Returns
@@ -302,7 +302,7 @@ Uses the item currently in your left-hand first, otherwise it will try the right
 **`Example`**
 
 ```ts
-client.useItemInHand();
+player.useItemInHand();
 ```
 
 #### Returns
@@ -320,7 +320,7 @@ Uses the last object you double-clicked
 **`Example`**
 
 ```ts
-client.useLastObject();
+player.useLastObject();
 ```
 
 #### Returns
@@ -338,7 +338,7 @@ Uses any door directly in-front of where the player is facing
 **`Example`**
 
 ```ts
-client.openDoor();
+player.openDoor();
 ```
 
 #### Returns
@@ -356,7 +356,7 @@ Triggers the `Bow` emote
 **`Example`**
 
 ```ts
-client.bow();
+player.bow();
 ```
 
 #### Returns
@@ -374,7 +374,7 @@ Triggers the `Salute` emote
 **`Example`**
 
 ```ts
-client.salute();
+player.salute();
 ```
 
 #### Returns
@@ -392,7 +392,7 @@ Toggle War Mode
 **`Example`**
 
 ```ts
-client.toggleWarMode();
+player.toggleWarMode();
 ```
 
 #### Returns
