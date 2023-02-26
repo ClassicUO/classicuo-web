@@ -232,9 +232,9 @@ client.toggleAlwaysRun();
 
 ___
 
-### closeGump
+### closeAllGumps
 
-• **closeGump**: () => `unknown`
+• **closeAllGumps**: () => `unknown`
 
 #### Type declaration
 
@@ -245,7 +245,7 @@ Closes all gumps that aren't the Top Bar, Buff bar, or the World view (radar)
 **`Example`**
 
 ```ts
-client.closeGump();
+client.closeAllGumps();
 ```
 
 ##### Returns

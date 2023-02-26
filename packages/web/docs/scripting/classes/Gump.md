@@ -142,7 +142,7 @@ Replies to a gump by "pressing" one of the buttons
 ```ts
 const gump = Gump.findOrWait(0xBB1B5472, 100);
 if(gump?.containsText("Alchemy")) { // If there's a gump open with that serial, check if it has `Alchemy` in it.
-  gump.close(); // We don't like alchemy, close the gump
+  gump.reply(1); // Craft something
 }
 ```
 
@@ -247,7 +247,6 @@ const gump = Gump.findOrWait(0xBB1B5472, 100); // Wait 100 milliseconds (5,000 i
 if(gump) {
   gump.reply(1); // Gump is open, simulate pressing a button
 }
-
 ```
 
 #### Parameters
@@ -260,3 +259,129 @@ if(gump) {
 #### Returns
 
 `undefined` \| [`Gump`](../Gump)
+
+___
+
+### closeAll
+
+▸ `Static` **closeAll**(): `void`
+
+Closes all gumps that aren't the Top Bar, Buff bar, or the World view (radar)
+Same as the `Close Gumps` hotkey
+
+**`Example`**
+
+```ts
+Gump.closeAll();
+```
+
+#### Returns
+
+`void`
+
+___
+
+### hasButton
+
+▸ **hasButton**(`id`): `boolean`
+
+Checks if the gump has the button id.
+Useful if you want to prevent clicking a button that doesn't exist.
+
+**`Example`**
+
+```ts
+const gump = Gump.findOrWait(0x59);
+if(gump && gump.hasButton(10)) {
+  gump.reply(10); // gump is open and has a button with id 10
+}
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `number` |
+
+#### Returns
+
+`boolean`
+
+___
+
+### switchPage
+
+▸ **switchPage**(`page`): `void`
+
+Attempts to switch the page if possible.
+
+**`Example`**
+
+```ts
+const gump = Gump.findOrWait(0x59);
+gump?.switchPage(2); // if gump is open, try changing to page 2
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `page` | `number` |
+
+#### Returns
+
+`void`
+
+___
+
+### setCheckbox
+
+▸ **setCheckbox**(`serial`, `value`): `void`
+
+Check or uncheck a checkbox/radio button
+
+**`Example`**
+
+```ts
+const gump = Gump.findOrWait(0x59);
+gump?.gumpSetCheckbox(serial, true); // if the gump is open, check the checkbox/radio control
+gump?.reply(1); // Press a button to reply
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `serial` | `number` |
+| `value` | `boolean` |
+
+#### Returns
+
+`void`
+
+___
+
+### setTextEntry
+
+▸ **setTextEntry**(`localSerial`, `value`): `void`
+
+Set the contents of a text entry in a gump
+
+**`Example`**
+
+```ts
+const gump = Gump.findOrWait(0x59);
+gump?.setTextEntry(0x01, "Hello there"); // if the gump is open, set the text entries content
+gump?.reply(1); // Press a button to reply
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `localSerial` | `number` |
+| `value` | `string` |
+
+#### Returns
+
+`void`

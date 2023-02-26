@@ -37,6 +37,12 @@ ___
 
 • `Const` **ignoreList**: [`IgnoreList`](../IgnoreList)
 
+___
+
+### popupMenu
+
+• `Const` **popupMenu**: [`PopupMenu`](../PopupMenu)
+
 ## Functions
 
 ### log
