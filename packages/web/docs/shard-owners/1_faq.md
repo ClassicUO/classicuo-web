@@ -50,20 +50,21 @@ Say goodbye to Gumps basically. The iteration speed will be a lot faster, and yo
 
 We're also planning to implement a feature negotiation packet that will allow shard owners to turn off/disable CUO features and parts of the Assistant (e.g. scripting).
 
-### Why is there a game proxy/DDOS issue?
+### Why is there a game proxy / is there a DDOS issue?
 
 There's no way to make a direct tcp connection from a web-browser to a random server for web security reasons. 
 In order to connect to a shard we need to proxy the tcp connection over websockets. 
-Right now we use Deno Deploy for hosting the game proxy which is a edge-compute service, 
-meaning when you connect you go via a local POP to then connect to the server. 
+Right now we use Fly.io for hosting the game proxy which is an edge-compute service, 
+meaning when you connect you go via the [game proxy in the nearest region](https://fly.io/docs/reference/regions/) to then connect to the server. 
 The proxy itself is pretty dumb but also controls the authentication for the web client.
 
-If you were to ping the proxy the IP you would see is Deno Deploy's anycast IP address, it's not a single server. 
-They have 26 POPs around the world and IIRC their infrastructure is on GCP, so if someone wants to DDOS google then they can have fun. 
+If you were to ping the proxy the IP you would see is Fly.io's anycast IP address, it's not a single server. DDOS'ing the anycast IP is like trying to DDOS a whole server provider.
 Furthermore, the proxy hides the shards IP address and the internal Shard ID is used when connecting the login/game sockets. 
-If your shard were to only use ClassicUO Web and never share the IP publicly your shard would be protected from DDOS.
+If your shard were to only use ClassicUO Web and never share the IP publicly your shard would be also protected from DDOS attempts.
 
-One of the reasons for the Beta is to test the game proxy, 
-we're not actually sure on the upper limit for connections or how long a websocket connection will live. 
+### Why do web client users have the same IP?
+As explained above, the game proxy connects users via the closest region to the Shard. In practice this means that several users connecting via the same region (e.g. New York) may share an IP address (the outgoing IP of the proxy).
 
-Deno Deploy itself is also in beta. Any feedback/issues you find please let us know!
+**If your shard has IP based limits then this will become a problem if there's many users connecting from one region.**
+
+**Right now the recommended solution is to remove IP limits.** Whilst useful back in the day when we all had static IPs from DSL providers, we're now in the age where it's trivial to install a VPN (this post sponsored by NordVPN /s). It's so easy now to change your IP it makes no sense to use it as a way to identify unique users, you only punish legitmate users who share an IP (like families, roommates etc).
