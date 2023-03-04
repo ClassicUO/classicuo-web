@@ -705,6 +705,51 @@ player.setSkillLock(Skills.Anatomy, SkillLock.Down);
 
 ___
 
+### getSkill
+
+▸ **getSkill**(`skill`): `undefined` \| { `value`: `number` ; `index`: `number` ; `name`: `string` ; `lock`: `number` ; `base`: `number` ; `cap`: `number` ; `canBeUsable`: `boolean`  }
+
+Gets an object containing the values of a skill.
+The actual `value` of the skill is represented as an integer value with no decimal.
+e.g. 74.6 would be 746
+
+**`Example`**
+
+```ts
+const anatomySkill = player.getSkill(Skills.Anatomy).value;
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `skill` | [`Skills`](../Skills) |
+
+#### Returns
+
+`undefined` \| { `value`: `number` ; `index`: `number` ; `name`: `string` ; `lock`: `number` ; `base`: `number` ; `cap`: `number` ; `canBeUsable`: `boolean`  }
+
+___
+
+### getAllSkills
+
+▸ **getAllSkills**(): `undefined` \| { `value`: `number` ; `index`: `number` ; `name`: `string` ; `lock`: `number` ; `base`: `number` ; `cap`: `number` ; `canBeUsable`: `boolean`  }[]
+
+Gets an array of all the skill values
+
+**`Example`**
+
+```ts
+const skills = player.getSkills();
+console.log(skills[0].value); // Print Alchemy skill value
+```
+
+#### Returns
+
+`undefined` \| { `value`: `number` ; `index`: `number` ; `name`: `string` ; `lock`: `number` ; `base`: `number` ; `cap`: `number` ; `canBeUsable`: `boolean`  }[]
+
+___
+
 ### hasBuffDebuff
 
 ▸ **hasBuffDebuff**(`buffID`): `boolean`
