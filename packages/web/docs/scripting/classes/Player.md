@@ -192,7 +192,7 @@ ___
 
 ### equip
 
-▸ **equip**(`serial`): ``null``
+▸ **equip**(`serial`): `void`
 
 Attempts to equip an item if possible
 
@@ -211,13 +211,13 @@ player.equip(axe);
 
 #### Returns
 
-``null``
+`void`
 
 ___
 
 ### attack
 
-▸ **attack**(`serial`): ``null``
+▸ **attack**(`serial`): `void`
 
 Attacks a mobile
 
@@ -235,13 +235,13 @@ player.attack(target.lastSerial);
 
 #### Returns
 
-``null``
+`void`
 
 ___
 
 ### fly
 
-▸ **fly**(): ``null``
+▸ **fly**(): `void`
 
 Attempt to fly... if you can.
 
@@ -253,13 +253,13 @@ player.fly();
 
 #### Returns
 
-``null``
+`void`
 
 ___
 
 ### land
 
-▸ **land**(): ``null``
+▸ **land**(): `void`
 
 Turn off flying and land
 
@@ -271,13 +271,13 @@ player.land();
 
 #### Returns
 
-``null``
+`void`
 
 ___
 
 ### toggleFlying
 
-▸ **toggleFlying**(): `unknown`
+▸ **toggleFlying**(): `void`
 
 Toggles flying, provided you are a Gargoyle.
 
@@ -289,13 +289,13 @@ player.toggleFlying();
 
 #### Returns
 
-`unknown`
+`void`
 
 ___
 
 ### useItemInHand
 
-▸ **useItemInHand**(): `unknown`
+▸ **useItemInHand**(): `void`
 
 Uses the item currently in your left-hand first, otherwise it will try the right.
 
@@ -307,13 +307,13 @@ player.useItemInHand();
 
 #### Returns
 
-`unknown`
+`void`
 
 ___
 
 ### useLastObject
 
-▸ **useLastObject**(): `unknown`
+▸ **useLastObject**(): `void`
 
 Uses the last object you double-clicked
 
@@ -325,13 +325,13 @@ player.useLastObject();
 
 #### Returns
 
-`unknown`
+`void`
 
 ___
 
 ### openDoor
 
-▸ **openDoor**(): `unknown`
+▸ **openDoor**(): `void`
 
 Uses any door directly in-front of where the player is facing
 
@@ -343,13 +343,13 @@ player.openDoor();
 
 #### Returns
 
-`unknown`
+`void`
 
 ___
 
 ### bow
 
-▸ **bow**(): `unknown`
+▸ **bow**(): `void`
 
 Triggers the `Bow` emote
 
@@ -361,13 +361,13 @@ player.bow();
 
 #### Returns
 
-`unknown`
+`void`
 
 ___
 
 ### salute
 
-▸ **salute**(): `unknown`
+▸ **salute**(): `void`
 
 Triggers the `Salute` emote
 
@@ -379,13 +379,13 @@ player.salute();
 
 #### Returns
 
-`unknown`
+`void`
 
 ___
 
 ### toggleWarMode
 
-▸ **toggleWarMode**(): `unknown`
+▸ **toggleWarMode**(): `void`
 
 Toggle War Mode
 
@@ -397,13 +397,13 @@ player.toggleWarMode();
 
 #### Returns
 
-`unknown`
+`void`
 
 ___
 
 ### use
 
-▸ **use**(`serial`): ``null``
+▸ **use**(`serial`): `void`
 
 Attempts to use an object if possible
 
@@ -422,13 +422,13 @@ player.use(dagger);
 
 #### Returns
 
-``null``
+`void`
 
 ___
 
 ### click
 
-▸ **click**(`serial`): ``null``
+▸ **click**(`serial`): `void`
 
 Simulates clicking an object
 
@@ -446,20 +446,23 @@ player.click(player);
 
 #### Returns
 
-``null``
+`void`
 
 ___
 
 ### useType
 
-▸ **useType**(`graphic`, `hue?`, `sourceSerial?`, `range?`): ``null``
+▸ **useType**(`graphic`, `hue?`, `sourceSerial?`, `range?`): `boolean`
 
 Attempts to use an object of a certain type
 
 **`Example`**
 
 ```ts
-player.useType(0x0F52);
+const myFriend = 0x217DED;
+player.useType(0xE21); // Bandage type
+target.wait(5000);
+target.entity(myFriend);
 ```
 
 #### Parameters
@@ -473,7 +476,7 @@ player.useType(0x0F52);
 
 #### Returns
 
-``null``
+`boolean`
 
 ___
 
@@ -573,7 +576,7 @@ ___
 
 ### moveTypeOnGroundOffset
 
-▸ **moveTypeOnGroundOffset**(`graphic`, `src`, `x?`, `y?`, `z?`, `hue?`, `amount?`, `range?`): ``null``
+▸ **moveTypeOnGroundOffset**(`graphic`, `src`, `x?`, `y?`, `z?`, `hue?`, `amount?`, `range?`): `void`
 
 Attempts to move an object of a certain type onto the ground
 
@@ -598,13 +601,13 @@ player.moveType(0x0F52, player.backpack); // Move item to the east
 
 #### Returns
 
-``null``
+`void`
 
 ___
 
 ### setAbility
 
-▸ **setAbility**(`primary`, `active`): ``null``
+▸ **setAbility**(`primary`, `active`): `void`
 
 Toggle ability on/off
 
@@ -624,7 +627,7 @@ player.setAbility(false, true); // Turn secondary ability on
 
 #### Returns
 
-``null``
+`void`
 
 ___
 
@@ -682,7 +685,7 @@ ___
 
 ### setSkillLock
 
-▸ **setSkillLock**(`skill`, `lock`): ``null``
+▸ **setSkillLock**(`skill`, `lock`): `void`
 
 Set the status of a skill lock
 
@@ -701,7 +704,7 @@ player.setSkillLock(Skills.Anatomy, SkillLock.Down);
 
 #### Returns
 
-``null``
+`void`
 
 ___
 

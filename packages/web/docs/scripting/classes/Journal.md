@@ -26,7 +26,7 @@ url: "/scripting/Journal/"
 | Name | Type |
 | :------ | :------ |
 | `text` | `string` |
-| `author?` | ``null`` \| `string` |
+| `author?` | `string` |
 
 #### Returns
 
@@ -43,7 +43,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `text` | `string` |
-| `author?` | ``null`` \| `string` |
+| `author?` | `string` |
 | `timeout?` | `number` |
 
 #### Returns

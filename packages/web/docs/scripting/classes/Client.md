@@ -13,11 +13,11 @@ url: "/scripting/Client/"
 
 ### sysMsg
 
-• **sysMsg**: (`message`: `string`, `hue?`: `number`) => ``null``
+• **sysMsg**: (`message`: `string`, `hue?`: `number`) => `void`
 
 #### Type declaration
 
-▸ (`message`, `hue?`): ``null``
+▸ (`message`, `hue?`): `void`
 
 ##### Parameters
 
@@ -28,17 +28,17 @@ url: "/scripting/Client/"
 
 ##### Returns
 
-``null``
+`void`
 
 ___
 
 ### headMsg
 
-• **headMsg**: (`message`: `string`, `serial`: `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject), `hue?`: `number`) => ``null``
+• **headMsg**: (`message`: `string`, `serial`: `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject), `hue?`: `number`) => `void`
 
 #### Type declaration
 
-▸ (`message`, `serial`, `hue?`): ``null``
+▸ (`message`, `serial`, `hue?`): `void`
 
 ##### Parameters
 
@@ -50,17 +50,17 @@ ___
 
 ##### Returns
 
-``null``
+`void`
 
 ___
 
 ### openPaperdoll
 
-• **openPaperdoll**: (`serial?`: `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject)) => ``null``
+• **openPaperdoll**: (`serial?`: `number` \| [`SerialObject`](../SerialObject) \| [`GameObject`](../GameObject)) => `void`
 
 #### Type declaration
 
-▸ (`serial?`): ``null``
+▸ (`serial?`): `void`
 
 ##### Parameters
 
@@ -70,7 +70,7 @@ ___
 
 ##### Returns
 
-``null``
+`void`
 
 ___
 
@@ -81,6 +81,21 @@ ___
 #### Type declaration
 
 ▸ (`serial`, `hue?`, `sourceSerial?`, `amount?`, `range?`): `undefined` \| [`Item`](../Item) \| [`Mobile`](../Mobile)
+
+Attempts to check whether a certain object can be found in the game.
+
+**`Example`**
+
+```ts
+const runebookSerial = 0x401C37FB;
+const runebook = client.findObject(runebookSerial);
+
+if(runebook) {
+  player.use(runebook);
+} else {
+  client.headMsg("Runbook missing!", player.serial);
+}
+```
 
 ##### Parameters
 
@@ -105,6 +120,22 @@ ___
 #### Type declaration
 
 ▸ (`graphic`, `hue?`, `sourceSerial?`, `amount?`, `range?`): `undefined` \| [`Item`](../Item) \| [`Mobile`](../Mobile)
+
+Attempts to find an object in the world with the specified search parameters, returning it if found.
+
+**`Example`**
+
+```ts
+const bandageType = 0xE21;
+const bandages = client.findType(bandageType);
+
+if(bandages) {
+  player.use(bandages);
+  target.waitTargetSelf();
+} else {
+  client.headMsg("Out of bandages", player.serial);
+}
+```
 
 ##### Parameters
 
@@ -145,11 +176,37 @@ ___
 
 ### selectEntity
 
-• **selectEntity**: (`searchOpt`: `number`, `searchRangeOpt`: [`SearchEntityRangeOptions`](../SearchEntityRangeOptions), `searchTypeOpt`: [`SearchEntityTypeOptions`](../SearchEntityTypeOptions), `asFriend`: `boolean`) => `number`
+• **selectEntity**: (`searchOpt`: `number`, `searchRangeOpt`: [`SearchEntityRangeOptions`](../SearchEntityRangeOptions), `searchTypeOpt`: [`SearchEntityTypeOptions`](../SearchEntityTypeOptions), `asFriend`: `boolean`) => `undefined` \| [`Mobile`](../Mobile)
 
 #### Type declaration
 
-▸ (`searchOpt`, `searchRangeOpt`, `searchTypeOpt`, `asFriend`): `number`
+▸ (`searchOpt`, `searchRangeOpt`, `searchTypeOpt`, `asFriend`): `undefined` \| [`Mobile`](../Mobile)
+
+Returns the entity based on the search criteria
+
+**`Example`**
+
+Select nearest `Gray` or `Enemy` entity, with `Any` body type, and not as a friend
+```ts
+ client.selectEntity(
+   SearchEntityOptions.Enemy | SearchEntityOptions.Gray,
+   SearchEntityRangeOptions.Nearest,
+   SearchEntityTypeOptions.Any,
+   false
+ )
+```
+
+**`Example`**
+
+Select nearest `Innocent`  entity, with `Any` body type, and not as a friend
+```ts
+ client.selectEntity(
+   SearchEntityOptions.Innocent,
+   SearchEntityRangeOptions.Nearest,
+   SearchEntityTypeOptions.Human,
+   false
+ )
+```
 
 ##### Parameters
 
@@ -162,17 +219,17 @@ ___
 
 ##### Returns
 
-`number`
+`undefined` \| [`Mobile`](../Mobile)
 
 ___
 
 ### allNames
 
-• **allNames**: () => `unknown`
+• **allNames**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Triggers the `All Names` macro which shows name overheads for all entities on-screen.
 
@@ -184,17 +241,17 @@ client.allNames();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
 ### quitGame
 
-• **quitGame**: () => `unknown`
+• **quitGame**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Triggers the `Quit Game` dialogue
 
@@ -206,17 +263,17 @@ client.quitGame();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
 ### toggleAlwaysRun
 
-• **toggleAlwaysRun**: () => `unknown`
+• **toggleAlwaysRun**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Toggles whether the player always runs despite the mouse distance from the player mobile.
 
@@ -228,17 +285,17 @@ client.toggleAlwaysRun();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
 ### closeAllGumps
 
-• **closeAllGumps**: () => `unknown`
+• **closeAllGumps**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Closes all gumps that aren't the Top Bar, Buff bar, or the World view (radar)
 
@@ -250,17 +307,17 @@ client.closeAllGumps();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
 ### closeCorpses
 
-• **closeCorpses**: () => `unknown`
+• **closeCorpses**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Closes all corpses on-screen
 
@@ -272,17 +329,17 @@ client.closeCorpses();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
 ### closeAllHealthBars
 
-• **closeAllHealthBars**: () => `unknown`
+• **closeAllHealthBars**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Closes all healthbars on-screen
 
@@ -294,17 +351,17 @@ client.closeAllHealthBars();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
 ### closeInactiveHealthBars
 
-• **closeInactiveHealthBars**: () => `unknown`
+• **closeInactiveHealthBars**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Closes all inactive healthbars (i.e. dead or off-screen entities).
 
@@ -316,17 +373,17 @@ client.closeInactiveHealthBars();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
 ### zoomReset
 
-• **zoomReset**: () => `unknown`
+• **zoomReset**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Reset the viewport zoom back to default (1.1)
 
@@ -338,17 +395,17 @@ client.zoomReset();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
 ### zoomIn
 
-• **zoomIn**: () => `unknown`
+• **zoomIn**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Zooms in the viewport
 
@@ -360,17 +417,17 @@ client.zoomIn();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
 ### zoomOut
 
-• **zoomOut**: () => `unknown`
+• **zoomOut**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Zooms out the viewport
 
@@ -382,17 +439,17 @@ client.zoomIn();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
 ### toggleChatVisibility
 
-• **toggleChatVisibility**: () => `unknown`
+• **toggleChatVisibility**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Toggles the chat visibility, e.g. the bar at the bottom of the game viewport
 
@@ -404,17 +461,17 @@ client.zoomIn();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
 ### setGrabBag
 
-• **setGrabBag**: () => `unknown`
+• **setGrabBag**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Sets the grab bag used by Grid Loot
 
@@ -426,17 +483,17 @@ client.zoomIn();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
 ### toggleNameOverheads
 
-• **toggleNameOverheads**: () => `unknown`
+• **toggleNameOverheads**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Toggles whether entities have name plates
 
@@ -448,17 +505,17 @@ client.toggleNameOverheads();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
 ### toggleAuras
 
-• **toggleAuras**: () => `unknown`
+• **toggleAuras**: () => `any`
 
 #### Type declaration
 
-▸ (): `unknown`
+▸ (): `any`
 
 Toggles whether mobiles have auras underneath them
 
@@ -470,7 +527,7 @@ client.toggleAuras();
 
 ##### Returns
 
-`unknown`
+`any`
 
 ___
 
@@ -546,3 +603,75 @@ ___
 ##### Returns
 
 `any`
+
+___
+
+### sendBuyRequest
+
+• **sendBuyRequest**: (`vendorSerial`: `number`, `items`: { `serial`: `number` ; `amount`: `number`  }[]) => `boolean`
+
+#### Type declaration
+
+▸ (`vendorSerial`, `items`): `boolean`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `vendorSerial` | `number` |
+| `items` | { `serial`: `number` ; `amount`: `number`  }[] |
+
+##### Returns
+
+`boolean`
+
+___
+
+### sendSellRequest
+
+• **sendSellRequest**: (`vendorSerial`: `number`, `items`: { `serial`: `number` ; `amount`: `number`  }[]) => `boolean`
+
+#### Type declaration
+
+▸ (`vendorSerial`, `items`): `boolean`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `vendorSerial` | `number` |
+| `items` | { `serial`: `number` ; `amount`: `number`  }[] |
+
+##### Returns
+
+`boolean`
+
+___
+
+### queryItemOPL
+
+• **queryItemOPL**: (`serial`: `number`, `timeout?`: `number`) => { `serial`: `number` ; `data`: `string` ; `name`: `string` ; `graphic`: `number` ; `hue`: `number` ; `amount`: `number`  }
+
+#### Type declaration
+
+▸ (`serial`, `timeout?`): `Object`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `serial` | `number` |
+| `timeout?` | `number` |
+
+##### Returns
+
+`Object`
+
+| Name | Type |
+| :------ | :------ |
+| `serial` | `number` |
+| `data` | `string` |
+| `name` | `string` |
+| `graphic` | `number` |
+| `hue` | `number` |
+| `amount` | `number` |

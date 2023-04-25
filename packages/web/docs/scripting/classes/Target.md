@@ -255,13 +255,13 @@ ___
 
 ### clearQueue
 
-▸ **clearQueue**(): ``null``
+▸ **clearQueue**(): `void`
 
 Clear target queue
 
 #### Returns
 
-``null``
+`void`
 
 ___
 
