@@ -19,6 +19,16 @@ url: "/scripting/Client/"
 
 ▸ (`message`, `hue?`): `void`
 
+Display a message in the text chat.
+
+**`Example`**
+
+Say a message in red/green over the players head.
+```ts
+client.headMsg('A chat in Red', 33);
+client.headMsg('A chat in Green', 66);
+```
+
 ##### Parameters
 
 | Name | Type |
@@ -39,6 +49,16 @@ ___
 #### Type declaration
 
 ▸ (`message`, `serial`, `hue?`): `void`
+
+Display a message overhead of the target entity.
+
+**`Example`**
+
+Say a message in red/green over the players head.
+```ts
+client.headMsg('A message in Red', player, 33);
+client.headMsg('A message in Green', player, 66);
+```
 
 ##### Parameters
 
@@ -61,6 +81,21 @@ ___
 #### Type declaration
 
 ▸ (`serial?`): `void`
+
+Open the paperdoll for a Mobile.
+
+**`Example`**
+
+```ts
+const nearestHuman = client.selectEntity(
+ SearchEntityOptions.Any,
+ SearchEntityRangeOptions.Nearest,
+ SearchEntityTypeOptions.Human,
+ false
+);
+
+client.openPaperdoll(nearestHuman);
+```
 
 ##### Parameters
 
@@ -160,6 +195,22 @@ ___
 #### Type declaration
 
 ▸ (`serial`, `layer`): `undefined` \| [`Item`](../Item)
+
+Attempts to find the object at the specified layer, if it exists.
+
+**`Example`**
+
+Try to remove the currently equipped helmet.
+```ts
+const helm = client.findItemOnLayer(player.serial, Layers.Helmet);
+
+if (helm) {
+  client.headMsg(`Removing helm`, player);
+  player.moveItem(helm, player.backpack);
+} else {
+  client.headMsg("Not wearing a helm", player.serial);
+}
+```
 
 ##### Parameters
 
