@@ -659,7 +659,7 @@ ___
 
 ### sendBuyRequest
 
-• **sendBuyRequest**: (`vendorSerial`: `number`, `items`: { `serial`: `number` ; `amount`: `number`  }[]) => `boolean`
+• **sendBuyRequest**: (`vendorSerial`: `number` \| [`Mobile`](../Mobile), `items`: { `serial`: `number` ; `amount`: `number`  }[]) => `boolean`
 
 #### Type declaration
 
@@ -669,7 +669,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `vendorSerial` | `number` |
+| `vendorSerial` | `number` \| [`Mobile`](../Mobile) |
 | `items` | { `serial`: `number` ; `amount`: `number`  }[] |
 
 ##### Returns
@@ -680,7 +680,7 @@ ___
 
 ### sendSellRequest
 
-• **sendSellRequest**: (`vendorSerial`: `number`, `items`: { `serial`: `number` ; `amount`: `number`  }[]) => `boolean`
+• **sendSellRequest**: (`vendorSerial`: `number` \| [`Mobile`](../Mobile), `items`: { `serial`: `number` ; `amount`: `number`  }[]) => `boolean`
 
 #### Type declaration
 
@@ -690,7 +690,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `vendorSerial` | `number` |
+| `vendorSerial` | `number` \| [`Mobile`](../Mobile) |
 | `items` | { `serial`: `number` ; `amount`: `number`  }[] |
 
 ##### Returns
@@ -701,7 +701,7 @@ ___
 
 ### queryItemOPL
 
-• **queryItemOPL**: (`serial`: `number`, `timeout?`: `number`) => { `serial`: `number` ; `data`: `string` ; `name`: `string` ; `graphic`: `number` ; `hue`: `number` ; `amount`: `number`  }
+• **queryItemOPL**: (`serial`: `number` \| [`Item`](../Item), `timeout?`: `number`) => { `serial`: `number` ; `data`: `string` ; `name`: `string` ; `graphic`: `number` ; `hue`: `number` ; `amount`: `number`  }
 
 #### Type declaration
 
@@ -711,7 +711,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `serial` | `number` |
+| `serial` | `number` \| [`Item`](../Item) |
 | `timeout?` | `number` |
 
 ##### Returns

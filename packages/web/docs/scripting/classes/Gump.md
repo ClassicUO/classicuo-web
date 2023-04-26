@@ -235,15 +235,25 @@ ___
 
 ### findOrWait
 
-▸ `Static` **findOrWait**(`serial`, `timeoutMs?`): `undefined` \| [`Gump`](../Gump)
+▸ `Static` **findOrWait**(`serialOrText`, `timeoutMs?`): `undefined` \| [`Gump`](../Gump)
 
-Find a gump by its serial, or wait for it to appear
+Find a gump by its serial or containing certain text, or wait for it to appear
 
 **`Example`**
 
-Closes the last sent gump, if it's open.
+Waits for the gump with the serial 0xBB1B5472 to open, and then presses a button.
 ```ts
 const gump = Gump.findOrWait(0xBB1B5472, 100); // Wait 100 milliseconds (5,000 if unspecified) for the gump to appear
+if(gump) {
+  gump.reply(1); // Gump is open, simulate pressing a button
+}
+```
+
+**`Example`**
+
+Waits for a gump to exist that contains the text "Blacksmithing", and then presses a button.
+```ts
+const gump = Gump.findOrWait("Blacksmithy Selection Menu");
 if(gump) {
   gump.reply(1); // Gump is open, simulate pressing a button
 }
@@ -253,7 +263,7 @@ if(gump) {
 
 | Name | Type |
 | :------ | :------ |
-| `serial` | `number` |
+| `serialOrText` | `string` \| `number` |
 | `timeoutMs?` | `number` |
 
 #### Returns
@@ -381,6 +391,35 @@ gump?.reply(1); // Press a button to reply
 | :------ | :------ |
 | `localSerial` | `number` |
 | `value` | `string` |
+
+#### Returns
+
+`void`
+
+___
+
+### horizontalMenuSelect
+
+▸ **horizontalMenuSelect**(`graphic`, `hue?`): `void`
+
+Select an item in the old-school T2A horizontal menu gump.
+
+**`Example`**
+
+```ts
+const gump = Gump.findOrWait(0x59);
+if(gump) {
+  console.log('Gump exists.');
+  gump.horizontalMenuSelect(gump, )
+}
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `graphic` | `number` |
+| `hue?` | `number` |
 
 #### Returns
 

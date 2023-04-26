@@ -241,10 +241,45 @@ ___
 
 Wait for target with a specific amount of time, when open target self.
 
+**`Example`**
+
+Use bandages, target self.
+```ts
+player.useType(0xE21);
+target.waitTargetSelf();
+
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
+| `timeoutMs?` | `number` |
+
+#### Returns
+
+`boolean`
+
+___
+
+### waitTargetType
+
+▸ **waitTargetType**(`graphic`, `hue?`, `timeoutMs?`): `boolean`
+
+Wait for target, when open target the first object with a certain graphic/hue
+
+**`Example`**
+
+Use a sewing kit, then target hides.
+```ts
+player.useType(0xF9D);
+target.waitTargetType(0x1078);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `graphic` | `number` |
+| `hue?` | `number` |
 | `timeoutMs?` | `number` |
 
 #### Returns
