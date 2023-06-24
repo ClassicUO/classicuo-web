@@ -141,7 +141,7 @@ switch(response) {
     // retry
     break;
   }
-  case successMessage {
+  case successMessage: {
     // loop
     break;
   }
