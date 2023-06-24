@@ -640,7 +640,7 @@ Walk/turn a single step in a direction
 **`Example`**
 
 ```ts
-player.walk(Directors.North);
+player.walk(Directions.North);
 ```
 
 #### Parameters

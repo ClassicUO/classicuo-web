@@ -16,12 +16,12 @@ There's many reasons why, but to outline a few:
 
 1. **Discovery.**  
 We're aspiring to be the OSRS of UO essentially. There should be a single destination people can remember to go to play UO and discover new shards/experiences. 
-In my opinion, a lot of great shards go overlooked as players have a hard time finding them, and the servers have a hard time attracting users. 
+It's our opinion, a lot of great shards go overlooked as players have a hard time finding them, and the servers have a hard time attracting users. 
 Having a centralised server listing that is also the entrypoint to playing the servers makes that experience 100x better and will bring new players to the game.
 
 2. **Fragmentation/Support.**  
 It's taken us over a year to get a properly stable version of CUO Web.
-We don't want to have to support 100s of fragmented installs with their own bugs and give support on how to bootstrap/maintain the infrastructure needed.
+We don't want to have to support 100s of fragmented installations with their own bugs and give support on how to bootstrap/maintain the infrastructure needed.
 We're not a PaaS app, we're three dudes working on this in our free time with full-time jobs and families.
 
 3. **Cheating.**  

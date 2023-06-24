@@ -24,8 +24,9 @@ declare const addExtraPlayerBody: (
   race: number,
   copyEquipConv?: boolean
 ) => void;
-declare const setProfileOptionAllowed: (name: string, allowed: boolean) => void;
 declare const setShardRules: (flags: ShardRules) => boolean;
+declare const sendWebGumpResponse: (serial: number, serverId: number, data: string | Object) => void;
+declare const closeWebGump: (serial: number, serverId: number) => void;
 
 declare const client: Client;
 declare const player: Player;
@@ -36,6 +37,7 @@ export {
   addEventListener,
   removeEventListener,
   addExtraPlayerBody,
-  setProfileOptionAllowed,
-  setShardRules
+  setShardRules,
+  sendWebGumpResponse,
+  closeWebGump
 };

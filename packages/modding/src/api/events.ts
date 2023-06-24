@@ -9,11 +9,13 @@ export type EventListener<T extends ValidEventTypes, K extends EventNames<T>> = 
 
 export interface EventMap {
   journalEntry: (ev: JournalEntry) => void;
-  gumpUpdate: (ev: any) => void;
-  gumpClose: (ev: any) => void;
   playerCreated: (ev: any) => void;
   worldClear: (ev: any) => void;
   profileLoaded: (ev: any) => void;
+  gumpUpdate: (ev: GumpUpdateEvent) => void;
+  gumpClose: (ev: GumpCloseEvent) => void;
+  [K: `webGump:${string}:update`]: (ev: GumpUpdateEvent) => void;
+  [K: `webGump:${string}:close`]: (ev: GumpUpdateEvent) => void;
 }
 
 export interface JournalEntry {
@@ -41,4 +43,21 @@ export interface JournalEntry {
   unicode: boolean;
   time: string;
   hueArgb: number;
+}
+
+export interface GumpIdentity {
+  serial: number;
+  serverId: number;
+}
+
+export interface GumpUpdateEvent extends GumpIdentity {
+  type: string;
+  json: string;
+}
+
+export interface GumpCloseEvent extends GumpIdentity {}
+
+export interface GumpInfo extends GumpIdentity {
+  type: string;
+  data: any;
 }

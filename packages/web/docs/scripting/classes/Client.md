@@ -9,6 +9,12 @@ url: "/scripting/Client/"
 
 [Client](/scripting/globals).Client
 
+## Constructors
+
+### constructor
+
+• **new Client**()
+
 ## Properties
 
 ### sysMsg
@@ -227,7 +233,7 @@ ___
 
 ### selectEntity
 
-• **selectEntity**: (`searchOpt`: `number`, `searchRangeOpt`: [`SearchEntityRangeOptions`](../SearchEntityRangeOptions), `searchTypeOpt`: [`SearchEntityTypeOptions`](../SearchEntityTypeOptions), `asFriend`: `boolean`) => `undefined` \| [`Mobile`](../Mobile)
+• **selectEntity**: (`searchOpt`: [`SearchEntityOptions`](../SearchEntityOptions), `searchRangeOpt`: [`SearchEntityRangeOptions`](../SearchEntityRangeOptions), `searchTypeOpt`: [`SearchEntityTypeOptions`](../SearchEntityTypeOptions), `asFriend`: `boolean`) => `undefined` \| [`Mobile`](../Mobile)
 
 #### Type declaration
 
@@ -263,7 +269,7 @@ Select nearest `Innocent`  entity, with `Any` body type, and not as a friend
 
 | Name | Type |
 | :------ | :------ |
-| `searchOpt` | `number` |
+| `searchOpt` | [`SearchEntityOptions`](../SearchEntityOptions) |
 | `searchRangeOpt` | [`SearchEntityRangeOptions`](../SearchEntityRangeOptions) |
 | `searchTypeOpt` | [`SearchEntityTypeOptions`](../SearchEntityTypeOptions) |
 | `asFriend` | `boolean` |
@@ -726,3 +732,24 @@ ___
 | `graphic` | `number` |
 | `hue` | `number` |
 | `amount` | `number` |
+
+___
+
+### queryItemSingleClickName
+
+• **queryItemSingleClickName**: (`serial`: `number`, `timeout?`: `number`) => `string`
+
+#### Type declaration
+
+▸ (`serial`, `timeout?`): `string`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `serial` | `number` |
+| `timeout?` | `number` |
+
+##### Returns
+
+`string`
