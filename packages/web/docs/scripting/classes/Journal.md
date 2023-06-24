@@ -55,6 +55,7 @@ target.waitTargetSelf();
 if(journal.waitForText("You healed", "System", 8000)) {
   client.headMsg(`Bandaged +${player.hits - healthBefore}`, player, 66)
 }
+```
 
 #### Parameters
 
@@ -83,7 +84,6 @@ If you want to wait for any string in the input array use `waitForTextAny`
 **`Example`**
 
 Bandage self, waiting for the System message
-
 ```ts
 const waitMessage = "You must wait";
 const failMessage = "You cannot focus";
@@ -95,6 +95,7 @@ const response = journal.waitForTextEvery([waitMessage, failMessage, successMess
 if(response.includes(successMessage)) {
   client.headMsg(`Meditating...`, player, 66)
 }
+```
 
 #### Parameters
 
@@ -123,7 +124,6 @@ If you want all the strings to appear you should use `waitForTextEvery`
 **`Example`**
 
 Bandage self, waiting for the System message
-
 ```typescript
 const waitMessage = "You must wait";
 const failMessage = "You cannot focus";
@@ -146,6 +146,7 @@ switch(response) {
     break;
   }
 }
+```
 
 #### Parameters
 
@@ -178,6 +179,7 @@ player.say("Hello there");
 journal.waitForText("Hello there"); // This will succeed quickly as the text was just added
 journal.clear();
 journal.waitForText("Hello there"); // this will time out, as the string is now empty.
+```
 
 #### Returns
 
