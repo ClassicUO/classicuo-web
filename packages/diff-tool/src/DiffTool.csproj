@@ -2,18 +2,18 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>ClassicUO_Web_FileDiff</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
 
     <OutputPath>$(ProjectDir)..\bin\Release\</OutputPath>
     <PublishDir>$(ProjectDir)..\bin\dist\</PublishDir>
     <AssemblyName>classicuo-web-diff-tool-$(RuntimeIdentifier)</AssemblyName>
+    <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="SharpZipLib" Version="1.3.3" />
     <PackageReference Include="VCDiff" Version="4.0.1" />
-    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
   </ItemGroup>
 </Project>
