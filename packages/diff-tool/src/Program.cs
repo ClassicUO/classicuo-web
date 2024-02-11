@@ -1,15 +1,14 @@
-﻿using LegacyMUL;
+﻿// #define WASM_USE_SHA256
+
+using LegacyMUL;
 using System.Buffers;
 using System.Buffers.Binary;
-using System.Diagnostics;
+using System.Globalization;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using static LegacyMUL.FileMapping;
 using System.Runtime.InteropServices;
-using System.Diagnostics.CodeAnalysis;
-using System.Text.Json.Serialization.Metadata;
-using VCDiff.Shared;
 
 // #if DEBUG
 //
@@ -24,8 +23,12 @@ using VCDiff.Shared;
 // #endif
 
 
-internal class Program
+internal static class Program
 {
+  private static int blockSize;
+  private static int chunkSize;
+  private static bool writeUopTarget;
+
   public static void Main(string[] args)
   {
     if (args.Length < 4)
@@ -37,6 +40,11 @@ internal class Program
     var targetDir = Directory.Exists(args[1]) ? new DirectoryInfo(args[1]) : Directory.CreateDirectory(args[1]);
     var outputDir = Directory.Exists(args[2]) ? new DirectoryInfo(args[2]) : Directory.CreateDirectory(args[2]);
     var fileName = args[3];
+
+    int.TryParse(Environment.GetEnvironmentVariable("PATCH_BLOCK_SIZE") ?? "32", out blockSize);
+    int.TryParse(Environment.GetEnvironmentVariable("PATCH_CHUNK_SIZE") ?? "64", out chunkSize);
+    writeUopTarget = (Environment.GetEnvironmentVariable("PATCH_WRITE_UOP_TARGET") ?? "false") == "true";
+    
 
     var patches = Patch(sourceDir, targetDir, outputDir, fileName).ToList();
 
@@ -92,7 +100,7 @@ internal class Program
         outputFile.Directory?.Create();
       }
 
-      var output = outputFile.Create();
+      using var output = outputFile.Create();
 
       EncodeFile(sourceStream, targetStream, output, fileName);
       output.Flush(true);
@@ -100,20 +108,22 @@ internal class Program
       yield return new PatchInfo(
         File.Exists(sourcePath) ? Path.Combine(subfolder, sourceFile.Name) : sourceFile.Name,
         Path.Combine(subfolder, outputFile.Name),
-        "EMPTY", // CalculateSHA256(outputMulPatch),
+        CalculateSHA256(output),
         output.Length,
-        targetStream.Length
+        CalculateSHA256(targetStream),
+        targetStream.Length,
+        CalculateSHA256(sourceStream),
+        sourceStream.Length
       );
 
       yield break;
     }
 
-
     (Stream mul, Stream idx) source;
     (Stream mul, Stream idx) target;
 
     // target is UOP file, convert to MUL,IDX
-    TryConvertUopToMul(targetFile, out target);
+    TryConvertUopToMul(targetFile, targetDir, out target);
 
     var sourceMulFile = new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, subfolder, uopMulName + ".mul"));
     var sourceIdxFile = new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, subfolder, GetMulIdxName(uopMulName)));
@@ -123,6 +133,7 @@ internal class Program
     {
       TryConvertUopToMul(
         new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, subfolder, targetFile.Name)),
+        targetDir,
         out source
       );
       using var mulStream = sourceMulFile.Create();
@@ -156,9 +167,12 @@ internal class Program
       yield return new PatchInfo(
         Path.Combine(subfolder, sourceMulFile.Name),
         Path.Combine(subfolder, sourceMulFile.Name) + ".patch",
-        "EMPTY", // CalculateSHA256(outputMulPatch),
+        CalculateSHA256(outputMulPatch),
         outputMulPatch.Length,
-        target.mul.Length
+        CalculateSHA256(target.mul),
+        target.mul.Length,
+        CalculateSHA256(source.mul),
+        source.mul.Length
       );
 
       if (source.idx is not null && target.idx is not null)
@@ -173,9 +187,12 @@ internal class Program
         yield return new PatchInfo(
           Path.Combine(subfolder, sourceIdxFile.Name),
           Path.Combine(subfolder, sourceIdxFile.Name) + ".patch",
-          "EMPTY", // CalculateSHA256(outputMulPatch),
+          CalculateSHA256(outputIdxPatch),
           outputIdxPatch.Length,
-          target.idx.Length
+          CalculateSHA256(target.idx),
+          target.idx.Length,
+          CalculateSHA256(source.idx),
+          source.idx.Length
         );
       }
     }
@@ -191,13 +208,14 @@ internal class Program
 
   static bool TryConvertUopToMul(
     FileInfo sourceFile,
+    DirectoryInfo targetDir,
     out (Stream outputMul, Stream outputIdx) streams
   )
   {
     var converter = new LegacyMULConverter();
-    var name = GetUopMulName(sourceFile.Name);
+    var uopMulName = GetUopMulName(sourceFile.Name);
 
-    if (name is null)
+    if (uopMulName is null)
     {
       streams = (null, null);
       return false;
@@ -208,9 +226,22 @@ internal class Program
     if (idxNameMatch.Success) int.TryParse(idxNameMatch.Value, out idx);
 
     using var inputUop = sourceFile.Open(FileMode.Open);
-    var outputMul = new MemoryStream();
-    var outputIdx = new MemoryStream();
-    var mulType = MulNameToType(name);
+    Stream outputMul;
+    Stream outputIdx;
+
+    if (writeUopTarget)
+    {
+      outputMul = new FileInfo(GetCaseNudgedPathName(targetDir.FullName, uopMulName + ".mul")).Create();
+      outputIdx = new FileInfo(GetCaseNudgedPathName(targetDir.FullName, GetMulIdxName(uopMulName))).Create();
+    }
+    else
+    {
+      outputMul = new MemoryStream();
+      outputIdx = new MemoryStream();
+    }
+    
+    
+    var mulType = MulNameToType(uopMulName);
 
     converter.FromUOP(inputUop, outputMul, outputIdx, mulType, idx, new ConsoleProgress(sourceFile.Name, "uopToMul"));
     streams = (outputMul, mulType != FileType.MapLegacyMUL ? outputIdx : null);
@@ -224,7 +255,15 @@ internal class Program
     target.Seek(0, SeekOrigin.Begin);
     output.Seek(0, SeekOrigin.Begin);
 
-    using var encoder = new VCDiff.Encoders.VcEncoder(source, target, output);
+    using var encoder = new VCDiff.Encoders.VcEncoder(
+      source,
+      target,
+      output,
+      maxBufferSize: 1,
+      blockSize: blockSize,
+      chunkSize: chunkSize
+    );
+    var progress = new ConsoleProgress(fileName, "vcdiff");
     var result = encoder.Encode(interleaved: false, progress: new ConsoleProgress(fileName, "vcdiff"));
 
     return result == VCDiff.Includes.VCDiffResult.SUCCESS;
@@ -279,27 +318,49 @@ internal class Program
 
   static string CalculateSHA256(Stream stream)
   {
-    stream.Seek(0, SeekOrigin.Begin);
-    var block = ArrayPool<byte>.Shared.Rent(8192);
-    try
+    // Use managed SHA256 impl on WASM as it does not have access to native crypto
+    if (RuntimeInformation.OSArchitecture == Architecture.Wasm)
     {
-      using (var sha256 = SHA256.Create())
+#if WASM_USE_SHA256
+      stream.Seek(0, SeekOrigin.Begin);
+      Span<byte> block = stackalloc byte[4096];
+      var sha256 = new SHA256ManagedImplementation();
+      int length;
+      while ((length = stream.Read(block)) > 0)
       {
-        int length;
-        while ((length = stream.Read(block)) > 0)
-        {
-          sha256.TransformBlock(block, 0, length, null, 0);
-        }
-
-        sha256.TransformFinalBlock(block, 0, 0);
-
-        var hash = sha256.Hash;
-        return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+        sha256.HashCore(block, 0, length);
       }
+    
+      var hash = sha256.HashFinal();
+      return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+#else
+      return "";
+#endif
     }
-    finally
+    else
     {
-      ArrayPool<byte>.Shared.Return(block);
+      stream.Seek(0, SeekOrigin.Begin);
+      var block = ArrayPool<byte>.Shared.Rent(8192);
+      try
+      {
+        using (var sha256 = SHA256.Create())
+        {
+          int length;
+          while ((length = stream.Read(block)) > 0)
+          {
+            sha256.TransformBlock(block, 0, length, null, 0);
+          }
+    
+          sha256.TransformFinalBlock(block, 0, 0);
+    
+          var hash = sha256.Hash;
+          return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+        }
+      }
+      finally
+      {
+        ArrayPool<byte>.Shared.Return(block);
+      }
     }
   }
 
