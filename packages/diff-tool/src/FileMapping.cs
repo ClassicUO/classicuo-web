@@ -4,7 +4,6 @@ namespace LegacyMUL;
 
 public static class FileMapping
 {
-    public readonly record struct PatchInfo(string source, string file, string sha256, long length, long size);
 
     private static readonly Regex IdxRegex = new(@"\d+");
     

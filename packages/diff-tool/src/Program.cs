@@ -1,8 +1,9 @@
-﻿using LegacyMUL;
+﻿// #define WASM_USE_SHA256
+
+using LegacyMUL;
 using System.Buffers;
 using System.Buffers.Binary;
-using System.CommandLine;
-using System.Diagnostics;
+using System.Globalization;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -21,91 +22,108 @@ using System.Runtime.InteropServices;
 //
 // #endif
 
-var jsonSettings = new JsonSerializerOptions
+
+internal static class Program
 {
-    WriteIndented = true,
-    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-};
+  private static int blockSize;
+  private static int chunkSize;
+  private static bool writeUopTarget;
 
-var optionSrc = new Option<DirectoryInfo>("--source-dir", "Ultima Online source path");
-var optionTarget = new Option<DirectoryInfo>("--target-dir", "Ultima Online target path");
-var optionOutput = new Option<DirectoryInfo>("--output-dir", "Output directory to store the generated MULs & DIFF");
-var fileArg = new Argument<string>("file", "File to process, e.g. artLegacyMUL.uop");
-
-var cmd = new RootCommand();
-cmd.AddOption(optionSrc);
-cmd.AddOption(optionTarget);
-cmd.AddOption(optionOutput);
-cmd.AddArgument(fileArg);
-cmd.SetHandler
-(
-    (sourceDir, targetDir, outputDir, fileName) =>
+  public static void Main(string[] args)
+  {
+    if (args.Length < 4)
     {
-        var patches = Patch(sourceDir, targetDir, outputDir, fileName).ToList();
-        using var stdout = Console.OpenStandardOutput();
-        JsonSerializer.Serialize(stdout, patches, jsonSettings);
-    },
-    optionSrc,
-    optionTarget,
-    optionOutput,
-    fileArg
-);
+      throw new ArgumentOutOfRangeException(nameof(args));
+    }
 
-return cmd.Invoke(args);
+    var sourceDir = Directory.Exists(args[0]) ? new DirectoryInfo(args[0]) : Directory.CreateDirectory(args[0]);
+    var targetDir = Directory.Exists(args[1]) ? new DirectoryInfo(args[1]) : Directory.CreateDirectory(args[1]);
+    var outputDir = Directory.Exists(args[2]) ? new DirectoryInfo(args[2]) : Directory.CreateDirectory(args[2]);
+    var fileName = args[3];
 
-static IEnumerable<PatchInfo> Patch(
+    int.TryParse(Environment.GetEnvironmentVariable("PATCH_BLOCK_SIZE") ?? "32", out blockSize);
+    int.TryParse(Environment.GetEnvironmentVariable("PATCH_CHUNK_SIZE") ?? "64", out chunkSize);
+    writeUopTarget = (Environment.GetEnvironmentVariable("PATCH_WRITE_UOP_TARGET") ?? "false") == "true";
+    
+
+    var patches = Patch(sourceDir, targetDir, outputDir, fileName).ToList();
+
+    using var stdout = Console.OpenStandardOutput();
+    foreach (var patch in patches)
+    {
+      JsonSerializer.Serialize(stdout, patch, typeof(PatchInfo), JsonSourceGenerationContext.Default);
+    }
+  }
+
+  static IEnumerable<PatchInfo> Patch(
     DirectoryInfo sourceDir,
     DirectoryInfo targetDir,
     DirectoryInfo outputDir,
     string fileName
-)
-{
+  )
+  {
     var targetFile = new FileInfo(GetCaseNudgedPathName(targetDir.FullName, fileName));
 
     if (!targetFile.Exists)
-        throw new FileNotFoundException($"Target file doesn't exist: {targetFile}");
+      throw new FileNotFoundException($"Target file doesn't exist: {targetFile}");
 
     var subfolder = GetSubfolder(
-        sourceDir,
-        new DirectoryInfo(
-            GetCaseNudgedDirectoryName(
-                sourceDir.FullName,
-                GetSubfolder(targetDir, targetFile.Directory)
-            )
+      sourceDir,
+      new DirectoryInfo(
+        GetCaseNudgedDirectoryName(
+          sourceDir.FullName,
+          GetSubfolder(targetDir, targetFile.Directory)
         )
+      )
     );
-    
-    Directory.CreateDirectory(Path.Combine(outputDir.FullName, subfolder));
+
+
+    var outputSubfolder = Path.Combine(outputDir.FullName, subfolder);
+    if (!Directory.Exists(outputSubfolder))
+    {
+      Directory.CreateDirectory(outputSubfolder);
+    }
 
     var uopMulName = GetUopMulName(targetFile.Name);
     if (uopMulName is null)
     {
-        var sourcePath = GetCaseNudgedPathName(sourceDir.FullName, subfolder, targetFile.Name);
-        var dictPath = GetCaseNudgedPathName(sourceDir.FullName, "dict.bin");
-        var sourceFile = new FileInfo(File.Exists(sourcePath) ? sourcePath : dictPath);
+      var sourcePath = GetCaseNudgedPathName(sourceDir.FullName, subfolder, targetFile.Name);
+      var dictPath = GetCaseNudgedPathName(sourceDir.FullName, "dict.bin");
+      var sourceFile = new FileInfo(File.Exists(sourcePath) ? sourcePath : dictPath);
 
-        using var sourceStream = sourceFile.OpenRead();
-        using var targetStream = targetFile.OpenRead();
-        var outputFile = new FileInfo(Path.Combine(outputDir.FullName, subfolder, $"{targetFile.Name}.patch"));
+      using var sourceStream = sourceFile.OpenRead();
+      using var targetStream = targetFile.OpenRead();
+      var outputFile = new FileInfo(Path.Combine(outputDir.FullName, subfolder, $"{targetFile.Name}.patch"));
+
+      if (outputFile.Directory?.Exists == false)
+      {
         outputFile.Directory?.Create();
-        var output = outputFile.Create();
+      }
 
-        EncodeFile(sourceStream, targetStream, output);
-        yield return new PatchInfo(
-            File.Exists(sourcePath) ? Path.Combine(subfolder, sourceFile.Name) : sourceFile.Name,
-            Path.Combine(subfolder, outputFile.Name),
-            CalculateSHA256(output), output.Length,
-            targetStream.Length
-        );
-        yield break;
+      using var output = outputFile.Create();
+
+      EncodeFile(sourceStream, targetStream, output, fileName);
+      output.Flush(true);
+
+      yield return new PatchInfo(
+        File.Exists(sourcePath) ? Path.Combine(subfolder, sourceFile.Name) : sourceFile.Name,
+        Path.Combine(subfolder, outputFile.Name),
+        CalculateSHA256(output),
+        output.Length,
+        CalculateSHA256(targetStream),
+        targetStream.Length,
+        CalculateSHA256(sourceStream),
+        sourceStream.Length
+      );
+
+      yield break;
     }
-
 
     (Stream mul, Stream idx) source;
     (Stream mul, Stream idx) target;
 
     // target is UOP file, convert to MUL,IDX
-    TryConvertUopToMul(targetFile, out target);
+    TryConvertUopToMul(targetFile, targetDir, out target);
 
     var sourceMulFile = new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, subfolder, uopMulName + ".mul"));
     var sourceIdxFile = new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, subfolder, GetMulIdxName(uopMulName)));
@@ -113,150 +131,182 @@ static IEnumerable<PatchInfo> Patch(
 #if DEBUG
     if (!sourceMulFile.Exists || !sourceIdxFile.Exists)
     {
-        TryConvertUopToMul(new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, subfolder, targetFile.Name)),
-            out source);
-        using var mulStream = sourceMulFile.Create();
+      TryConvertUopToMul(
+        new FileInfo(GetCaseNudgedPathName(sourceDir.FullName, subfolder, targetFile.Name)),
+        targetDir,
+        out source
+      );
+      using var mulStream = sourceMulFile.Create();
 
-        source.mul.Seek(0, SeekOrigin.Begin);
-        source.mul.CopyTo(mulStream);
+      source.mul.Seek(0, SeekOrigin.Begin);
+      source.mul.CopyTo(mulStream);
 
-        if (source.idx is not null)
-        {
-            using var idxStream = sourceIdxFile.Create();
-            source.idx.Seek(0, SeekOrigin.Begin);
-            source.idx.CopyTo(idxStream);
-        }
+      if (source.idx is not null)
+      {
+        using var idxStream = sourceIdxFile.Create();
+        source.idx.Seek(0, SeekOrigin.Begin);
+        source.idx.CopyTo(idxStream);
+      }
     }
     else
 #endif
     {
-        source = (sourceMulFile.OpenRead(), sourceIdxFile.Exists ? sourceIdxFile.OpenRead() : null);
+      source = (sourceMulFile.Open(FileMode.Open), sourceIdxFile.Exists ? sourceIdxFile.Open(FileMode.Open) : null);
     }
 
     try
     {
-        using var outputMulPatch =
-            File.Open(GetCaseNudgedPathName(outputDir.FullName, subfolder, sourceMulFile.Name + ".patch"),
-                FileMode.Create);
-        EncodeFile(source.mul, target.mul, outputMulPatch);
-
-        yield return new PatchInfo(
-            Path.Combine(subfolder, sourceMulFile.Name),
-            Path.Combine(subfolder, sourceMulFile.Name) + ".patch",
-            CalculateSHA256(outputMulPatch),
-            outputMulPatch.Length,
-            target.mul.Length
+      using var outputMulPatch =
+        File.Open(
+          GetCaseNudgedPathName(outputDir.FullName, subfolder, sourceMulFile.Name + ".patch"),
+          FileMode.Create
         );
 
-        if (source.idx is not null && target.idx is not null)
-        {
-            using var outputIdxPatch =
-                File.Open(GetCaseNudgedPathName(outputDir.FullName, subfolder, sourceIdxFile.Name + ".patch"),
-                    FileMode.Create);
-            EncodeFile(source.idx, target.idx, outputIdxPatch);
-            yield return new PatchInfo(
-                Path.Combine(subfolder, sourceIdxFile.Name),
-                Path.Combine(subfolder, sourceIdxFile.Name) + ".patch",
-                CalculateSHA256(outputIdxPatch),
-                outputIdxPatch.Length,
-                target.idx.Length
-            );
-        }
+      EncodeFile(source.mul, target.mul, outputMulPatch, fileName);
+
+      yield return new PatchInfo(
+        Path.Combine(subfolder, sourceMulFile.Name),
+        Path.Combine(subfolder, sourceMulFile.Name) + ".patch",
+        CalculateSHA256(outputMulPatch),
+        outputMulPatch.Length,
+        CalculateSHA256(target.mul),
+        target.mul.Length,
+        CalculateSHA256(source.mul),
+        source.mul.Length
+      );
+
+      if (source.idx is not null && target.idx is not null)
+      {
+        using var outputIdxPatch =
+          File.Open(
+            GetCaseNudgedPathName(outputDir.FullName, subfolder, sourceIdxFile.Name + ".patch"),
+            FileMode.Create
+          );
+
+        EncodeFile(source.idx, target.idx, outputIdxPatch, fileName);
+        yield return new PatchInfo(
+          Path.Combine(subfolder, sourceIdxFile.Name),
+          Path.Combine(subfolder, sourceIdxFile.Name) + ".patch",
+          CalculateSHA256(outputIdxPatch),
+          outputIdxPatch.Length,
+          CalculateSHA256(target.idx),
+          target.idx.Length,
+          CalculateSHA256(source.idx),
+          source.idx.Length
+        );
+      }
     }
     finally
     {
-        target.mul.Dispose();
-        target.idx?.Dispose();
-        source.mul.Dispose();
-        source.idx?.Dispose();
+      target.mul.Dispose();
+      target.idx?.Dispose();
+      source.mul.Dispose();
+      source.idx?.Dispose();
     }
-}
+  }
 
 
-static bool TryConvertUopToMul(
-    FileInfo source,
+  static bool TryConvertUopToMul(
+    FileInfo sourceFile,
+    DirectoryInfo targetDir,
     out (Stream outputMul, Stream outputIdx) streams
-)
-{
+  )
+  {
     var converter = new LegacyMULConverter();
-    var name = GetUopMulName(source.Name);
+    var uopMulName = GetUopMulName(sourceFile.Name);
 
-    if (name is null)
+    if (uopMulName is null)
     {
-        streams = (null, null);
-        return false;
+      streams = (null, null);
+      return false;
     }
 
     int idx = 0;
-    var idxNameMatch = Regex.Match(source.Name, @"\d+", RegexOptions.IgnoreCase);
+    var idxNameMatch = Regex.Match(sourceFile.Name, @"\d+", RegexOptions.IgnoreCase);
     if (idxNameMatch.Success) int.TryParse(idxNameMatch.Value, out idx);
 
-    using var inputUop = source.OpenRead();
-    var outputMul = new MemoryStream();
-    var outputIdx = new MemoryStream();
-    var mulType = MulNameToType(name);
+    using var inputUop = sourceFile.Open(FileMode.Open);
+    Stream outputMul;
+    Stream outputIdx;
 
-    converter.FromUOP(inputUop, outputMul, outputIdx, mulType, idx);
+    if (writeUopTarget)
+    {
+      outputMul = new FileInfo(GetCaseNudgedPathName(targetDir.FullName, uopMulName + ".mul")).Create();
+      outputIdx = new FileInfo(GetCaseNudgedPathName(targetDir.FullName, GetMulIdxName(uopMulName))).Create();
+    }
+    else
+    {
+      outputMul = new MemoryStream();
+      outputIdx = new MemoryStream();
+    }
+    
+    
+    var mulType = MulNameToType(uopMulName);
+
+    converter.FromUOP(inputUop, outputMul, outputIdx, mulType, idx, new ConsoleProgress(sourceFile.Name, "uopToMul"));
     streams = (outputMul, mulType != FileType.MapLegacyMUL ? outputIdx : null);
 
     return true;
-}
+  }
 
-static bool EncodeFile(Stream source, Stream target, Stream output)
-{
+  static bool EncodeFile(Stream source, Stream target, Stream output, string fileName)
+  {
     source.Seek(0, SeekOrigin.Begin);
     target.Seek(0, SeekOrigin.Begin);
     output.Seek(0, SeekOrigin.Begin);
 
-    using var encoder = new VCDiff.Encoders.VcEncoder
-    (
-        source,
-        target,
-        output
+    using var encoder = new VCDiff.Encoders.VcEncoder(
+      source,
+      target,
+      output,
+      maxBufferSize: 1,
+      blockSize: blockSize,
+      chunkSize: chunkSize
     );
+    var progress = new ConsoleProgress(fileName, "vcdiff");
+    var result = encoder.Encode(interleaved: false, progress: new ConsoleProgress(fileName, "vcdiff"));
 
-    var result = encoder.Encode(interleaved: false);
     return result == VCDiff.Includes.VCDiffResult.SUCCESS;
-}
+  }
 
-static bool TryGetClientVersionFromExe(string clientpath, out string version)
-{
+  static bool TryGetClientVersionFromExe(string clientpath, out string version)
+  {
     if (!string.IsNullOrEmpty(clientpath) && File.Exists(clientpath))
     {
-        using (FileStream fs = new FileStream(clientpath, FileMode.Open, FileAccess.Read, FileShare.Read))
+      using (FileStream fs = new FileStream(clientpath, FileMode.Open, FileAccess.Read, FileShare.Read))
+      {
+        byte[] buffer = new byte[fs.Length];
+
+        fs.Read(buffer, 0, (int)fs.Length);
+
+        // VS_VERSION_INFO (unicode)
+        Span<byte> vsVersionInfo = stackalloc byte[]
         {
-            byte[] buffer = new byte[fs.Length];
+          0x56, 0x00, 0x53, 0x00, 0x5F, 0x00, 0x56,
+          0x00, 0x45, 0x00, 0x52, 0x00, 0x53, 0x00,
+          0x49, 0x00, 0x4F, 0x00, 0x4E, 0x00, 0x5F,
+          0x00, 0x49, 0x00, 0x4E, 0x00, 0x46, 0x00,
+          0x4F, 0x00
+        };
 
-            fs.Read(buffer, 0, (int)fs.Length);
+        var idx = buffer.AsSpan().IndexOf(vsVersionInfo);
 
-            // VS_VERSION_INFO (unicode)
-            Span<byte> vsVersionInfo = stackalloc byte[]
-            {
-                0x56, 0x00, 0x53, 0x00, 0x5F, 0x00, 0x56,
-                0x00, 0x45, 0x00, 0x52, 0x00, 0x53, 0x00,
-                0x49, 0x00, 0x4F, 0x00, 0x4E, 0x00, 0x5F,
-                0x00, 0x49, 0x00, 0x4E, 0x00, 0x46, 0x00,
-                0x4F, 0x00
-            };
+        if (idx >= 0)
+        {
+          var offset = idx + 42; // 30 + 12
 
-            var idx = buffer.AsSpan().IndexOf(vsVersionInfo);
+          var minorPart = BinaryPrimitives.ReadUInt16LittleEndian(buffer.AsSpan(offset));
+          var majorPart = BinaryPrimitives.ReadUInt16LittleEndian(buffer.AsSpan(offset + 2));
+          var privatePart = BinaryPrimitives.ReadUInt16LittleEndian(buffer.AsSpan(offset + 4));
+          var buildPart = BinaryPrimitives.ReadUInt16LittleEndian(buffer.AsSpan(offset + 6));
 
-            if (idx >= 0)
-            {
-                var offset = idx + 42; // 30 + 12
+          version = $"{majorPart}.{minorPart}.{buildPart}.{privatePart}";
 
-                var minorPart = BinaryPrimitives.ReadUInt16LittleEndian(buffer.AsSpan(offset));
-                var majorPart = BinaryPrimitives.ReadUInt16LittleEndian(buffer.AsSpan(offset + 2));
-                var privatePart = BinaryPrimitives.ReadUInt16LittleEndian(buffer.AsSpan(offset + 4));
-                var buildPart = BinaryPrimitives.ReadUInt16LittleEndian(buffer.AsSpan(offset + 6));
+          Console.WriteLine("client version found: {0}", version);
 
-                version = $"{majorPart}.{minorPart}.{buildPart}.{privatePart}";
-
-                Console.WriteLine("client version found: {0}", version);
-
-                return true;
-            }
+          return true;
         }
+      }
     }
 
     Console.WriteLine("client version not found :(");
@@ -264,44 +314,67 @@ static bool TryGetClientVersionFromExe(string clientpath, out string version)
     version = string.Empty;
 
     return false;
-}
+  }
 
-static string CalculateSHA256(Stream stream)
-{
-    stream.Seek(0, SeekOrigin.Begin);
-    var block = ArrayPool<byte>.Shared.Rent(8192);
-    try
+  static string CalculateSHA256(Stream stream)
+  {
+    // Use managed SHA256 impl on WASM as it does not have access to native crypto
+    if (RuntimeInformation.OSArchitecture == Architecture.Wasm)
     {
+#if WASM_USE_SHA256
+      stream.Seek(0, SeekOrigin.Begin);
+      Span<byte> block = stackalloc byte[4096];
+      var sha256 = new SHA256ManagedImplementation();
+      int length;
+      while ((length = stream.Read(block)) > 0)
+      {
+        sha256.HashCore(block, 0, length);
+      }
+    
+      var hash = sha256.HashFinal();
+      return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+#else
+      return "";
+#endif
+    }
+    else
+    {
+      stream.Seek(0, SeekOrigin.Begin);
+      var block = ArrayPool<byte>.Shared.Rent(8192);
+      try
+      {
         using (var sha256 = SHA256.Create())
         {
-            int length;
-            while ((length = stream.Read(block)) > 0)
-            {
-                sha256.TransformBlock(block, 0, length, null, 0);
-            }
-
-            sha256.TransformFinalBlock(block, 0, 0);
-
-            var hash = sha256.Hash;
-            return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+          int length;
+          while ((length = stream.Read(block)) > 0)
+          {
+            sha256.TransformBlock(block, 0, length, null, 0);
+          }
+    
+          sha256.TransformFinalBlock(block, 0, 0);
+    
+          var hash = sha256.Hash;
+          return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
         }
-    }
-    finally
-    {
+      }
+      finally
+      {
         ArrayPool<byte>.Shared.Return(block);
+      }
     }
-}
+  }
 
-static bool IsValidUOFile(FileInfo f) => f.Extension switch
-{
-    ".mul" or ".idx" or ".uop" or ".txt" or ".def" or ".rle" or ".mp3" or ".midi" => true,
-    _ => false
-} || f.Name.StartsWith("cliloc.", StringComparison.InvariantCultureIgnoreCase);
+  static bool IsValidUOFile(FileInfo f) =>
+    f.Extension switch
+    {
+      ".mul" or ".idx" or ".uop" or ".txt" or ".def" or ".rle" or ".mp3" or ".midi" => true,
+      _ => false
+    } || f.Name.StartsWith("cliloc.", StringComparison.InvariantCultureIgnoreCase);
 
-
-static string RemoveRootPath(string root, string path) =>
+  private static string RemoveRootPath(string root, string path) =>
     path.Replace(root, string.Empty)
-        .TrimStart('/')
-        .TrimStart('\\')
-        .TrimEnd('/')
-        .TrimEnd('\\');
+      .TrimStart('/')
+      .TrimStart('\\')
+      .TrimEnd('/')
+      .TrimEnd('\\');
+}

@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
-using System.Buffers.Binary;
 
 namespace LegacyMUL
 {
@@ -298,10 +293,10 @@ namespace LegacyMUL
         // 
         // UOP -> MUL
         //
-        public void FromUOP(Stream inputUop, Stream outputMul, Stream outputIdx, FileType type, int typeIndex)
+        public void FromUOP(Stream inputUop, Stream outputMul, Stream outputIdx, FileType type, int typeIndex, IProgress<float>? progress = null)
         {
-            Dictionary<ulong, int> chunkIds = new Dictionary<ulong, int>();
-            Dictionary<ulong, int> chunkIds2 = new Dictionary<ulong, int>();
+            var chunkIds = new Dictionary<ulong, int>();
+            var chunkIds2 = new Dictionary<ulong, int>();
 
             int maxId;
             string[] formats = GetHashFormat(type, typeIndex, out maxId);
@@ -335,6 +330,9 @@ namespace LegacyMUL
             {
                 // Table header
                 stream.Seek(nextTable, SeekOrigin.Begin);
+
+                progress?.Report((float)stream.Position / stream.Length);
+                
                 int entries = reader.ReadInt32();
                 nextTable = reader.ReadInt64();
 
@@ -546,6 +544,9 @@ namespace LegacyMUL
                 }
                 toLog.Clear();
                 */
+            
+            progress?.Report((float)1.0);
+
         }
 
         //

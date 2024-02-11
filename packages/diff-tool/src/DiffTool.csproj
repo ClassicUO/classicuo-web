@@ -2,18 +2,53 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>ClassicUO_Web_FileDiff</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
 
     <OutputPath>$(ProjectDir)..\bin\Release\</OutputPath>
     <PublishDir>$(ProjectDir)..\bin\dist\</PublishDir>
     <AssemblyName>classicuo-web-diff-tool-$(RuntimeIdentifier)</AssemblyName>
+    <PublishTrimmed>true</PublishTrimmed>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+
+  <!-- https://github.com/elringus/DotNetJS/blob/feat/revamp/DotNet/Bootsharp/Build/Bootsharp.targets#L15 -->
+  <Choose>
+    <When Condition="$(AggressiveTrimming) == 'true'">
+      <PropertyGroup>
+        <!-- https://learn.microsoft.com/en-us/aspnet/core/blazor/performance?#minimize-app-download-size -->
+        <!-- https://raw.githubusercontent.com/dotnet/runtime/main/docs/workflow/trimming/feature-switches.md -->
+        <PublishTrimmed>true</PublishTrimmed>
+        <TrimMode>full</TrimMode>
+        <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
+        <_AggressiveAttributeTrimming>true</_AggressiveAttributeTrimming>
+        <AutoreleasePoolSupport>false</AutoreleasePoolSupport>
+        <DebuggerSupport>false</DebuggerSupport>
+        <EnableCppCLIHostActivation>false</EnableCppCLIHostActivation>
+        <EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
+        <EnableUnsafeBinaryFormatterInDesigntimeLicenseContextSerialization>false</EnableUnsafeBinaryFormatterInDesigntimeLicenseContextSerialization>
+        <EnableUnsafeUTF7Encoding>false</EnableUnsafeUTF7Encoding>
+        <_EnableConsumingManagedCodeFromNativeHosting>false</_EnableConsumingManagedCodeFromNativeHosting>
+        <EventSourceSupport>false</EventSourceSupport>
+        <HttpActivityPropagationSupport>false</HttpActivityPropagationSupport>
+        <MetadataUpdaterSupport>false</MetadataUpdaterSupport>
+        <UseNativeHttpHandler>true</UseNativeHttpHandler>
+        <UseSystemResourceKeys>true</UseSystemResourceKeys>
+        <StartupHookSupport>false</StartupHookSupport>
+        <CustomResourceTypesSupport>false</CustomResourceTypesSupport>
+        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+        <WasmEmitSourceMap>false</WasmEmitSourceMap>
+        <WasmNativeDebugSymbols>false</WasmNativeDebugSymbols>
+        <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
+      </PropertyGroup>
+    </When>
+  </Choose>
+
   <ItemGroup>
+    <PackageReference Include="acryptohashnet" Version="2.0.0" />
     <PackageReference Include="SharpZipLib" Version="1.3.3" />
     <PackageReference Include="VCDiff" Version="4.0.1" />
-    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
   </ItemGroup>
 </Project>

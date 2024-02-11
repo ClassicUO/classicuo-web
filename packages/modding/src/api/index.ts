@@ -3,41 +3,42 @@ import { Client } from './client';
 import { Player } from './player';
 import { ShardRules } from '../types';
 
-/**
- * Add a listener for a given event.
- */
-declare const addEventListener: <T extends EventNames<EventMap>>(
-  event: T,
-  fn: EventListener<EventMap, T>,
-  once?: boolean
-) => number;
-
-/**
- * Remove the listeners of a given event.
- */
-declare const removeEventListener: <T extends EventNames<EventMap>>(listenerId: number) => void;
-declare const addExtraPlayerBody: (
-  graphicId: number,
-  gumpArtId: number,
-  animId: number,
-  isFemale: boolean,
-  race: number,
-  copyEquipConv?: boolean
-) => void;
-declare const setShardRules: (flags: ShardRules) => boolean;
-declare const sendWebGumpResponse: (serial: number, serverId: number, data: string | Object) => void;
-declare const closeWebGump: (serial: number, serverId: number) => void;
-
-declare const client: Client;
-declare const player: Player;
-
-export {
-  client,
-  player,
+export const {
   addEventListener,
   removeEventListener,
   addExtraPlayerBody,
   setShardRules,
   sendWebGumpResponse,
-  closeWebGump
-};
+  closeWebGump,
+  client,
+  player
+}: {
+  /**
+   * Add a listener for a given event.
+   */
+  addEventListener: <T extends EventNames<EventMap>>(
+    event: T,
+    fn: EventListener<EventMap, T>,
+    once?: boolean
+  ) => number;
+
+  /**
+   * Remove the listeners of a given event.
+   */
+  removeEventListener: <T extends EventNames<EventMap>>(listenerId: number) => void;
+
+  addExtraPlayerBody: (
+    graphicId: number,
+    gumpArtId: number,
+    animId: number,
+    isFemale: boolean,
+    race: number,
+    copyEquipConv?: boolean
+  ) => void;
+
+  setShardRules: (flags: ShardRules) => boolean;
+  sendWebGumpResponse: (serial: number, serverId: number, data: string | Object) => void;
+  closeWebGump: (serial: number, serverId: number) => void;
+  client: Client;
+  player: Player;
+} = globalThis as any;

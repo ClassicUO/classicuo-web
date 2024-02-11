@@ -1,12 +1,17 @@
 import { z } from 'zod';
-import { sourceManifestSchema } from './manifest';
 import { shardRulesSchema } from './rules';
+import { regionSchema } from './regions';
 
 export type Shard = z.infer<typeof shardSchema>;
 
+export const focusSchema = z.union([z.literal('PvP'), z.literal('PvM'), z.literal('PvP / PvM')]);
+
 export const shardSchema = z.object({
   id: z.number(),
-  manifest: z.string().url(),
+  manifest: z
+    .string()
+    .url()
+    .regex(/^https:\/\/[^/]+/),
   mods: z
     .array(
       z.object({
@@ -17,15 +22,23 @@ export const shardSchema = z.object({
     .optional(),
   rules: shardRulesSchema.optional(),
   logo: z.string().url(),
-  name: z.string(),
-  region: z.string(),
-  focus: z.string(),
-  website: z.string().url(),
-  discord: z.string().url().optional(),
+  name: z.string().max(80),
+  region: regionSchema,
+  focus: focusSchema,
+  website: z
+    .string()
+    .regex(/^https:\/\/[^/]+/)
+    .url(),
+  discord: z
+    .string()
+    .url()
+    .regex(/^https:\/\/discord\.gg\/[^/]+/)
+    .optional(),
   encryption: z.number(),
-  clientVersion: z.string(),
+  clientVersion: z.string().regex(/^(\d+\.\d+\.\d+(\.\d+)?[a-z]*)$/),
   useVerdata: z.boolean(),
-  mapLayouts: z.string(),
-  useTokenAuth: z.boolean(),
-  testing: z.boolean().optional()
+  mapLayouts: z.string().regex(/^(\d+,\d+;?)*/),
+  useTokenAuth: z.boolean().optional(),
+  testing: z.boolean().optional(),
+  emulatorType: z.number().optional()
 });
