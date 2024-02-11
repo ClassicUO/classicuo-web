@@ -8,7 +8,7 @@ description: Get started with ClassicUO
 ClassicUO Web is a hosted version of the native desktop ClassicUO client using the latest bleeding-edge web technologies. 
 
 # Highlights
-- You only need a web browser (Chrome 99+) and a few free GB to play
+- You only need a web browser (Chrome 121+) and a few free GB to play
 - Ready to play the first time in minutes, after that seconds
 - Close to native speed of a local CUO install
 - No need to manage game files, they're automatically fetched and updated

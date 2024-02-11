@@ -15,22 +15,22 @@ We don't currently have plans to open-source the web client. Though we do have p
 There's many reasons why, but to outline a few:
 
 1. **Discovery.**  
-We're aspiring to be the OSRS of UO essentially. There should be a single destination people can remember to go to play UO and discover new shards/experiences. 
+We're aspiring to be the [OSRS](https://en.wikipedia.org/wiki/Old_School_RuneScape) of UO essentially. There should be a single destination people can remember to go to play UO and discover new shards/experiences. 
 It's our opinion, a lot of great shards go overlooked as players have a hard time finding them, and the servers have a hard time attracting users. 
 Having a centralised server listing that is also the entrypoint to playing the servers makes that experience 100x better and will bring new players to the game.
 
 2. **Fragmentation/Support.**  
-It's taken us over a year to get a properly stable version of CUO Web.
+It's taken us over a long time to port CUO to the WebAssembly, and to build the supporting web infrastructure to power it.
 We don't want to have to support 100s of fragmented installations with their own bugs and give support on how to bootstrap/maintain the infrastructure needed.
-We're not a PaaS app, we're three dudes working on this in our free time with full-time jobs and families.
+We're not out to make a "Platform as a Service" and all the maintenance that comes with, we're three dudes working on this in our free time with full-time jobs and families.
 
 3. **Cheating.**  
-As others have shown, in order to combat cheating you need to have a modified closed-source client, and then compile it AOT. 
+As others have shown, in order to combat cheating you need to have a modified closed-source client, and then compile it [ahead-of-time](https://blog.ndepend.com/net-native-aot-explained/). 
 Usually with changes to the network protocol to prevent standard CUO from connecting. 
 This is essentially the same reason it's a bad idea to release the web client source. 
 People will take it and make modified clients all over again.
 
-With all that said, we might be open to allowing larger shards to host their own game proxy. However, we'd need to decouple some parts of th authentication system to do that.
+With all that said, we might be open to allowing larger shards to host their own game proxy.
 
 ### I have custom MUL/UOP files for my shard, can I use them with the web client?
 Yes, you can bring your own modified files, see the [Patching guide](https://classicuo.org/docs/shard-owners/patching/) for more info.
@@ -67,4 +67,4 @@ As explained above, the game proxy connects users via the closest region to the 
 
 **If your shard has IP based limits then this will become a problem if there's many users connecting from one region.**
 
-**Right now the recommended solution is to remove IP limits.** Whilst useful back in the day when we all had static IPs from DSL providers, we're now in the age where it's trivial to install a VPN (this post sponsored by NordVPN /s). It's so easy now to change your IP it makes no sense to use it as a way to identify unique users, you only punish legitmate users who share an IP (like families, roommates etc).
+In order to receive the real clients IP address the web client can send the [WebIdentity packet](https://github.com/ClassicUO/packets/?tab=readme-ov-file#packets), which you can enable in the Shard Management for your shard.
