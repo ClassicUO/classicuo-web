@@ -85,6 +85,7 @@ internal static class Program
     }
 
     var uopMulName = GetUopMulName(targetFile.Name);
+    uopMulName = null;
     if (uopMulName is null)
     {
       var sourcePath = GetCaseNudgedPathName(sourceDir.FullName, subfolder, targetFile.Name);

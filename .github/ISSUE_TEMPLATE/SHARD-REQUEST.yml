@@ -10,135 +10,55 @@ body:
   - type: markdown
     attributes:
       value: |
-        Please enter your shard details below, we'll do our best to add it as soon as we can.
+        Enter your shard details below, we'll do our best to add it as soon as we can.
         If you have issues/questions please contact us directly via the CUO discord.
+        
+        :warning: We're currently taking limited shard applications while we automate the shard registration, expect delays :warning:
   - type: input
     id: shard-name
     attributes:
-      label: "Shard Name"
+      label: Shard Name
     validations:
       required: true
   - type: input
     id: shard-contact
     attributes:
       label: Shard admins
-      description: Please provide the usernames of people responsible for your shard
-      placeholder: ex. blah#1234 bob#1234
-    validations:
-      required: false
-  - type: input
-    id: shard-logo
-    attributes:
-      label: Shard Logo
-      description: Please provide a URL to your shards logo
-      placeholder: https://google.com/logo.png
-    validations:
-      required: true
-  - type: input
-    id: shard-discord
-    attributes:
-      label: Shard Discord
-      description: Please provide a URL to your shards discord server (if any)
-      placeholder: https://google.com/logo.png
-    validations:
-      required: false
-  - type: input
-    id: shard-region
-    attributes:
-      label: Shard Region/Country
-      description: Please the short country/region code that your shard resides in
-      placeholder: e.g. US, AU or BR etc.
-    validations:
-      required: true
-  - type: input
-    id: shard-endpoint
-    attributes:
-      label: Shard ip/port
-      description: Please provide your shard's public IP/port, if you want to keep it private please provide it via Discord DM.
-      placeholder: 123.0.14.121,2593
+      description: Please provide the Discord usernames of people responsible for your shard
+      placeholder: e.g. `karasho` `blank000` etc
     validations:
       required: false
   - type: textarea
     id: shard-description
     attributes:
       label: Shard description
-      description: A brief 2-3 sentence description of the shard (this will get shown to players)
+      description: A brief 2-3 sentence description of why you want to add your shard to the web client
     validations:
       required: true
   - type: dropdown
-    id: shard-type
+    id: shard-phase
     attributes:
-      label: Shard type
-      description: What is your type of shard?
+      label: Shard phase
+      description: What state is your shard in, is it launched?
       multiple: true
       options:
-        - PvM
-        - PvP
-        - Other
+        - Development
+        - Testing (Pre-Live)
+        - Live
     validations:
       required: true
   - type: dropdown
-    id: shard-era
+    id: shard-pop
     attributes:
-      label: Shard era
-      description: What UO era is your shard?
-      options:
-        - T2A
-        - UOR
-        - UOTD
-        - LBR
-        - AOS
-        - SE
-        - ML
-        - SA
-        - HS
-        - TOL
-        - EJ
-    validations:
-      required: true
-  - type: dropdown
-    id: shard-customisations
-    attributes:
-      label: What customisations does your shard currently have?
+      label: Shard population
+      description: What is the average concurrent players of your shard
       multiple: true
       options:
-        - Assets (modified UOP/MUL etc)
-        - Custom ClassicUO client
-        - None, stock latest UO
+        - 0-10
+        - 10-100
+        - 100+
     validations:
       required: true
-  - type: input
-    id: shard-files
-    attributes:
-      label: Link to shard files
-      description: Please provide a link to the shard files, preferably a ZIP or dropbox/google drive link, leave empty if using unmodified latest UO files.
-    validations:
-      required: false
-  - type: input
-    id: shard-files-version
-    attributes:
-      label: Version used for the basis of you shard files
-      description: What version of files did you base your assets off? (if unknown use an approximate or n/a)
-      placeholder: 7.0.95.0
-    validations:
-      required: false
-  - type: textarea
-    id: shard-files-modded
-    attributes:
-      label: List of modified UO assets
-      description: |
-        Please provide a list of files you've edited, e.g. gumps.mul, gumpidx.mul, statics0.mul etc.
-        It's important you provide every file you've modified as we will use this list to generate patches.
-      render: shell
-  - type: textarea
-    id: shard-classicuo-customisations
-    attributes:
-      label: ClassicUO Customisations
-      description: | 
-        If you have a customised ClassicUO client for your shard, please give us a list of the changes you've made.
-        This will help us understand how we can help onboard your shard, and how what we need to build into the client to support your type of custom features.
-    validations:
-      required: false
   - type: textarea
     id: shard-comments
     attributes:

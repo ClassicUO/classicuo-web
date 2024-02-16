@@ -6,8 +6,8 @@ description: Frequently asked questions about the ClassicUO Client from shard ow
 # Shard Owners FAQ
 
 ### How can I add my shard to the server list?
-Right now we're keeping the pool of servers small for testing purposes. 
-Please make a [Shard Request issue over on our Github](https://github.com/ClassicUO/classicuo-web/issues/new/choose) and we will get back to you.
+Right now we're not accepting any new shards while we work on automating the application process.
+Please make a [Shard Request issue over on our Github](https://github.com/ClassicUO/classicuo-web/issues/new/choose) and once we're ready to add shards again we will notify you.
 
 ### Will ClassicUO Web be open-source?
 We don't currently have plans to open-source the web client. Though we do have plans to allow customization by shard owners.
