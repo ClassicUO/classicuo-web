@@ -1,3 +1,5 @@
 .yarn
 node_modules
 .parcel-cache
+site/.vitepress/dist
+site/.vitepress/cache

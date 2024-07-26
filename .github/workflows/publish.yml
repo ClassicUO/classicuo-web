@@ -12,23 +12,41 @@ jobs:
       contents: read
 
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Setup Deno environment
-        uses: denoland/setup-deno@v1
+      - name: Setup nodejs 21
+        uses: actions/setup-node@v3
         with:
-          deno-version: v1.x
+          node-version: 21
+
+      - name: Setup yarn
+        id: setup-yarn
+        shell: bash
+        working-directory: web
+        run: |
+          corepack enable
+          corepack prepare yarn@3.2.0 --activate
+          echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+
+      - name: Restore yarn cache (with retry)
+        uses: Wandalen/wretry.action@v1.0.36
+        with:
+          action: actions/cache@v3
+          attempt_limit: 3
+          with: |
+            path: ${{ steps.setup-yarn.outputs.dir }}
+            key: yarn-cache-folder-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
+            restore-keys: |
+              yarn-cache-folder-
 
       - name: Build site
         run: |
-          deno task build
-          deno task styles
-        working-directory: ./packages/web
+          yarn install
+          yarn docs:build
 
       - name: Publish
-        uses: cloudflare/wrangler-action@2.0.0
+        uses: cloudflare/wrangler-action@v3
         with:
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           apiToken: ${{ secrets.CF_API_TOKEN }}
-          command: pages publish --commit-dirty --branch main --project-name=web-classicuo ./packages/web/_site
+          command: pages publish --commit-dirty --branch main --project-name=web-classicuo ./site/.vitepress/dist

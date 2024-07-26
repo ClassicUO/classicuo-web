@@ -1,0 +1,82 @@
+[
+  {
+    "text": "Functions",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "exit",
+        "link": "/scripting/functions/exit.md"
+      },
+      {
+        "text": "log",
+        "link": "/scripting/functions/log.md"
+      },
+      {
+        "text": "sleep",
+        "link": "/scripting/functions/sleep.md"
+      }
+    ]
+  },
+  {
+    "text": "References",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "Client",
+        "link": "/scripting/namespaces/Client/"
+      },
+      {
+        "text": "Entity",
+        "link": "/scripting/namespaces/Entity/"
+      },
+      {
+        "text": "GameObject",
+        "link": "/scripting/namespaces/GameObject/"
+      },
+      {
+        "text": "Gump",
+        "link": "/scripting/namespaces/Gump/"
+      },
+      {
+        "text": "IgnoreList",
+        "link": "/scripting/namespaces/IgnoreList/"
+      },
+      {
+        "text": "Item",
+        "link": "/scripting/namespaces/Item/"
+      },
+      {
+        "text": "Journal",
+        "link": "/scripting/namespaces/Journal/"
+      },
+      {
+        "text": "Mobile",
+        "link": "/scripting/namespaces/Mobile/"
+      },
+      {
+        "text": "Player",
+        "link": "/scripting/namespaces/Player/"
+      },
+      {
+        "text": "PopupMenu",
+        "link": "/scripting/namespaces/PopupMenu/"
+      },
+      {
+        "text": "Prompt",
+        "link": "/scripting/namespaces/Prompt/"
+      },
+      {
+        "text": "Skill",
+        "link": "/scripting/namespaces/Skill/"
+      },
+      {
+        "text": "Target",
+        "link": "/scripting/namespaces/Target/"
+      },
+      {
+        "text": "enums",
+        "link": "/scripting/namespaces/enums/"
+      }
+    ]
+  }
+]

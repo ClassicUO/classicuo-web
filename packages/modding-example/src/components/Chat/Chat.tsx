@@ -26,8 +26,6 @@ export const Chat: React.FC = () => {
           <ChatInput />
         </ChatContainer>
       </View>
-
-      <PlayerStatusGump />
     </>
   );
 };
