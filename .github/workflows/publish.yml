@@ -22,7 +22,6 @@ jobs:
       - name: Setup yarn
         id: setup-yarn
         shell: bash
-        working-directory: web
         run: |
           corepack enable
           corepack prepare yarn@3.2.0 --activate
