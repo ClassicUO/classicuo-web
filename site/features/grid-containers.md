@@ -4,11 +4,10 @@ outline: deep
 
 # Grid Containers
 
-Web Grid Containers are entirely rendered by the browser, and work by **automatic sorting rather than being slot-based
-**.
+Web Grid Containers are entirely rendered by the browser, and works by **automatic sorting rather than being slot-based**.
 
 ::: info
-Turn on `Modern Grid Containers`, `Modern Loot Gump`, and `Modern Tooltips` in the Experimental options.
+Enable `Modern Grid Containers`, `Modern Loot Gump`, and `Modern Tooltips` under `Experimental` in the game options to use.
 :::
 
 ## Highlights

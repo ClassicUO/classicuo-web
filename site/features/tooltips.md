@@ -4,9 +4,9 @@ outline: deep
 # Tooltips
 
 Essentially these replace the existing dated UO tooltips with a complete web version rendered by the browser.
-
-**Enable `ModernTooltips` under `Experimental` in the game options to use.**
-
+::: info
+Enable `ModernTooltips` under `Experimental` in the game options to use.
+:::
 ## Highlights
 
 - Sleek interface, with better readability

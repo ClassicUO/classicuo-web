@@ -39,6 +39,6 @@ Tou can make the item filtering less strict by toggling the filters next to the 
 - Ignore name
 - Ignore hue
 
-![img_1.png](/features/loot-agent/filters.png)![img.png](/features/loot-agent/filters.png)
+![img.png](/features/loot-agent/filters.png)
 
 
