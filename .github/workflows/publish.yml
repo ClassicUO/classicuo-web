@@ -24,7 +24,7 @@ jobs:
         shell: bash
         run: |
           corepack enable
-          corepack prepare yarn@3.2.0 --activate
+          yarn set version stable
 
       - name: Build site
         run: |
