@@ -25,18 +25,6 @@ jobs:
         run: |
           corepack enable
           corepack prepare yarn@3.2.0 --activate
-          echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-
-      - name: Restore yarn cache (with retry)
-        uses: Wandalen/wretry.action@v1.0.36
-        with:
-          action: actions/cache@v3
-          attempt_limit: 3
-          with: |
-            path: ${{ steps.setup-yarn.outputs.dir }}
-            key: yarn-cache-folder-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
-            restore-keys: |
-              yarn-cache-folder-
 
       - name: Build site
         run: |
