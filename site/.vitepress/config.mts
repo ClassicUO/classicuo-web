@@ -46,8 +46,9 @@ export default defineConfig({
               { text: 'Game Profiles', link: '/features/game-profiles.md' },
               { text: 'Game Options', link: '/features/game-options.md' },
               { text: 'Grid Containers', link: '/features/grid-containers.md' },
-              { text: 'Hotkeys', link: '/features/hotkeys.md' },
-              { text: 'Scripting', link: '/features/scripting.md' },
+              // TODO
+              // { text: 'Hotkeys', link: '/features/hotkeys.md' },
+              // { text: 'Scripting', link: '/features/scripting.md' },
               { text: 'Tooltips', link: '/features/tooltips.md' }
             ]
           }
