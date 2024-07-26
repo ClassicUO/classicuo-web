@@ -3,7 +3,7 @@ outline: deep
 ---
 # Loot Agent
 
-The loot agent automatically collects items from corpses based a white-listed set of items you add.
+The loot agent automatically collects items from corpses based on a white-listed set of items you add.
 
 ::: info
 Enable `Modern Loot Gump` in the Loot Agent options to use.
@@ -34,7 +34,7 @@ You can do this by replacing the destination bag on the right of the item in the
 ### Item filtering
 
 Sometimes items of the same type have differing names or hues, causing the Autoloot to skip over them.
-Tou can make the item filtering less strict by toggling the filters next to the item, namely:
+You can make the item filtering less strict by toggling the filters next to the item, namely:
 
 - Ignore name
 - Ignore hue
