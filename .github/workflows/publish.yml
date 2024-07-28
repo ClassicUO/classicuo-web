@@ -40,4 +40,4 @@ jobs:
         with:
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           apiToken: ${{ secrets.CF_API_TOKEN }}
-          command: pages publish --commit-dirty --branch main --project-name=web-classicuo ./site/.vitepress/dist
+          command: pages deploy --commit-dirty --branch main --project-name=web-classicuo ./site/.vitepress/dist
