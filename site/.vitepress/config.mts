@@ -4,6 +4,15 @@ import { SearchPlugin } from 'vitepress-plugin-search';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  title: 'Web Client - ClassicUO',
+  description: 'Web Client - ClassicUO',
+  lastUpdated: true,
+  cleanUrls: true,
+  metaChunk: true,
+  head: [['link', { rel: 'icon', href: '/favicon.png' }]],
+  sitemap: {
+    hostname: 'https://classicuo.org'
+  },
   vite: {
     plugins: [
       SearchPlugin({
@@ -16,18 +25,19 @@ export default defineConfig({
       })
     ]
   },
-  title: 'Web Client - ClassicUO',
-  description: 'Web Client - ClassicUO',
   themeConfig: {
-    logo: '/images/cuo-logo.png',
     // https://vitepress.dev/reference/default-theme-config
+    outline: [4, 5],
+    logo: '/images/cuo-logo.png',
+    editLink: {
+      text: 'Edit this page on GitHub',
+      pattern: 'https://github.com/ClassicUO/classicuo-web/edit/main/site/:path'
+    },
     nav: [
       { text: 'Home', link: '/' },
       { text: 'About', link: '/about' },
       { text: 'Scripting', link: '/scripting/globals' }
     ],
-    outline: [4, 5],
-
     sidebar: [
       {
         text: 'Home',
