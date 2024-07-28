@@ -12,7 +12,8 @@ once we are ready to add shards again.
 
 ## Will ClassicUO Web be open-source?
 
-We do not have plans to open-source the web client at this time.
+While the [desktop ClassicUO client](https://github.com/ClassicUO/ClassicUO) will always be open-source, we do not have plans to open-source the web client at
+this time.
 
 There are several reasons for this decision:
 
