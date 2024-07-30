@@ -233,6 +233,8 @@ terrain(
 
 Target a Tile or Static
 
+**When `graphic` is omitted it will target `LAND` by default.**
+
 ###### Parameters
 
 | Parameter  | Type     |
@@ -275,6 +277,8 @@ terrainRelativeToEntity(
 
 Target a Tile or Static from a specific Item or Mobile
 
+**When `graphic` is omitted it will target `LAND` by default.**
+
 ###### Parameters
 
 | Parameter  | Type                                                      |
@@ -316,6 +320,8 @@ terrainWithOffset(
 ```
 
 Target a Tile or Static where `{ x, y, z }` is the distance from the player.
+
+**When `graphic` is omitted it will target `LAND` by default.**
 
 ###### Parameters
 
