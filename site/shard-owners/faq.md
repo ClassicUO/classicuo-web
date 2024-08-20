@@ -5,10 +5,9 @@ outline: deep
 # Shard Owners FAQ
 
 ## How can I add my shard to the server list?
+**The shard application process is currently in BETA**
 
-Currently, we are not accepting new shards while we work on automating the application process. Please create
-a [Shard Request issue](https://github.com/ClassicUO/classicuo-web/issues/new/choose) on our GitHub. We will notify you
-once we are ready to add shards again.
+Create a [shard application](https://play.classicuo.org/shard-management/shard-application) to have your shard added to the list.
 
 ## Will ClassicUO Web be open-source?
 
