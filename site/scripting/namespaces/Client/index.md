@@ -86,7 +86,7 @@ client.headMsg('A chat in Green', 66);
 ```ts
 (
    message: string,
-   serial: number | SerialObject | GameObject,
+   serial: number | SerialObject | GameObject | "world",
    hue?: number): void
 ```
 
@@ -94,11 +94,11 @@ Display a message overhead of the target entity.
 
 ###### Parameters
 
-| Parameter | Type                                                                                                                   |
-| :-------- | :--------------------------------------------------------------------------------------------------------------------- |
-| `message` | `string`                                                                                                               |
-| `serial`  | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
-| `hue`?    | `number`                                                                                                               |
+| Parameter | Type                                                                                                                                |
+| :-------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| `message` | `string`                                                                                                                            |
+| `serial`  | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) \| `"world"` |
+| `hue`?    | `number`                                                                                                                            |
 
 ###### Example
 
@@ -117,16 +117,16 @@ client.headMsg('A message in Green', player, 66);
 ##### openPaperdoll()
 
 ```ts
-(serial?: number | SerialObject | GameObject): void
+(serial?: number | SerialObject | GameObject | "world"): void
 ```
 
 Open the paperdoll for a Mobile.
 
 ###### Parameters
 
-| Parameter | Type                                                                                                                   |
-| :-------- | :--------------------------------------------------------------------------------------------------------------------- |
-| `serial`? | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
+| Parameter | Type                                                                                                                                |
+| :-------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| `serial`? | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) \| `"world"` |
 
 ###### Example
 
@@ -152,9 +152,14 @@ client.openPaperdoll(nearestHuman);
 
 ```ts
 (
-   serial: number | SerialObject | GameObject,
+   serial: number | SerialObject | GameObject | "world",
    hue?: null | number,
-   sourceSerial?: null | number | SerialObject | GameObject,
+   sourceSerial?:
+  | null
+  | number
+  | SerialObject
+  | GameObject
+  | "world",
    amount?: null | number,
    range?: null | number): any
 ```
@@ -163,13 +168,13 @@ Attempts to check whether a certain object can be found in the game.
 
 ###### Parameters
 
-| Parameter       | Type                                                                                                                             |
-| :-------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| `serial`        | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject)           |
-| `hue`?          | `null` \| `number`                                                                                                               |
-| `sourceSerial`? | `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
-| `amount`?       | `null` \| `number`                                                                                                               |
-| `range`?        | `null` \| `number`                                                                                                               |
+| Parameter       | Type                                                                                                                                             |
+| :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `serial`        | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) \| `"world"`              |
+| `hue`?          | `null` \| `number`                                                                                                                               |
+| `sourceSerial`? | \| `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) \| `"world"` |
+| `amount`?       | `null` \| `number`                                                                                                                               |
+| `range`?        | `null` \| `number`                                                                                                                               |
 
 ###### Example
 
@@ -197,7 +202,12 @@ if (runebook) {
 (
    graphic: number,
    hue?: null | number,
-   sourceSerial?: null | number | SerialObject | GameObject,
+   sourceSerial?:
+  | null
+  | number
+  | SerialObject
+  | GameObject
+  | "world",
    amount?: null | number,
    range?: null | number): any
 ```
@@ -206,13 +216,13 @@ Attempts to find an object in the world with the specified search parameters, re
 
 ###### Parameters
 
-| Parameter       | Type                                                                                                                             |
-| :-------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| `graphic`       | `number`                                                                                                                         |
-| `hue`?          | `null` \| `number`                                                                                                               |
-| `sourceSerial`? | `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
-| `amount`?       | `null` \| `number`                                                                                                               |
-| `range`?        | `null` \| `number`                                                                                                               |
+| Parameter       | Type                                                                                                                                             |
+| :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `graphic`       | `number`                                                                                                                                         |
+| `hue`?          | `null` \| `number`                                                                                                                               |
+| `sourceSerial`? | \| `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) \| `"world"` |
+| `amount`?       | `null` \| `number`                                                                                                                               |
+| `range`?        | `null` \| `number`                                                                                                                               |
 
 ###### Example
 
@@ -241,7 +251,12 @@ if (bandages) {
 (
    graphic: number,
    hue?: null | number,
-   sourceSerial?: null | number | SerialObject | GameObject,
+   sourceSerial?:
+  | null
+  | number
+  | SerialObject
+  | GameObject
+  | "world",
    amount?: null | number,
    range?: null | number): any[]
 ```
@@ -250,13 +265,13 @@ Attempts to find all objects of a certain type (graphic), returning the matching
 
 ###### Parameters
 
-| Parameter       | Type                                                                                                                             |
-| :-------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| `graphic`       | `number`                                                                                                                         |
-| `hue`?          | `null` \| `number`                                                                                                               |
-| `sourceSerial`? | `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
-| `amount`?       | `null` \| `number`                                                                                                               |
-| `range`?        | `null` \| `number`                                                                                                               |
+| Parameter       | Type                                                                                                                                             |
+| :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `graphic`       | `number`                                                                                                                                         |
+| `hue`?          | `null` \| `number`                                                                                                                               |
+| `sourceSerial`? | \| `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) \| `"world"` |
+| `amount`?       | `null` \| `number`                                                                                                                               |
+| `range`?        | `null` \| `number`                                                                                                                               |
 
 ###### Returns
 
@@ -266,7 +281,7 @@ Attempts to find all objects of a certain type (graphic), returning the matching
 
 ```ts
 const goldPile = 0xeed;
-const piles = client.findAllOfType(goldPile, undefined, Constant.WorldSerial);
+const piles = client.findAllOfType(goldPile, undefined, 'world');
 
 if (piles.length > 0) {
   client.headMsg(`Found ${piles.length} gold piles on the ground`, player);
@@ -288,7 +303,12 @@ if (piles.length > 0) {
 (
    graphic: number,
    hue?: null | number,
-   sourceSerial?: null | number | SerialObject | GameObject,
+   sourceSerial?:
+  | null
+  | number
+  | SerialObject
+  | GameObject
+  | "world",
    amount?: null | number,
    range?: null | number): Item[]
 ```
@@ -297,13 +317,13 @@ Attempts to find all **Items** of a certain type (graphic).
 
 ###### Parameters
 
-| Parameter       | Type                                                                                                                             |
-| :-------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| `graphic`       | `number`                                                                                                                         |
-| `hue`?          | `null` \| `number`                                                                                                               |
-| `sourceSerial`? | `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
-| `amount`?       | `null` \| `number`                                                                                                               |
-| `range`?        | `null` \| `number`                                                                                                               |
+| Parameter       | Type                                                                                                                                             |
+| :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `graphic`       | `number`                                                                                                                                         |
+| `hue`?          | `null` \| `number`                                                                                                                               |
+| `sourceSerial`? | \| `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) \| `"world"` |
+| `amount`?       | `null` \| `number`                                                                                                                               |
+| `range`?        | `null` \| `number`                                                                                                                               |
 
 ###### Returns
 
@@ -313,7 +333,7 @@ Attempts to find all **Items** of a certain type (graphic).
 
 ```ts
 const goldPile = 0xeed;
-const piles = client.findAllItemsOfType(goldPile, undefined, Constant.WorldSerial);
+const piles = client.findAllItemsOfType(goldPile, undefined, 'world');
 
 if (piles.length > 0) {
   const total = piles.reduce((sum, item) => sum + item.amount, 0);
@@ -336,7 +356,12 @@ if (piles.length > 0) {
 (
    graphic: number,
    hue?: null | number,
-   sourceSerial?: null | number | SerialObject | GameObject,
+   sourceSerial?:
+  | null
+  | number
+  | SerialObject
+  | GameObject
+  | "world",
    amount?: null | number,
    range?: null | number): Mobile[]
 ```
@@ -345,13 +370,13 @@ Attempts to find all **Mobiles** of a certain type (graphic).
 
 ###### Parameters
 
-| Parameter       | Type                                                                                                                             |
-| :-------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| `graphic`       | `number`                                                                                                                         |
-| `hue`?          | `null` \| `number`                                                                                                               |
-| `sourceSerial`? | `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
-| `amount`?       | `null` \| `number`                                                                                                               |
-| `range`?        | `null` \| `number`                                                                                                               |
+| Parameter       | Type                                                                                                                                             |
+| :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `graphic`       | `number`                                                                                                                                         |
+| `hue`?          | `null` \| `number`                                                                                                                               |
+| `sourceSerial`? | \| `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) \| `"world"` |
+| `amount`?       | `null` \| `number`                                                                                                                               |
+| `range`?        | `null` \| `number`                                                                                                                               |
 
 ###### Returns
 
@@ -380,17 +405,17 @@ if (sheep.length > 0) {
 ##### findItemOnLayer()
 
 ```ts
-(serial: number | SerialObject | GameObject, layer: Layers): any
+(serial: number | SerialObject | GameObject | "world", layer: Layers): any
 ```
 
 Attempts to find the object at the specified layer, if it exists.
 
 ###### Parameters
 
-| Parameter | Type                                                                                                                   |
-| :-------- | :--------------------------------------------------------------------------------------------------------------------- |
-| `serial`  | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
-| `layer`   | `Layers`                                                                                                               |
+| Parameter | Type                                                                                                                                |
+| :-------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| `serial`  | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) \| `"world"` |
+| `layer`   | `Layers`                                                                                                                            |
 
 ###### Example
 
@@ -875,15 +900,15 @@ client.toggleAuras();
 ##### queryItemOPL()
 
 ```ts
-(serialOrObject: number | SerialObject | GameObject, timeout?: number): object
+(serialOrObject: number | SerialObject | GameObject | "world", timeout?: number): object
 ```
 
 ###### Parameters
 
-| Parameter        | Type                                                                                                                   |
-| :--------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| `serialOrObject` | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
-| `timeout`?       | `number`                                                                                                               |
+| Parameter        | Type                                                                                                                                |
+| :--------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| `serialOrObject` | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) \| `"world"` |
+| `timeout`?       | `number`                                                                                                                            |
 
 ###### Returns
 
@@ -909,15 +934,15 @@ client.toggleAuras();
 ##### queryItemSingleClickName()
 
 ```ts
-(serialOrObject: number | SerialObject | GameObject, timeout?: number): string
+(serialOrObject: number | SerialObject | GameObject | "world", timeout?: number): string
 ```
 
 ###### Parameters
 
-| Parameter        | Type                                                                                                                   |
-| :--------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| `serialOrObject` | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
-| `timeout`?       | `number`                                                                                                               |
+| Parameter        | Type                                                                                                                                |
+| :--------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| `serialOrObject` | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) \| `"world"` |
+| `timeout`?       | `number`                                                                                                                            |
 
 ###### Returns
 
