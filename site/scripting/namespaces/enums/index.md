@@ -247,6 +247,21 @@
 ---
 
 <div class="heading-level-3">
+<a id="constant" name="constant"></a>
+
+### Constant
+
+#### Enumeration Members
+
+| Enumeration Member                                        | Value        |
+| :-------------------------------------------------------- | :----------- |
+| <a id="worldserial" name="worldserial"></a> `WorldSerial` | `4294967295` |
+
+</div>
+
+---
+
+<div class="heading-level-3">
 <a id="directions" name="directions"></a>
 
 ### Directions

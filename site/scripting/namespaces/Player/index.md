@@ -172,6 +172,8 @@ energyResistance: number;
 equippedItems: object;
 ```
 
+The currently equipped items of the mobile (humanoid/players)
+
 | Member      | Type                            |
 | :---------- | :------------------------------ |
 | `arms`      | [`Item`](../Item/index.md#item) |
@@ -376,6 +378,8 @@ if (entity) {
 inWarMode: boolean;
 ```
 
+Whether the mobile is currently in War Mode (humanoid)
+
 ###### Inherited from
 
 [`Mobile`](../Mobile/index.md#mobile).[`inWarMode`](../Mobile/index.md#inwarmode)
@@ -406,6 +410,8 @@ intelligence: number;
 isDead: boolean;
 ```
 
+Whether the mobile is dead
+
 ###### Inherited from
 
 [`Mobile`](../Mobile/index.md#mobile).[`isDead`](../Mobile/index.md#isdead)
@@ -422,6 +428,8 @@ isDead: boolean;
 ```ts
 isFemale: boolean;
 ```
+
+Whether the mobile is female, or otherwise male.
 
 ###### Inherited from
 
@@ -457,6 +465,8 @@ isHidden: boolean;
 isParalyzed: boolean;
 ```
 
+Whether the mobile is currently paralyzed.
+
 ###### Inherited from
 
 [`Mobile`](../Mobile/index.md#mobile).[`isParalyzed`](../Mobile/index.md#isparalyzed)
@@ -474,6 +484,8 @@ isParalyzed: boolean;
 isPoisoned: boolean;
 ```
 
+Whether the mobile is poisoned (green hued)
+
 ###### Inherited from
 
 [`Mobile`](../Mobile/index.md#mobile).[`isPoisoned`](../Mobile/index.md#ispoisoned)
@@ -490,6 +502,8 @@ isPoisoned: boolean;
 ```ts
 isYellowHits: boolean;
 ```
+
+Whether the mobiles status is yellow (i.e. Invulnerable)
 
 ###### Inherited from
 
@@ -546,6 +560,8 @@ luck: number;
 ```ts
 mana: number;
 ```
+
+The mobiles current mana. For the player it returns the real value, for other mobiles it is a scale of 1 to 100
 
 ###### Inherited from
 
@@ -658,6 +674,8 @@ if (entity) {
 maxMana: number;
 ```
 
+The mobiles maximum mana. For the player it returns the real value, for other mobiles it is a scale of 1 to 100
+
 ###### Inherited from
 
 [`Mobile`](../Mobile/index.md#mobile).[`maxMana`](../Mobile/index.md#maxmana)
@@ -700,6 +718,8 @@ maxPoisonResistence: number;
 ```ts
 maxStamina: number;
 ```
+
+The mobiles maximum stamina. For the player it returns the real value, for other mobiles it is a scale of 1 to 100
 
 ###### Inherited from
 
@@ -745,6 +765,8 @@ if (entity) {
 ```ts
 notoriety: Notorieties;
 ```
+
+The mobiles Notoriety, i.e. Innocent, Gray, etc.
 
 ###### Inherited from
 
@@ -844,6 +866,8 @@ spellDamageIncrease: number;
 ```ts
 stamina: number;
 ```
+
+The mobiles current stamina. For the player it returns the real value, for other mobiles it is a scale of 1 to 100
 
 ###### Inherited from
 
@@ -1063,16 +1087,16 @@ player.bow();
 ##### cast()
 
 ```ts
-cast(spell: string | Spells): void
+cast(spell: any): void
 ```
 
 Casts a spell
 
 ###### Parameters
 
-| Parameter | Type                                             |
-| :-------- | :----------------------------------------------- |
-| `spell`   | `string` \| [`Spells`](../enums/index.md#spells) |
+| Parameter | Type  |
+| :-------- | :---- |
+| `spell`   | `any` |
 
 ###### Example
 
@@ -1093,190 +1117,7 @@ target.entity(player);
 
 ```ts
 castTo(
-   spell:
-  | Spells
-  | "Clumsy"
-  | "CreateFood"
-  | "Feeblemind"
-  | "Heal"
-  | "MagicArrow"
-  | "NightSight"
-  | "ReactiveArmor"
-  | "Weaken"
-  | "Agility"
-  | "Cunning"
-  | "Cure"
-  | "Harm"
-  | "MagicTrap"
-  | "RemoveTrap"
-  | "Protection"
-  | "Strength"
-  | "Bless"
-  | "Fireball"
-  | "MagicLock"
-  | "Poison"
-  | "Telekinesis"
-  | "Teleport"
-  | "Unlock"
-  | "WallOfStone"
-  | "ArchCure"
-  | "ArchProtection"
-  | "Curse"
-  | "FireField"
-  | "GreaterHeal"
-  | "Lightning"
-  | "ManaDrain"
-  | "Recall"
-  | "BladeSpirits"
-  | "DispelField"
-  | "Incognito"
-  | "MagicReflect"
-  | "MindBlast"
-  | "Paralyze"
-  | "PoisonField"
-  | "SummonCreature"
-  | "Dispel"
-  | "EnergyBolt"
-  | "Explosion"
-  | "Invisibility"
-  | "Mark"
-  | "MassCurse"
-  | "ParalyzeField"
-  | "Reveal"
-  | "ChainLightning"
-  | "EnergyField"
-  | "FlameStrike"
-  | "GateTravel"
-  | "ManaVampire"
-  | "MassDispel"
-  | "MeteorSwarm"
-  | "Polymorph"
-  | "Earthquake"
-  | "EnergyVortex"
-  | "Resurrection"
-  | "AirElemental"
-  | "SummonDaemon"
-  | "EarthElemental"
-  | "FireElemental"
-  | "WaterElemental"
-  | "AnimateDead"
-  | "BloodOath"
-  | "CorpseSkin"
-  | "CurseWeapon"
-  | "EvilOmen"
-  | "HorrificBeast"
-  | "LichForm"
-  | "MindRot"
-  | "PainSpike"
-  | "PoisonStrike"
-  | "Strangle"
-  | "SummonFamiliar"
-  | "VampiricEmbrace"
-  | "VengefulSpirit"
-  | "Wither"
-  | "WraithForm"
-  | "Exorcism"
-  | "CleanseByFire"
-  | "CloseWounds"
-  | "ConsecrateWeapon"
-  | "DispelEvil"
-  | "DivineFury"
-  | "EnemyOfOne"
-  | "HolyLight"
-  | "NobleSacrifice"
-  | "RemoveCurse"
-  | "SacredJourney"
-  | "HonorableExecution"
-  | "Confidence"
-  | "Evasion"
-  | "CounterAttack"
-  | "LightningStrike"
-  | "MomentumStrike"
-  | "FocusAttack"
-  | "DeathStrike"
-  | "AnimalForm"
-  | "KiAttack"
-  | "SurpriseAttack"
-  | "Backstab"
-  | "Shadowjump"
-  | "MirrorImage"
-  | "ArcaneCircle"
-  | "GiftOfRenewal"
-  | "ImmolatingWeapon"
-  | "Attunement"
-  | "Thunderstorm"
-  | "NaturesFury"
-  | "SummonFey"
-  | "SummonFiend"
-  | "ReaperForm"
-  | "Wildfire"
-  | "EssenceOfWind"
-  | "DryadAllure"
-  | "EtherealVoyage"
-  | "WordOfDeath"
-  | "GiftOfLife"
-  | "ArcaneEmpowerment"
-  | "NetherBolt"
-  | "HealingStone"
-  | "PurgeMagic"
-  | "Enchant"
-  | "Sleep"
-  | "EagleStrike"
-  | "AnimatedWeapon"
-  | "StoneForm"
-  | "SpellTrigger"
-  | "MassSleep"
-  | "CleansingWinds"
-  | "Bombard"
-  | "SpellPlague"
-  | "HailStorm"
-  | "NetherCyclone"
-  | "RisingColossus"
-  | "Inspire"
-  | "Invigorate"
-  | "Resilience"
-  | "Perseverance"
-  | "Tribulation"
-  | "Despair"
-  | "DeathRay"
-  | "EtherealBurst"
-  | "NetherBlast"
-  | "MysticWeapon"
-  | "CommandUndead"
-  | "Conduit"
-  | "ManaShield"
-  | "SummonReaper"
-  | "EnchantedSummoning"
-  | "AnticipateHit"
-  | "Warcry"
-  | "Intuition"
-  | "Rejuvenate"
-  | "HolyFist"
-  | "Shadow"
-  | "WhiteTigerForm"
-  | "FlamingShot"
-  | "PlayingTheOdds"
-  | "Thrust"
-  | "Pierce"
-  | "Stagger"
-  | "Toughness"
-  | "Onslaught"
-  | "FocusedEye"
-  | "ElementalFury"
-  | "CalledShot"
-  | "WarriorsGifts"
-  | "ShieldBash"
-  | "Bodyguard"
-  | "HeightenSenses"
-  | "Tolerance"
-  | "InjectedStrike"
-  | "Potency"
-  | "Rampage"
-  | "FistsOfFury"
-  | "Knockout"
-  | "Whispering"
-  | "CombatTraining"
-  | "Boarding",
+   spell: any,
    serial: SerialOrEntity,
    timeout?: number): void
 ```
@@ -1285,11 +1126,11 @@ Casts a spell and automatically targets the given serial on the next target
 
 ###### Parameters
 
-| Parameter  | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| :--------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `spell`    | \| [`Spells`](../enums/index.md#spells) \| `"Clumsy"` \| `"CreateFood"` \| `"Feeblemind"` \| `"Heal"` \| `"MagicArrow"` \| `"NightSight"` \| `"ReactiveArmor"` \| `"Weaken"` \| `"Agility"` \| `"Cunning"` \| `"Cure"` \| `"Harm"` \| `"MagicTrap"` \| `"RemoveTrap"` \| `"Protection"` \| `"Strength"` \| `"Bless"` \| `"Fireball"` \| `"MagicLock"` \| `"Poison"` \| `"Telekinesis"` \| `"Teleport"` \| `"Unlock"` \| `"WallOfStone"` \| `"ArchCure"` \| `"ArchProtection"` \| `"Curse"` \| `"FireField"` \| `"GreaterHeal"` \| `"Lightning"` \| `"ManaDrain"` \| `"Recall"` \| `"BladeSpirits"` \| `"DispelField"` \| `"Incognito"` \| `"MagicReflect"` \| `"MindBlast"` \| `"Paralyze"` \| `"PoisonField"` \| `"SummonCreature"` \| `"Dispel"` \| `"EnergyBolt"` \| `"Explosion"` \| `"Invisibility"` \| `"Mark"` \| `"MassCurse"` \| `"ParalyzeField"` \| `"Reveal"` \| `"ChainLightning"` \| `"EnergyField"` \| `"FlameStrike"` \| `"GateTravel"` \| `"ManaVampire"` \| `"MassDispel"` \| `"MeteorSwarm"` \| `"Polymorph"` \| `"Earthquake"` \| `"EnergyVortex"` \| `"Resurrection"` \| `"AirElemental"` \| `"SummonDaemon"` \| `"EarthElemental"` \| `"FireElemental"` \| `"WaterElemental"` \| `"AnimateDead"` \| `"BloodOath"` \| `"CorpseSkin"` \| `"CurseWeapon"` \| `"EvilOmen"` \| `"HorrificBeast"` \| `"LichForm"` \| `"MindRot"` \| `"PainSpike"` \| `"PoisonStrike"` \| `"Strangle"` \| `"SummonFamiliar"` \| `"VampiricEmbrace"` \| `"VengefulSpirit"` \| `"Wither"` \| `"WraithForm"` \| `"Exorcism"` \| `"CleanseByFire"` \| `"CloseWounds"` \| `"ConsecrateWeapon"` \| `"DispelEvil"` \| `"DivineFury"` \| `"EnemyOfOne"` \| `"HolyLight"` \| `"NobleSacrifice"` \| `"RemoveCurse"` \| `"SacredJourney"` \| `"HonorableExecution"` \| `"Confidence"` \| `"Evasion"` \| `"CounterAttack"` \| `"LightningStrike"` \| `"MomentumStrike"` \| `"FocusAttack"` \| `"DeathStrike"` \| `"AnimalForm"` \| `"KiAttack"` \| `"SurpriseAttack"` \| `"Backstab"` \| `"Shadowjump"` \| `"MirrorImage"` \| `"ArcaneCircle"` \| `"GiftOfRenewal"` \| `"ImmolatingWeapon"` \| `"Attunement"` \| `"Thunderstorm"` \| `"NaturesFury"` \| `"SummonFey"` \| `"SummonFiend"` \| `"ReaperForm"` \| `"Wildfire"` \| `"EssenceOfWind"` \| `"DryadAllure"` \| `"EtherealVoyage"` \| `"WordOfDeath"` \| `"GiftOfLife"` \| `"ArcaneEmpowerment"` \| `"NetherBolt"` \| `"HealingStone"` \| `"PurgeMagic"` \| `"Enchant"` \| `"Sleep"` \| `"EagleStrike"` \| `"AnimatedWeapon"` \| `"StoneForm"` \| `"SpellTrigger"` \| `"MassSleep"` \| `"CleansingWinds"` \| `"Bombard"` \| `"SpellPlague"` \| `"HailStorm"` \| `"NetherCyclone"` \| `"RisingColossus"` \| `"Inspire"` \| `"Invigorate"` \| `"Resilience"` \| `"Perseverance"` \| `"Tribulation"` \| `"Despair"` \| `"DeathRay"` \| `"EtherealBurst"` \| `"NetherBlast"` \| `"MysticWeapon"` \| `"CommandUndead"` \| `"Conduit"` \| `"ManaShield"` \| `"SummonReaper"` \| `"EnchantedSummoning"` \| `"AnticipateHit"` \| `"Warcry"` \| `"Intuition"` \| `"Rejuvenate"` \| `"HolyFist"` \| `"Shadow"` \| `"WhiteTigerForm"` \| `"FlamingShot"` \| `"PlayingTheOdds"` \| `"Thrust"` \| `"Pierce"` \| `"Stagger"` \| `"Toughness"` \| `"Onslaught"` \| `"FocusedEye"` \| `"ElementalFury"` \| `"CalledShot"` \| `"WarriorsGifts"` \| `"ShieldBash"` \| `"Bodyguard"` \| `"HeightenSenses"` \| `"Tolerance"` \| `"InjectedStrike"` \| `"Potency"` \| `"Rampage"` \| `"FistsOfFury"` \| `"Knockout"` \| `"Whispering"` \| `"CombatTraining"` \| `"Boarding"` |
-| `serial`   | [`SerialOrEntity`](../GameObject/index.md#serialorentity)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `timeout`? | `number`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Parameter  | Type                                                      |
+| :--------- | :-------------------------------------------------------- |
+| `spell`    | `any`                                                     |
+| `serial`   | [`SerialOrEntity`](../GameObject/index.md#serialorentity) |
+| `timeout`? | `number`                                                  |
 
 ###### Example
 
@@ -1417,9 +1258,9 @@ no decimal. e.g. 74.6 would be 746
 
 ###### Parameters
 
-| Parameter | Type                                 |
-| :-------- | :----------------------------------- |
-| `skill`   | [`Skills`](../enums/index.md#skills) |
+| Parameter | Type     |
+| :-------- | :------- |
+| `skill`   | `Skills` |
 
 ###### Returns
 
@@ -1446,9 +1287,9 @@ hasBuffDebuff(buffID: BuffDebuffs): boolean
 
 ###### Parameters
 
-| Parameter | Type                                           |
-| :-------- | :--------------------------------------------- |
-| `buffID`  | [`BuffDebuffs`](../enums/index.md#buffdebuffs) |
+| Parameter | Type          |
+| :-------- | :------------ |
+| `buffID`  | `BuffDebuffs` |
 
 ###### Returns
 
@@ -1694,9 +1535,9 @@ Run/turn a single step in a direction
 
 ###### Parameters
 
-| Parameter   | Type                                         |
-| :---------- | :------------------------------------------- |
-| `direction` | [`Directions`](../enums/index.md#directions) |
+| Parameter   | Type         |
+| :---------- | :----------- |
+| `direction` | `Directions` |
 
 ###### Returns
 
@@ -1805,10 +1646,10 @@ Set the status of a skill lock
 
 ###### Parameters
 
-| Parameter | Type                                       |
-| :-------- | :----------------------------------------- |
-| `skill`   | [`Skills`](../enums/index.md#skills)       |
-| `lock`    | [`SkillLock`](../enums/index.md#skilllock) |
+| Parameter | Type        |
+| :-------- | :---------- |
+| `skill`   | `Skills`    |
+| `lock`    | `SkillLock` |
 
 ###### Example
 
@@ -1939,66 +1780,7 @@ player.useLastObject();
 
 ```ts
 useSkill(
-   skill:
-  | "RemoveTrap"
-  | Skills
-  | "Alchemy"
-  | "Anatomy"
-  | "AnimalLore"
-  | "ItemID"
-  | "ArmsLore"
-  | "Parry"
-  | "Begging"
-  | "Blacksmith"
-  | "Fletching"
-  | "Peacemaking"
-  | "Camping"
-  | "Carpentry"
-  | "Cartography"
-  | "Cooking"
-  | "DetectHidden"
-  | "Discordance"
-  | "EvalInt"
-  | "Healing"
-  | "Fishing"
-  | "Forensics"
-  | "Herding"
-  | "Hiding"
-  | "Provocation"
-  | "Inscribe"
-  | "Lockpicking"
-  | "Magery"
-  | "MagicResist"
-  | "Tactics"
-  | "Snooping"
-  | "Musicianship"
-  | "Poisoning"
-  | "Archery"
-  | "SpiritSpeak"
-  | "Stealing"
-  | "Tailoring"
-  | "AnimalTaming"
-  | "TasteID"
-  | "Tinkering"
-  | "Tracking"
-  | "Veterinary"
-  | "Swords"
-  | "Macing"
-  | "Fencing"
-  | "Wrestling"
-  | "Lumberjacking"
-  | "Mining"
-  | "Meditation"
-  | "Stealth"
-  | "Necromancy"
-  | "Focus"
-  | "Chivalry"
-  | "Bushido"
-  | "Ninjitsu"
-  | "Spellweaving"
-  | "Mysticism"
-  | "Imbuing"
-  | "Throwing",
+   skill: any,
    target?: SerialOrEntity,
    timeout?: number): void
 ```
@@ -2007,11 +1789,11 @@ Uses a skill
 
 ###### Parameters
 
-| Parameter  | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `skill`    | \| `"RemoveTrap"` \| [`Skills`](../enums/index.md#skills) \| `"Alchemy"` \| `"Anatomy"` \| `"AnimalLore"` \| `"ItemID"` \| `"ArmsLore"` \| `"Parry"` \| `"Begging"` \| `"Blacksmith"` \| `"Fletching"` \| `"Peacemaking"` \| `"Camping"` \| `"Carpentry"` \| `"Cartography"` \| `"Cooking"` \| `"DetectHidden"` \| `"Discordance"` \| `"EvalInt"` \| `"Healing"` \| `"Fishing"` \| `"Forensics"` \| `"Herding"` \| `"Hiding"` \| `"Provocation"` \| `"Inscribe"` \| `"Lockpicking"` \| `"Magery"` \| `"MagicResist"` \| `"Tactics"` \| `"Snooping"` \| `"Musicianship"` \| `"Poisoning"` \| `"Archery"` \| `"SpiritSpeak"` \| `"Stealing"` \| `"Tailoring"` \| `"AnimalTaming"` \| `"TasteID"` \| `"Tinkering"` \| `"Tracking"` \| `"Veterinary"` \| `"Swords"` \| `"Macing"` \| `"Fencing"` \| `"Wrestling"` \| `"Lumberjacking"` \| `"Mining"` \| `"Meditation"` \| `"Stealth"` \| `"Necromancy"` \| `"Focus"` \| `"Chivalry"` \| `"Bushido"` \| `"Ninjitsu"` \| `"Spellweaving"` \| `"Mysticism"` \| `"Imbuing"` \| `"Throwing"` |
-| `target`?  | [`SerialOrEntity`](../GameObject/index.md#serialorentity)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `timeout`? | `number`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Parameter  | Type                                                      |
+| :--------- | :-------------------------------------------------------- |
+| `skill`    | `any`                                                     |
+| `target`?  | [`SerialOrEntity`](../GameObject/index.md#serialorentity) |
+| `timeout`? | `number`                                                  |
 
 ###### Example
 
@@ -2019,6 +1801,7 @@ Uses a skill
 player.useSkill(Skills.Meditation);
 
 @example Use skill and target yourself
+
 ```ts
 player.useSkill(Skills.Anatomy);
 ````
@@ -2075,7 +1858,7 @@ target.entity(myFriend);
 
 ```ts
 useVirtue(
-   virtue: Virtues | "Honor" | "Sacrifice" | "Valor",
+   virtue: any,
    target?: SerialOrEntity,
    timeout?: number): void
 ```
@@ -2084,11 +1867,11 @@ Uses a virtue
 
 ###### Parameters
 
-| Parameter  | Type                                                                              |
-| :--------- | :-------------------------------------------------------------------------------- |
-| `virtue`   | [`Virtues`](../enums/index.md#virtues) \| `"Honor"` \| `"Sacrifice"` \| `"Valor"` |
-| `target`?  | [`SerialOrEntity`](../GameObject/index.md#serialorentity)                         |
-| `timeout`? | `number`                                                                          |
+| Parameter  | Type                                                      |
+| :--------- | :-------------------------------------------------------- |
+| `virtue`   | `any`                                                     |
+| `target`?  | [`SerialOrEntity`](../GameObject/index.md#serialorentity) |
+| `timeout`? | `number`                                                  |
 
 ###### Example
 
@@ -2096,6 +1879,7 @@ Uses a virtue
 player.useVirtue(Virtues.Honor);
 
 @example Use virtue and target yourself
+
 ```ts
 player.useVirtue(Virtues.Honor);
 ````
@@ -2115,10 +1899,10 @@ waitForBuffDebuff(buffId: BuffDebuffs, timeoutMs?: number): null | boolean
 
 ###### Parameters
 
-| Parameter    | Type                                           |
-| :----------- | :--------------------------------------------- |
-| `buffId`     | [`BuffDebuffs`](../enums/index.md#buffdebuffs) |
-| `timeoutMs`? | `number`                                       |
+| Parameter    | Type          |
+| :----------- | :------------ |
+| `buffId`     | `BuffDebuffs` |
+| `timeoutMs`? | `number`      |
 
 ###### Returns
 
@@ -2141,9 +1925,9 @@ Walk/turn a single step in a direction
 
 ###### Parameters
 
-| Parameter   | Type                                         |
-| :---------- | :------------------------------------------- |
-| `direction` | [`Directions`](../enums/index.md#directions) |
+| Parameter   | Type         |
+| :---------- | :----------- |
+| `direction` | `Directions` |
 
 ###### Returns
 

@@ -5,6 +5,9 @@
 
 ### Mobile
 
+The `Mobile` class represents a mobile entity in the ClassicUO web client, such as players, NPCs, or creatures. Each
+mobile entity has attributes such as health, position and stat attributes. Mobile
+
 #### Extends
 
 - [`Entity`](../Entity/index.md#entity)
@@ -58,6 +61,8 @@ if (entity) {
 ```ts
 equippedItems: object;
 ```
+
+The currently equipped items of the mobile (humanoid/players)
 
 | Member      | Type                            |
 | :---------- | :------------------------------ |
@@ -181,6 +186,8 @@ if (entity) {
 inWarMode: boolean;
 ```
 
+Whether the mobile is currently in War Mode (humanoid)
+
 </div>
 
 ---
@@ -194,6 +201,8 @@ inWarMode: boolean;
 isDead: boolean;
 ```
 
+Whether the mobile is dead
+
 </div>
 
 ---
@@ -206,6 +215,8 @@ isDead: boolean;
 ```ts
 isFemale: boolean;
 ```
+
+Whether the mobile is female, or otherwise male.
 
 </div>
 
@@ -237,6 +248,8 @@ isHidden: boolean;
 isParalyzed: boolean;
 ```
 
+Whether the mobile is currently paralyzed.
+
 </div>
 
 ---
@@ -249,6 +262,8 @@ isParalyzed: boolean;
 ```ts
 isPoisoned: boolean;
 ```
+
+Whether the mobile is poisoned (green hued)
 
 </div>
 
@@ -263,6 +278,8 @@ isPoisoned: boolean;
 isYellowHits: boolean;
 ```
 
+Whether the mobiles status is yellow (i.e. Invulnerable)
+
 </div>
 
 ---
@@ -275,6 +292,8 @@ isYellowHits: boolean;
 ```ts
 mana: number;
 ```
+
+The mobiles current mana. For the player it returns the real value, for other mobiles it is a scale of 1 to 100
 
 </div>
 
@@ -318,6 +337,8 @@ if (entity) {
 maxMana: number;
 ```
 
+The mobiles maximum mana. For the player it returns the real value, for other mobiles it is a scale of 1 to 100
+
 </div>
 
 ---
@@ -330,6 +351,8 @@ maxMana: number;
 ```ts
 maxStamina: number;
 ```
+
+The mobiles maximum stamina. For the player it returns the real value, for other mobiles it is a scale of 1 to 100
 
 </div>
 
@@ -372,6 +395,8 @@ if (entity) {
 notoriety: Notorieties;
 ```
 
+The mobiles Notoriety, i.e. Innocent, Gray, etc.
+
 </div>
 
 ---
@@ -401,6 +426,8 @@ serial: number;
 ```ts
 stamina: number;
 ```
+
+The mobiles current stamina. For the player it returns the real value, for other mobiles it is a scale of 1 to 100
 
 </div>
 

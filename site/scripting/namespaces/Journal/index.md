@@ -5,6 +5,14 @@
 
 ### Journal
 
+The `Journal` can be used to inspect the game journal contents to trigger parts of your script.
+
+Use it for:
+
+- Checking if the Journal contains text
+- Waiting for text to appear in the Journal
+- Waiting for a collection of possible strings to exist
+
 #### Methods
 
 <div class="heading-level-5">

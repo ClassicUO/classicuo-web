@@ -29,6 +29,27 @@ client.toggleCircleOfTransparency();
 ---
 
 <div class="heading-level-5">
+<a id="getping" name="getping"></a>
+
+##### getPing()
+
+```ts
+(): number
+```
+
+Gets the current ping to the server (as seen in the Connection gump)
+
+###### Returns
+
+`number`
+
+number
+
+</div>
+
+---
+
+<div class="heading-level-5">
 <a id="sysmsg" name="sysmsg"></a>
 
 ##### sysMsg()
@@ -37,12 +58,21 @@ client.toggleCircleOfTransparency();
 (message: string, hue?: number): void
 ```
 
+Display a message in the text chat.
+
 ###### Parameters
 
 | Parameter | Type     |
 | :-------- | :------- |
 | `message` | `string` |
 | `hue`?    | `number` |
+
+###### Example
+
+```ts
+client.headMsg('A chat in Red', 33);
+client.headMsg('A chat in Green', 66);
+```
 
 </div>
 
@@ -60,6 +90,8 @@ client.toggleCircleOfTransparency();
    hue?: number): void
 ```
 
+Display a message overhead of the target entity.
+
 ###### Parameters
 
 | Parameter | Type                                                                                                                   |
@@ -67,6 +99,13 @@ client.toggleCircleOfTransparency();
 | `message` | `string`                                                                                                               |
 | `serial`  | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
 | `hue`?    | `number`                                                                                                               |
+
+###### Example
+
+```ts
+client.headMsg('A message in Red', player, 33);
+client.headMsg('A message in Green', player, 66);
+```
 
 </div>
 
@@ -81,11 +120,26 @@ client.toggleCircleOfTransparency();
 (serial?: number | SerialObject | GameObject): void
 ```
 
+Open the paperdoll for a Mobile.
+
 ###### Parameters
 
 | Parameter | Type                                                                                                                   |
 | :-------- | :--------------------------------------------------------------------------------------------------------------------- |
 | `serial`? | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
+
+###### Example
+
+```ts
+const nearestHuman = client.selectEntity(
+  SearchEntityOptions.Any,
+  SearchEntityRangeOptions.Nearest,
+  SearchEntityTypeOptions.Human,
+  false
+);
+
+client.openPaperdoll(nearestHuman);
+```
 
 </div>
 
@@ -105,6 +159,8 @@ client.toggleCircleOfTransparency();
    range?: null | number): any
 ```
 
+Attempts to check whether a certain object can be found in the game.
+
 ###### Parameters
 
 | Parameter       | Type                                                                                                                             |
@@ -114,6 +170,19 @@ client.toggleCircleOfTransparency();
 | `sourceSerial`? | `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
 | `amount`?       | `null` \| `number`                                                                                                               |
 | `range`?        | `null` \| `number`                                                                                                               |
+
+###### Example
+
+```ts
+const runebookSerial = 0x401c37fb;
+const runebook = client.findObject(runebookSerial);
+
+if (runebook) {
+  player.use(runebook);
+} else {
+  client.headMsg('Runbook missing!', player.serial);
+}
+```
 
 </div>
 
@@ -133,6 +202,8 @@ client.toggleCircleOfTransparency();
    range?: null | number): any
 ```
 
+Attempts to find an object in the world with the specified search parameters, returning it if found.
+
 ###### Parameters
 
 | Parameter       | Type                                                                                                                             |
@@ -142,6 +213,162 @@ client.toggleCircleOfTransparency();
 | `sourceSerial`? | `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
 | `amount`?       | `null` \| `number`                                                                                                               |
 | `range`?        | `null` \| `number`                                                                                                               |
+
+###### Example
+
+```ts
+const bandageType = 0xe21;
+const bandages = client.findType(bandageType);
+
+if (bandages) {
+  player.use(bandages);
+  target.waitTargetSelf();
+} else {
+  client.headMsg('Out of bandages', player.serial);
+}
+```
+
+</div>
+
+---
+
+<div class="heading-level-5">
+<a id="findalloftype" name="findalloftype"></a>
+
+##### findAllOfType()
+
+```ts
+(
+   graphic: number,
+   hue?: null | number,
+   sourceSerial?: null | number | SerialObject | GameObject,
+   amount?: null | number,
+   range?: null | number): any[]
+```
+
+Attempts to find all objects of a certain type (graphic), returning the matching Items/Mobiles.
+
+###### Parameters
+
+| Parameter       | Type                                                                                                                             |
+| :-------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| `graphic`       | `number`                                                                                                                         |
+| `hue`?          | `null` \| `number`                                                                                                               |
+| `sourceSerial`? | `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
+| `amount`?       | `null` \| `number`                                                                                                               |
+| `range`?        | `null` \| `number`                                                                                                               |
+
+###### Returns
+
+`any`\[]
+
+###### Example
+
+```ts
+const goldPile = 0xeed;
+const piles = client.findAllOfType(goldPile, undefined, Constant.WorldSerial);
+
+if (piles.length > 0) {
+  client.headMsg(`Found ${piles.length} gold piles on the ground`, player);
+} else {
+  client.headMsg('No gold piles in range', player);
+}
+```
+
+</div>
+
+---
+
+<div class="heading-level-5">
+<a id="findallitemsoftype" name="findallitemsoftype"></a>
+
+##### findAllItemsOfType()
+
+```ts
+(
+   graphic: number,
+   hue?: null | number,
+   sourceSerial?: null | number | SerialObject | GameObject,
+   amount?: null | number,
+   range?: null | number): Item[]
+```
+
+Attempts to find all **Items** of a certain type (graphic).
+
+###### Parameters
+
+| Parameter       | Type                                                                                                                             |
+| :-------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| `graphic`       | `number`                                                                                                                         |
+| `hue`?          | `null` \| `number`                                                                                                               |
+| `sourceSerial`? | `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
+| `amount`?       | `null` \| `number`                                                                                                               |
+| `range`?        | `null` \| `number`                                                                                                               |
+
+###### Returns
+
+`Item`\[]
+
+###### Example
+
+```ts
+const goldPile = 0xeed;
+const piles = client.findAllItemsOfType(goldPile, undefined, Constant.WorldSerial);
+
+if (piles.length > 0) {
+  const total = piles.reduce((sum, item) => sum + item.amount, 0);
+  client.headMsg(`Found ${piles.length} piles, ${total} gold`, player);
+} else {
+  client.headMsg('No gold piles in range', player);
+}
+```
+
+</div>
+
+---
+
+<div class="heading-level-5">
+<a id="findallmobilesoftype" name="findallmobilesoftype"></a>
+
+##### findAllMobilesOfType()
+
+```ts
+(
+   graphic: number,
+   hue?: null | number,
+   sourceSerial?: null | number | SerialObject | GameObject,
+   amount?: null | number,
+   range?: null | number): Mobile[]
+```
+
+Attempts to find all **Mobiles** of a certain type (graphic).
+
+###### Parameters
+
+| Parameter       | Type                                                                                                                             |
+| :-------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| `graphic`       | `number`                                                                                                                         |
+| `hue`?          | `null` \| `number`                                                                                                               |
+| `sourceSerial`? | `null` \| `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
+| `amount`?       | `null` \| `number`                                                                                                               |
+| `range`?        | `null` \| `number`                                                                                                               |
+
+###### Returns
+
+`Mobile`\[]
+
+###### Example
+
+```ts
+const sheepGraphic = 0xcf;
+const sheep = client.findAllMobilesOfType(sheepGraphic);
+
+if (sheep.length > 0) {
+  client.headMsg(`I count ${sheep.length} sheep`, player);
+} else {
+  client.headMsg('No sheep here!', player);
+}
+```
 
 </div>
 
@@ -156,12 +383,27 @@ client.toggleCircleOfTransparency();
 (serial: number | SerialObject | GameObject, layer: Layers): any
 ```
 
+Attempts to find the object at the specified layer, if it exists.
+
 ###### Parameters
 
 | Parameter | Type                                                                                                                   |
 | :-------- | :--------------------------------------------------------------------------------------------------------------------- |
 | `serial`  | `number` \| [`SerialObject`](../GameObject/index.md#serialobject) \| [`GameObject`](../GameObject/index.md#gameobject) |
 | `layer`   | `Layers`                                                                                                               |
+
+###### Example
+
+```ts
+const helm = client.findItemOnLayer(player.serial, Layers.Helmet);
+
+if (helm) {
+  client.headMsg(`Removing helm`, player);
+  player.moveItem(helm, player.backpack);
+} else {
+  client.headMsg('Not wearing a helm', player.serial);
+}
+```
 
 </div>
 
@@ -180,6 +422,8 @@ client.toggleCircleOfTransparency();
    asFriend: boolean): any
 ```
 
+Returns the entity based on the search criteria
+
 ###### Parameters
 
 | Parameter        | Type      |
@@ -188,6 +432,26 @@ client.toggleCircleOfTransparency();
 | `searchRangeOpt` | `number`  |
 | `searchTypeOpt`  | `number`  |
 | `asFriend`       | `boolean` |
+
+###### Examples
+
+```ts
+client.selectEntity(
+  SearchEntityOptions.Enemy | SearchEntityOptions.Gray,
+  SearchEntityRangeOptions.Nearest,
+  SearchEntityTypeOptions.Any,
+  false
+);
+```
+
+```ts
+client.selectEntity(
+  SearchEntityOptions.Innocent,
+  SearchEntityRangeOptions.Nearest,
+  SearchEntityTypeOptions.Human,
+  false
+);
+```
 
 </div>
 
@@ -200,6 +464,14 @@ client.toggleCircleOfTransparency();
 
 ```ts
 (): any
+```
+
+Triggers the `All Names` macro which shows name overheads for all entities on-screen.
+
+###### Example
+
+```ts
+client.allNames();
 ```
 
 </div>
@@ -215,6 +487,14 @@ client.toggleCircleOfTransparency();
 (): any
 ```
 
+Triggers the `Quit Game` dialogue
+
+###### Example
+
+```ts
+client.quitGame();
+```
+
 </div>
 
 ---
@@ -226,6 +506,14 @@ client.toggleCircleOfTransparency();
 
 ```ts
 (): any
+```
+
+Toggles whether the player always runs despite the mouse distance from the player mobile.
+
+###### Example
+
+```ts
+client.toggleAlwaysRun();
 ```
 
 </div>
@@ -241,6 +529,14 @@ client.toggleCircleOfTransparency();
 (): any
 ```
 
+Closes all gumps that aren't the Top Bar, Buff bar, or the World view (radar)
+
+###### Example
+
+```ts
+client.closeAllGumps();
+```
+
 </div>
 
 ---
@@ -252,6 +548,14 @@ client.toggleCircleOfTransparency();
 
 ```ts
 (): any
+```
+
+Closes all corpses on-screen
+
+###### Example
+
+```ts
+client.closeCorpses();
 ```
 
 </div>
@@ -267,6 +571,14 @@ client.toggleCircleOfTransparency();
 (): any
 ```
 
+Closes all healthbars on-screen
+
+###### Example
+
+```ts
+client.closeAllHealthBars();
+```
+
 </div>
 
 ---
@@ -278,6 +590,14 @@ client.toggleCircleOfTransparency();
 
 ```ts
 (): any
+```
+
+Closes all inactive healthbars (i.e. dead or off-screen entities).
+
+###### Example
+
+```ts
+client.closeInactiveHealthBars();
 ```
 
 </div>
@@ -293,6 +613,14 @@ client.toggleCircleOfTransparency();
 (): any
 ```
 
+Reset the viewport zoom back to default (1.1)
+
+###### Example
+
+```ts
+client.zoomReset();
+```
+
 </div>
 
 ---
@@ -304,6 +632,14 @@ client.toggleCircleOfTransparency();
 
 ```ts
 (): any
+```
+
+Zooms in the viewport
+
+###### Example
+
+```ts
+client.zoomIn();
 ```
 
 </div>
@@ -319,6 +655,14 @@ client.toggleCircleOfTransparency();
 (): any
 ```
 
+Zooms out the viewport
+
+###### Example
+
+```ts
+client.zoomIn();
+```
+
 </div>
 
 ---
@@ -330,6 +674,14 @@ client.toggleCircleOfTransparency();
 
 ```ts
 (): any
+```
+
+Toggles the chat visibility, e.g. the bar at the bottom of the game viewport
+
+###### Example
+
+```ts
+client.zoomIn();
 ```
 
 </div>
@@ -345,6 +697,14 @@ client.toggleCircleOfTransparency();
 (): any
 ```
 
+Sets the grab bag used by Grid Loot
+
+###### Example
+
+```ts
+client.zoomIn();
+```
+
 </div>
 
 ---
@@ -358,6 +718,14 @@ client.toggleCircleOfTransparency();
 (): any
 ```
 
+Toggles whether entities have name plates
+
+###### Example
+
+```ts
+client.toggleNameOverheads();
+```
+
 </div>
 
 ---
@@ -369,6 +737,14 @@ client.toggleCircleOfTransparency();
 
 ```ts
 (): any
+```
+
+Toggles whether mobiles have auras underneath them
+
+###### Example
+
+```ts
+client.toggleAuras();
 ```
 
 </div>

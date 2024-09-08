@@ -15,8 +15,8 @@
 | [Prompt](namespaces/Prompt/index.md)         | -           |
 | [Skill](namespaces/Skill/index.md)           | -           |
 | [Target](namespaces/Target/index.md)         | -           |
-| [enums](namespaces/enums/index.md)           | -           |
 | [globalThis](namespaces/globalThis/index.md) | -           |
+| [enums](namespaces/enums/index.md)           | -           |
 
 ## Functions
 
@@ -37,7 +37,7 @@
 const client: Client;
 ```
 
-Test
+`client` is the main object to use for interacting with the ClassicUO client and the client world.
 
 </div>
 
