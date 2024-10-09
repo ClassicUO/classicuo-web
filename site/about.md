@@ -12,11 +12,6 @@ It's powered via WebAssembly with additional features built in React.
 It's **free to use**, we receive no monetary gain from the project and pay for the hosting costs out of our own pockets.
 If you would [like to donate](https://www.patreon.com/classicuo) we welcome it, but it is not necessary.
 
-::: warning
-This client should not be used to connect to the official Ultima Online
-servers, [doing so may result in your account being banned](https://uo.com/2024/07/22/the-war-on-unapproved-3rd-party-programs/)!
-:::
-
 ## Highlights
 
 - Browse and join multiple servers or discover new ones through the Server List.
