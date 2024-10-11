@@ -4,6 +4,9 @@ outline: deep
 
 # Players FAQ
 
+### Can I play use the web client on the official Ultima Online servers?
+Yes, as of recently the web client has been sanctioned for use on the retail servers. 
+
 ### How do I file a bug report?
 
 If you run into a bug please file an issue on our github: https://github.com/ClassicUO/classicuo-web/issues

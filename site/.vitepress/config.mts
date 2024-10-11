@@ -47,6 +47,7 @@ export default defineConfig({
         text: 'Players',
         items: [
           { text: 'FAQ', link: '/players/faq.md' },
+          { text: 'FAQ (sanctioned)', link: '/players/faq-sanctioned.md' },
           {
             text: 'Features',
             items: [
