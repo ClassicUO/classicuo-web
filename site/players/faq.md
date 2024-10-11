@@ -5,7 +5,8 @@ outline: deep
 # Players FAQ
 
 ### Can I play use the web client on the official Ultima Online servers?
-Yes, as of recently the web client has been sanctioned for use on the retail servers. 
+Yes, as of recently the web client has been sanctioned for use on the retail servers.
+See the [FAQ (Sanctioned) page](https://classicuo.org/players/faq-sanctioned) for more information.
 
 ### How do I file a bug report?
 
@@ -18,9 +19,9 @@ profile icon at the top right of the side menu.
 Optionally you can clear the storage, but this will of course result in needing to re-download the files next time you
 click Play.
 
-### Why do I need to login using Discord?
+### Why do I need to log in using Discord?
 
-Discord authentication helps us prevent abuse of the client, and curbs cheating as shard owners can choose to ban people
+**Discord authentication helps us prevent abuse of the client**, and curbs cheating as shard owners can choose to ban people
 via Discord account rather than just an IP which can be easily changed.
 
 The client also store user profiles in the cloud, so you can go to any device and keep your same macros,

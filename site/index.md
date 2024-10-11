@@ -10,13 +10,16 @@ hero:
     src: /videos/wasm-page-demo.mp4
     alt: Web Client
   actions:
-    - theme: brand
-      text: Play now
-      link: https://play.classicuo.org
+#    - theme: brand
+#      text: Play Retail
+#      link: https://play.classicuo.org
     - theme: alt
       text: Documentation
       link: /about
-
+    - theme: brand
+      text: Server List
+      link: https://play.classicuo.org
+      
 features:
   - icon: ⚡
     title: Play instantly
