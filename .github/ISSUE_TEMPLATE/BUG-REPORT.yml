@@ -2,9 +2,16 @@ name: "🐛 Bug Report"
 description: Create a new ticket for a bug.
 title: "🐛 [BUG] - <title>"
 labels: [
-  "bug"
+  "bug", "needs-triage"
 ]
 body:
+  - type: input
+    id: contact
+    attributes:
+      label: Discord Username
+      description: How can we get in touch with you if we need more info?
+    validations:
+      required: false
   - type: textarea
     id: description
     attributes:

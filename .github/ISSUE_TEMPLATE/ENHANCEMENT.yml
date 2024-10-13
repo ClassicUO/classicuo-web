@@ -1,0 +1,23 @@
+name: "💡 Enhancement"
+description: Create a new ticket for suggesting an enhancement.
+title: "💡 [Enhancement] - <title>"
+labels: [
+  "enhancement",
+  "needs-triage"
+]
+assignees:
+  - jabinb
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please before submitting your enhancement search if someone has already submitted something similar.
+        If it does please voice your support there, we are more likely to implement a feature with broad community support.
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: Please enter a description for your enhancement to the client.
+      placeholder: Concise description of your idea
+    validations:
+      required: true
