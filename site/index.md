@@ -10,9 +10,9 @@ hero:
     src: /videos/wasm-page-demo.mp4
     alt: Web Client
   actions:
-#    - theme: brand
-#      text: Play Retail
-#      link: https://play.classicuo.org
+    - theme: brand
+      text: Play Retail
+      link: https://retail.classicuo.org
     - theme: alt
       text: Documentation
       link: /about
