@@ -101,6 +101,12 @@ chrome://flags/#use-angle
 
 ![The "Choose ANGLE graphics backend" flag in chrome://flags:change the dropdown from Default to D3D11.](/players/troubleshooting/chrome-use-angle.png)
 
+::: tip
+
+You can also experiment with the other backend options in the list and see if they improve your performance.
+
+:::
+
 ## Step 3: Update your graphics drivers
 
 Outdated GPU drivers are a common cause of rendering glitches and poor performance. The drivers that come with Windows

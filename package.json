@@ -20,5 +20,6 @@
     "docs:dev": "vitepress dev site --host 0.0.0.0",
     "docs:build": "vitepress build site",
     "docs:preview": "vitepress preview site"
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }
