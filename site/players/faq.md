@@ -88,7 +88,7 @@ Always check your shards rules first on their policy around multi-boxing.
 ### What do I do if the game freezes?
 
 Close the tab entirely and open a new one. Simply trying to relog from a frozen tab usually won't work.
-If freezes happen often, see our [Freezes & Crashes troubleshooting guide](/players/troubleshooting-crashes) for steps that can reduce or prevent them.
+If freezes happen often, see our [troubleshooting guide](/players/troubleshooting) for steps that can reduce or prevent them.
 
 ### What do I do if the game runs poorly?
 
