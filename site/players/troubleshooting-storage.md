@@ -15,8 +15,9 @@ If the progress bar stalls, drops to near zero, or keeps retrying:
 
 1. **Check your connection to Cloudflare.** The game files are served from Cloudflare, so a routing issue between you
    and their network is a common cause of stalled downloads. Use these tools to check:
-   - [speed.cloudflare.com](https://speed.cloudflare.com/): general Cloudflare network speed and latency
-   - [r2-ping.fernandodilland.com](https://r2-ping.fernandodilland.com/): ping test specifically for Cloudflare R2,
+   - [speed.cloudflare.com](https://speed.cloudflare.com/): General Cloudflare network speed and latency. Take special
+     note of the packet loss metric, **high packet loss will cause dropped downloads**.
+   - [r2-ping.fernandodilland.com](https://r2-ping.fernandodilland.com/): Ping test specifically for Cloudflare R2,
      where the game files are stored
 2. **Check your extensions.** Disable any VPN extensions or ad-blockers that may be intercepting download requests.
 3. **Try a VPN.** In rare cases your ISP's routing to our game files CDN (hosted on Cloudflare) may have issues. A VPN

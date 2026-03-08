@@ -4,26 +4,47 @@ outline: deep
 
 # Using a Dedicated Browser for the Game
 
-Chrome flags and ExitLag apply to the **entire browser**, not just one tab. If you'd rather not have game settings
-affect your everyday browsing, or don't want ExitLag routing all of Chrome, the simplest fix is to use a separate
-browser just for the game.
+Using a separate browser for the game keeps performance flags and ExitLag from affecting your everyday browsing. This
+page walks through the full setup.
 
-## Option 1: Microsoft Edge (recommended)
+## Step 1: Install your dedicated browser
 
-Same Chromium engine as Chrome, so the game runs more or less the same. Use `edge://flags` for all the same performance
-tweaks. If you use ExitLag, add `msedge.exe` to it instead of Chrome.
+Pick one of the following. Both use the same Chromium engine as Chrome, so the game runs more or less the same.
 
-## Option 2: Chrome Beta
+**Microsoft Edge (recommended):** Already installed on most Windows machines. Use `edge://flags` for all the same
+performance tweaks as Chrome. If you use ExitLag, add `msedge.exe` to it instead of `chrome.exe`.
 
-Installs as a completely separate from your main Chrome. Essentially a second Chrome you can customize completely
-without touching your normal instance.
+**Chrome Beta:** A completely separate installation from your main Chrome, with its own settings, flags, and data.
+Download from [google.com/chrome/beta](https://www.google.com/chrome/beta/). It's a beta channel but is generally
+stable. Any bugs you encounter are browser-level, not game-level.
 
-Download from [google.com/chrome/beta](https://www.google.com/chrome/beta/).
+Open the game in your new browser before continuing to the next steps.
 
-**Note:** It's a beta version of Chrome, whilst likely very stable it will have more bugs than normal Chrome.
+## Step 2: Test your browser
 
-## Game settings carry over
+Before spending time on configuration, confirm your new browser has everything the game needs. Follow the
+[browser test guide](/players/troubleshooting-browser-test). If WebGL shows software rendering, move to Step 3 first
+then rerun the test.
 
-Your in-game settings (FPS cap, Game Loop Scheduler, etc.) are saved to your cloud profile, so they'll be there
-automatically when you log in on a different browser. You only need to set the browser-level flags once in your new
-browser, see the [performance guide](/players/troubleshooting-performance) for the full list.
+## Step 3: Apply performance settings
+
+Follow the [performance guide](/players/troubleshooting-performance) in your dedicated browser. The flags use
+`edge://flags` on Edge and `chrome://flags` on Chrome Beta, but the flag names are identical.
+
+## Step 4: Install as an app
+
+Follow the [install as app guide](/players/install-as-app). This gives you a dedicated window with no browser UI and
+protects your downloaded game files from being automatically deleted under disk pressure.
+
+## Step 5: Add to ExitLag (optional)
+
+If you use ExitLag, add your new browser's executable instead of Chrome so only game traffic is routed through it.
+Follow the [ExitLag guide](/players/troubleshooting-gaming-vpn) and substitute:
+
+- **Edge:** `msedge.exe`
+- **Chrome Beta:** `chrome.exe` from `C:\Program Files\Google\Chrome Beta\Application\`
+
+## Your in-game settings carry over
+
+Your FPS cap, Game Loop Scheduler, macros, and profiles are all saved to the cloud. When you log in on the new browser
+for the first time they will load automatically. You only need to set the browser-level flags once.

@@ -87,9 +87,9 @@ Always check your shards rules first on their policy around multi-boxing.
 
 ### What do I do if the game freezes?
 
-You will need to refresh the tab and reload into the game. If you can reproduce the crash please file a bug report on
-Discord or Github issues.
+Close the tab entirely and open a new one. Simply trying to relog from a frozen tab usually won't work.
+If freezes happen often, see our [Freezes & Crashes troubleshooting guide](/players/troubleshooting-crashes) for steps that can reduce or prevent them.
 
 ### What do I do if the game runs poorly?
 
-You can try to check if the `Hardware acceleration` option is enabled in your browsers settings.
+See our [Performance & Lag troubleshooting guide](/players/troubleshooting-performance) for a full walkthrough. The most common fix is making sure your browser is using your dedicated GPU instead of your CPU for rendering.

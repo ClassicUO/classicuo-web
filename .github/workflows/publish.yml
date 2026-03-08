@@ -18,10 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup nodejs 21
-        uses: actions/setup-node@v3
+      - name: Setup nodejs 22
+        uses: actions/setup-node@v4
         with:
-          node-version: 21
+          node-version: 22
 
       - name: Setup yarn
         id: setup-yarn
@@ -36,7 +36,7 @@ jobs:
           yarn docs:build
 
       - name: Publish
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         with:
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           apiToken: ${{ secrets.CF_API_TOKEN }}
