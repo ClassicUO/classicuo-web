@@ -170,6 +170,20 @@ To test if an extension is the problem, disable all extensions temporarily:
 3. If performance is noticeably better, one of your extensions is the culprit. Re-enable them one at a time to find
    which one.
 
+## Step 8: Fix purple textures on Linux (Wayland + Vulkan)
+
+::: info Linux only
+
+Skip this step if you are on Windows or macOS.
+
+:::
+
+If the game renders but all textures appear purple or magenta, Chromium's Vulkan renderer is conflicting with the
+Wayland display server. Open `chrome://flags/#use-angle` and set the ANGLE backend to **OpenGL** instead of Vulkan,
+then relaunch.
+
+If that does not help, you can also launch Chrome with `--ozone-platform=x11` to force X11 mode entirely.
+
 ## If you're running multiple accounts
 
 When you have the game open in multiple tabs, Chrome will throttle (slow down) any tab that isn't in the foreground.
