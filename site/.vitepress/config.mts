@@ -48,6 +48,19 @@ export default defineConfig({
         items: [
           { text: 'FAQ', link: '/players/faq.md' },
           { text: 'FAQ (sanctioned)', link: '/players/faq-sanctioned.md' },
+          { text: 'Install as App', link: '/players/install-as-app.md' },
+          {
+            text: 'Troubleshooting',
+            collapsed: false,
+            items: [
+              { text: 'Overview', link: '/players/troubleshooting.md' },
+              { text: 'Test Your Browser', link: '/players/troubleshooting-browser-test.md' },
+              { text: 'Downloading Issues', link: '/players/troubleshooting-storage.md' },
+              { text: 'Performance & Lag', link: '/players/troubleshooting-performance.md' },
+              { text: 'Dedicated Browser', link: '/players/troubleshooting-dedicated-browser.md' },
+              { text: 'Gaming VPNs', link: '/players/troubleshooting-gaming-vpn.md' }
+            ]
+          },
           {
             text: 'Features',
             items: [
