@@ -32,7 +32,7 @@ chrome://gpu
 
 2. Look for the **Graphics Feature Status** section near the top.
 3. You want to see **"Hardware accelerated"** next to items like **WebGL**, **Canvas**, and **Rasterization**.
-4. If you see **"Software only"** or **"Unavailable"** your GPU on most of these then it is not being used.
+4. If you see **"Software only"** or **"Unavailable"** your CPU is being used instead of your GPU.
 
 ::: tip This is what a "good" feature status looks like -- however there could still be other issues at play
 ![The chrome://gpu page showing Graphics Feature Status with key items marked as "Hardware accelerated".](/players/troubleshooting/chrome-gpu-report.png)
@@ -76,6 +76,14 @@ chrome://flags/#force-high-performance-gpu
 3. Click the **Relaunch** button at the bottom of the page.
 
 ![The "Force High Performance GPU" flag in chrome://flags:set the dropdown to Enabled.](/players/troubleshooting/chrome-laptop-force-high-perf-gpu.png)
+
+::: warning This setting is power-hungry
+
+If you use your laptop on battery this will cause a big increase in power usage across Chrome for all tabs (whether the
+Web Client is running or not), consider whether you want to set up a separate
+[dedicated browser](/players/troubleshooting-dedicated-browser) instead.
+
+:::
 
 ## Step 2: Set Chrome's graphics backend to DirectX 11 (Windows only)
 
